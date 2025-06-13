@@ -1,9 +1,12 @@
 <template>
-  <ion-app>
-    <ion-router-outlet />
-  </ion-app>
+  <div class="prose dark:prose-invert w-full">
+    <ion-app>
+      <ion-router-outlet />
+    </ion-app>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { IonApp, IonRouterOutlet } from '@ionic/vue';
+import "./assets/styles/main.css";
+import { IonApp, IonRouterOutlet } from "@ionic/vue";
 </script>
