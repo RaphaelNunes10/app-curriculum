@@ -1,0 +1,7 @@
+{
+  "name": "curriculum-App",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
