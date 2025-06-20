@@ -986,12 +986,12 @@ import {
   IonTextarea,
   IonTitle,
   IonToolbar,
-  ItemReorderEventDetail,
+  // ItemReorderEventDetail,
 } from "@ionic/vue";
 
-import { Camera } from "@capacitor/camera";
-import { Filesystem } from "@capacitor/filesystem";
-import { Capacitor } from "@capacitor/core";
+// import { Camera } from "@capacitor/camera";
+// import { Filesystem } from "@capacitor/filesystem";
+// import { Capacitor } from "@capacitor/core";
 
 import { addIcons } from "ionicons";
 import { add, close, reload } from "ionicons/icons";
@@ -1231,45 +1231,47 @@ const modals = reactive({
   ],
 });
 
-const blobToBase64 = (blob: Blob): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result as string);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-};
+// TODO: Finish image upload
 
-const addImagem = async (fieldValue: any) => {
-  try {
-    const imagem = await Camera.pickImages({
-      quality: 90,
-      limit: 1,
-    });
+// const blobToBase64 = (blob: Blob): Promise<string> => {
+//   return new Promise((resolve, reject) => {
+//     const reader = new FileReader();
+//     reader.onloadend = () => resolve(reader.result as string);
+//     reader.onerror = reject;
+//     reader.readAsDataURL(blob);
+//   });
+// };
 
-    if (imagem.photos[0]) {
-      const photo = imagem.photos[0];
+// const addImagem = async (fieldValue: any) => {
+//   try {
+//     const imagem = await Camera.pickImages({
+//       quality: 90,
+//       limit: 1,
+//     });
 
-      let imageUrl = "";
-      if (Capacitor.getPlatform() === "web") {
-        // For web, use the webPath directly as base64
-        const response = await fetch(photo.webPath!);
-        const blob = await response.blob();
-        imageUrl = await blobToBase64(blob);
-      } else {
-        // For native platforms, use Filesystem to read the file
-        const file = await Filesystem.readFile({
-          path: photo.path!,
-        });
-        imageUrl = `data:image/jpeg;base64,${file.data}`;
-      }
+//     if (imagem.photos[0]) {
+//       const photo = imagem.photos[0];
 
-      fieldValue = imageUrl;
-    }
-  } catch (error) {
-    console.error("Error capturing image:", error);
-  }
-};
+//       let imageUrl = "";
+//       if (Capacitor.getPlatform() === "web") {
+//         // For web, use the webPath directly as base64
+//         const response = await fetch(photo.webPath!);
+//         const blob = await response.blob();
+//         imageUrl = await blobToBase64(blob);
+//       } else {
+//         // For native platforms, use Filesystem to read the file
+//         const file = await Filesystem.readFile({
+//           path: photo.path!,
+//         });
+//         imageUrl = `data:image/jpeg;base64,${file.data}`;
+//       }
+
+//       fieldValue = imageUrl;
+//     }
+//   } catch (error) {
+//     console.error("Error capturing image:", error);
+//   }
+// };
 
 const addItem = (object: any, list: any[]) => {
   list.push(object);

@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from "vue";
+// import { onMounted, reactive, ref } from "vue";
 
 import EditPage from "./EditPage.vue";
 
@@ -99,7 +99,7 @@ import { addCircle, create } from "ionicons/icons";
 
 import { register as registerSwiper } from "swiper/element/bundle";
 
-import { useDadosCurriculum } from "@/composables/dados-curriculum";
+// import { useDadosCurriculum } from "@/composables/dados-curriculum";
 import { useCrudCurriculum } from "@/composables/crud-curriculum";
 
 const swiper = new Swiper(".swiper", {
