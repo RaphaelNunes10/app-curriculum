@@ -13,6 +13,15 @@ export function useCrudCurriculum() {
     value ? (curricula.value = JSON.parse(value)) : (curricula.value = []);
   };
 
+  const fetchCurriculumById = async (queryId: number) => {
+    const { value } = await Preferences.get({ key: "curricula" });
+    const curricula: Curriculum[] = value ? JSON.parse(value) : [];
+
+    const curriculum = curricula.find(({ id }) => id === queryId);
+
+    return curriculum;
+  };
+
   const createCurriculum = async (curriculum: Curriculum) => {
     curricula.value.push(curriculum);
 
@@ -52,6 +61,7 @@ export function useCrudCurriculum() {
   return {
     curricula,
     fetchCurricula,
+    fetchCurriculumById,
     createCurriculum,
     updateCurriculum,
     deleteCurriculum,

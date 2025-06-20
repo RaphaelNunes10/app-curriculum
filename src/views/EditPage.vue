@@ -958,7 +958,7 @@
 <script setup lang="ts">
 // TODO: Corrigir e finalizar schema do formulário.
 
-import { reactive, ref, useTemplateRef } from "vue";
+import { onMounted, reactive, ref, useTemplateRef } from "vue";
 
 import { useRouter } from "vue-router";
 
@@ -1002,6 +1002,7 @@ import { Field, FieldArray, Form } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import z from "zod";
 import { useCrudCurriculum } from "@/composables/crud-curriculum";
+import { useRoute } from "vue-router";
 
 addIcons({
   add: add,
@@ -1009,7 +1010,10 @@ addIcons({
   reload: reload,
 });
 
-const { createCurriculum, updateCurriculum } = useCrudCurriculum();
+const {
+  fetchCurriculumById,
+  createCurriculum, // updateCurriculum
+} = useCrudCurriculum();
 
 const form = useTemplateRef("form");
 
@@ -1289,6 +1293,21 @@ const convertYear = (event: any) => {
 // const handleContatoIconeChange = (event: any, index: number) => {
 //   curriculum.contato![index].icone.d = event.detail.value;
 // };
+
+const route = useRoute();
+
+onMounted(async () => {
+  const id = route.params.id;
+  if (!id) return;
+
+  const fetchedCurriculum = await fetchCurriculumById(
+    Number.parseInt(id as string),
+  );
+
+  if (fetchedCurriculum) {
+    form.value?.setValues(fetchedCurriculum);
+  }
+});
 </script>
 
 <style scoped>
