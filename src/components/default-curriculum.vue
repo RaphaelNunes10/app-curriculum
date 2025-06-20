@@ -41,6 +41,10 @@
     <g transform="translate(-6.9017153,0.36346883)">
       <g transform="translate(-3.4189596e-7,-0.06353245)">
         <path
+          style="fill: #ffffff; fill-opacity: 1; fill-rule: nonzero; stroke: none"
+          d="M 0,0 H 794 V 1123 H 0 Z"
+        />
+        <path
           d="M 0,0 H 256 V 837 H 0 Z"
           style="fill: #d9d9d9; fill-opacity: 1; fill-rule: nonzero; stroke: none"
           transform="matrix(0.38950614,0,0,0.38950614,-6.9808729,-14.656658)"
@@ -112,7 +116,7 @@
             </tspan>
           </text>
           <g>
-            <g v-for="(contato, index) in dados.contato">
+            <g v-for="(contato, index) in dados.contato" :key="index">
               <path
                 :d="`${contato.icone.d}`"
                 :transform="
@@ -161,6 +165,7 @@
           >
             <tspan
               v-for="(linhaSobre, index) in dados.sobre"
+              :key="index"
               style="font-style: normal; font-variant: normal; font-weight: 300; font-stretch: normal; font-size: 4.09046px; line-height: 1.35; font-family: Nunito-Light; -inkscape-font-specification: 'Nunito-Light Light'; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
               x="103.49005"
               :y="96.094856 + index * 5"
@@ -184,16 +189,14 @@
               FORMAÇÃO
             </tspan>
           </text>
-          <g v-for="(formacao, index) in dados.formacao">
+          <g v-for="(formacao, index) in dados.formacao" :key="index">
             <text
               xml:space="preserve"
               x="28.081341"
               :y="146.37514 + index * 23"
               style="font-size: 3.175px; stroke-width: 0.264583"
             >
-              <tspan
-                style="font-variant: normal; font-weight: normal; font-size: 4.77573px; font-family: Ruda; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
-              >
+              <tspan style="font-variant: normal; font-weight: normal; font-size: 4.77573px; font-family: Ruda; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583">
                 {{ formacao.curso }}
               </tspan>
             </text>
@@ -221,9 +224,7 @@
               :y="159.40234 + index * 23"
               style="font-size: 3.175px; stroke-width: 0.264583"
             >
-              <tspan
-                style="font-variant: normal; font-weight: 300; font-size: 4.42383px; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
-              >
+              <tspan style="font-variant: normal; font-weight: 300; font-size: 4.42383px; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583">
                 {{ formacao.universidade }}
               </tspan>
             </text>
@@ -244,7 +245,7 @@
               EXPERIÊNCIA
             </tspan>
           </text>
-          <g v-for="(experiencia, index) in dados.experiencia">
+          <g v-for="(experiencia, index) in dados.experiencia" :key="index">
             <g>
               <text
                 xml:space="preserve"
@@ -252,9 +253,7 @@
                 :y="146.37514 + index * 47.5"
                 style="font-size: 3.175px; stroke-width: 0.264583"
               >
-                <tspan
-                  style="font-variant: normal; font-weight: normal; font-size: 4.77573px; font-family: Ruda; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
-                >
+                <tspan style="font-variant: normal; font-weight: normal; font-size: 4.77573px; font-family: Ruda; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583">
                   {{ experiencia.empresa }}
                 </tspan>
               </text>
@@ -299,6 +298,7 @@
             >
               <tspan
                 v-for="(linhaInfo, indexLinha) in experiencia.info"
+                :key="indexLinha"
                 style="font-style: normal; font-variant: normal; font-weight: 300; font-stretch: normal; font-size: 4.09046px; line-height: 1.35; font-family: Nunito-Light; -inkscape-font-specification: 'Nunito-Light Light'; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
                 x="103.49005"
                 :y="(167.70168 + index * 47.5) + indexLinha * 5"
@@ -326,6 +326,7 @@
             </text>
             <text
               v-for="(habilidade, index) in dados.habilidades"
+              :key="index"
               xml:space="preserve"
               x="28.081341"
               :y="211.82178 + index * 7"
@@ -358,14 +359,13 @@
             </text>
             <text
               v-for="(idioma, index) in dados.idiomas"
+              :key="index"
               xml:space="preserve"
               x="28.081341"
               :y="267.31854 + index * 7"
               style="font-size: 3.175px; stroke-width: 0.264583"
             >
-              <tspan
-                style="font-variant: normal; font-weight: 300; font-size: 4.09046px; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
-              >
+              <tspan style="font-variant: normal; font-weight: 300; font-size: 4.09046px; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583">
                 {{ idioma.lingua }}, {{ idioma.nivel }}
               </tspan>
             </text>
