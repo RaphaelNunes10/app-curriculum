@@ -962,8 +962,6 @@ import { onMounted, reactive, ref, useTemplateRef } from "vue";
 
 import { useRouter } from "vue-router";
 
-import { Curriculum } from "@/utils/types/curriculum.types";
-
 import {
   IonBackButton,
   IonButton,
