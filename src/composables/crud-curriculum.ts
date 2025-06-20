@@ -7,7 +7,7 @@ import { Curriculum } from "@/utils/types/curriculum.types";
 export function useCrudCurriculum() {
   const curricula = ref<Curriculum[]>([]);
 
-  const fetchCurriculum = async () => {
+  const fetchCurricula = async () => {
     const { value } = await Preferences.get({ key: "curricula" });
 
     value ? (curricula.value = JSON.parse(value)) : (curricula.value = []);
@@ -21,7 +21,7 @@ export function useCrudCurriculum() {
       value: JSON.stringify(curricula.value),
     });
 
-    await fetchCurriculum();
+    await fetchCurricula();
   };
 
   const updateCurriculum = async (index: number, curriculum: Curriculum) => {
@@ -32,7 +32,7 @@ export function useCrudCurriculum() {
       value: JSON.stringify(curricula.value),
     });
 
-    await fetchCurriculum();
+    await fetchCurricula();
   };
 
   const deleteCurriculum = async (id: number) => {
@@ -46,12 +46,12 @@ export function useCrudCurriculum() {
       value: JSON.stringify(curricula.value),
     });
 
-    await fetchCurriculum();
+    await fetchCurricula();
   };
 
   return {
     curricula,
-    fetchCurriculum,
+    fetchCurricula,
     createCurriculum,
     updateCurriculum,
     deleteCurriculum,

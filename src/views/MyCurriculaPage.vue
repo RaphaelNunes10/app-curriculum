@@ -127,10 +127,8 @@ addIcons({
 
 registerSwiper();
 
-const { curricula } = useDadosCurriculum();
-
-// const { curricula, fetchCurriculum } = useCrudCurriculum();
-// fetchCurriculum();
+const { curricula, fetchCurricula } = useCrudCurriculum();
+fetchCurricula();
 </script>
 
 <style scoped>
