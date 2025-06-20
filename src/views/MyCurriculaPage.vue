@@ -15,7 +15,7 @@
 
       <div
         id="container"
-        class="flex-0 relative h-full grid place-items-center"
+        class="flex-0 relative h-full"
       >
         <div v-if="curricula.length == 0" class="justify-items-center">
           <h2>
@@ -35,6 +35,7 @@
         >
           <swiper-slide
             v-for="curriculum in curricula"
+            :key="curriculum.id"
             class="p-4 justify-items-center"
           >
             <ion-card class="z-0">
