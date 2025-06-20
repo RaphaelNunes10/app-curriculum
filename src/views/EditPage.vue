@@ -149,7 +149,11 @@
           <ion-card class="mb-6">
             <ion-card-content>
               <ion-label position="stacked">Contato *</ion-label>
-              <FieldArray name="contato" v-slot="{ fields, push, remove }">
+              <FieldArray
+                ref="contato-field-array"
+                name="contato"
+                v-slot="{ fields, push, remove }"
+              >
                 <div
                   v-for="(field, index) in fields"
                   :key="field.key"
@@ -254,7 +258,11 @@
 
           <ion-card class="mb-6">
             <ion-card-content>
-              <FieldArray name="experiencia" v-slot="{ fields, push, remove }">
+              <FieldArray
+                ref="experiencia-field-array"
+                name="experiencia"
+                v-slot="{ fields, push, remove }"
+              >
                 <div
                   v-for="(field, index) in fields"
                   :key="field.key"
@@ -543,7 +551,11 @@
 
           <ion-card class="mb-6">
             <ion-card-content>
-              <FieldArray name="formacao" v-slot="{ fields, push, remove }">
+              <FieldArray
+                ref="formacao-field-array"
+                name="formacao"
+                v-slot="{ fields, push, remove }"
+              >
                 <div
                   v-for="(field, index) in fields"
                   :key="field.key"
@@ -790,6 +802,7 @@
               <div class="grid gap-2">
                 <ion-label position="stacked">Habilidades (opcional)</ion-label>
                 <FieldArray
+                  ref="habilidades-field-array"
                   name="habilidades"
                   v-slot="{ fields, push, remove }"
                 >
@@ -850,7 +863,11 @@
             <ion-card-content>
               <div class="grid gap-2">
                 <ion-label position="stacked">Idiomas (opcional)</ion-label>
-                <FieldArray name="idiomas" v-slot="{ fields, push, remove }">
+                <FieldArray
+                  ref="idiomas-field-array"
+                  name="idiomas"
+                  v-slot="{ fields, push, remove }"
+                >
                   <ion-item v-for="(field, index) in fields" :key="field.key">
                     <ion-grid>
                       <ion-row>
@@ -1014,6 +1031,11 @@ const {
 } = useCrudCurriculum();
 
 const form = useTemplateRef("form");
+const contatoFieldArray = useTemplateRef("contato-field-array");
+const experienciaFieldArray = useTemplateRef("experiencia-field-array");
+const formacaoFieldArray = useTemplateRef("formacao-field-array");
+const habilidadesFieldArray = useTemplateRef("habilidades-field-array");
+const idiomasFieldArray = useTemplateRef("idiomas-field-array");
 
 const errorMessage = ref("");
 
@@ -1296,6 +1318,8 @@ const convertYear = (event: any) => {
 
 const route = useRoute();
 
+// TODO: finish form fill
+
 onMounted(async () => {
   const id = route.params.id;
   if (!id) return;
@@ -1305,7 +1329,23 @@ onMounted(async () => {
   );
 
   if (fetchedCurriculum) {
-    form.value?.setValues(fetchedCurriculum);
+    form.value?.setFieldValue("nome", fetchedCurriculum.nome);
+    form.value?.setFieldValue("sobrenome", fetchedCurriculum.sobrenome);
+    form.value?.setFieldValue("sobre", fetchedCurriculum.sobre);
+    contatoFieldArray.value.replace(fetchedCurriculum.contato);
+    fetchedCurriculum.formacao.forEach((formacao, index) => {
+      // formacaoFieldArray.value.push({
+      //   universidade: "",
+      //   anoInicio: null,
+      //   anoFim: null,
+      //   curso: "",
+      // });
+      addItem({
+        isAnoInicioOpen: false,
+        isAnoFimOpen: false,
+      }, modals.formacao!);
+    });
+    formacaoFieldArray.value.replace(fetchedCurriculum.formacao);
   }
 });
 </script>
