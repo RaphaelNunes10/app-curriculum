@@ -14,8 +14,8 @@
     version="1.1"
   >
     <metadata id="metadata8">
-      <rdf:RDF><cc:Work rdf:about=""><dc:format>image/svg+xml</dc:format
-          ><dc:type
+      <rdf:RDF><cc:Work rdf:about=""><dc:format
+          >image/svg+xml</dc:format><dc:type
             rdf:resource="http://purl.org/dc/dcmitype/StillImage"
           /></cc:Work></rdf:RDF>
     </metadata>
