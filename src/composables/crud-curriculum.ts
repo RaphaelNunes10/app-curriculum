@@ -4,9 +4,9 @@ import { Preferences } from "@capacitor/preferences";
 
 import { Curriculum } from "@/utils/types/curriculum.types";
 
-export function useCrudCurriculum() {
-  const curricula = ref<Curriculum[]>([]);
+const curricula = ref<Curriculum[]>([]);
 
+export function useCrudCurriculum() {
   const fetchCurricula = async () => {
     const { value } = await Preferences.get({ key: "curricula" });
 
