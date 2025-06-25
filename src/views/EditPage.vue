@@ -6,7 +6,7 @@
           <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title class="ml-2">
-          Editar Curriculum
+          {{ id ? "Editar curriculum" : "Adicionar curriculum" }}
         </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -17,7 +17,9 @@
           <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
           </ion-buttons>
-          <ion-title size="large" class="ml-2">Editar Curriculum</ion-title>
+          <ion-title size="large" class="ml-2">
+            {{ id ? "Editar curriculum" : "Adicionar curriculum" }}
+          </ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -49,7 +51,7 @@
                       color="primary"
                       shape="round"
                       class="w-10 absolute top-0 right-0 mx-auto aspect-square"
-                      @click="addImagem(field.value)"
+                      @click="addImagem"
                     >
                       <ion-icon slot="icon-only" name="reload"></ion-icon>
                     </ion-button>
@@ -59,7 +61,7 @@
                     color="primary"
                     expand="full"
                     class="w-full md:w-[50%] lg:w-[20%] mx-auto aspect-square"
-                    @click="addImagem(field.value)"
+                    @click="addImagem"
                   >
                     <ion-icon name="add"></ion-icon>
                   </ion-button>
@@ -962,7 +964,11 @@
 
           <ion-card class="bg-transparent shadow-none !flex justify-center">
             <ion-button type="submit" color="primary" shape="round">
-              Adicionar curriculum
+              {{
+                id
+                ? "Editar curriculum"
+                : "Adicionar curriculum"
+              }}
             </ion-button>
             {{ errorMessage }}
           </ion-card>
@@ -1006,9 +1012,9 @@ import {
   // ItemReorderEventDetail,
 } from "@ionic/vue";
 
-// import { Camera } from "@capacitor/camera";
-// import { Filesystem } from "@capacitor/filesystem";
-// import { Capacitor } from "@capacitor/core";
+import { Camera } from "@capacitor/camera";
+import { Filesystem } from "@capacitor/filesystem";
+import { Capacitor } from "@capacitor/core";
 
 import { addIcons } from "ionicons";
 import { add, close, reload } from "ionicons/icons";
@@ -1024,6 +1030,8 @@ addIcons({
   close: close,
   reload: reload,
 });
+
+const id = route.params.id;
 
 const {
   fetchCurriculumById,
@@ -1253,47 +1261,43 @@ const modals = reactive({
   ],
 });
 
-// TODO: Finish image upload
+const blobToBase64 = (blob: Blob): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+};
 
-// const blobToBase64 = (blob: Blob): Promise<string> => {
-//   return new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-//     reader.onloadend = () => resolve(reader.result as string);
-//     reader.onerror = reject;
-//     reader.readAsDataURL(blob);
-//   });
-// };
+const addImagem = async () => {
+  try {
+    const imagem = await Camera.pickImages({
+      quality: 90,
+      limit: 1,
+    });
 
-// const addImagem = async (fieldValue: any) => {
-//   try {
-//     const imagem = await Camera.pickImages({
-//       quality: 90,
-//       limit: 1,
-//     });
+    if (imagem.photos[0]) {
+      const photo = imagem.photos[0];
 
-//     if (imagem.photos[0]) {
-//       const photo = imagem.photos[0];
+      let imageUrl = "";
+      if (Capacitor.getPlatform() === "web") {
+        const response = await fetch(photo.webPath!);
+        const blob = await response.blob();
+        imageUrl = await blobToBase64(blob);
+      } else {
+        const file = await Filesystem.readFile({
+          path: photo.path!,
+        });
+        imageUrl = `data:image/jpeg;base64,${file.data}`;
+      }
 
-//       let imageUrl = "";
-//       if (Capacitor.getPlatform() === "web") {
-//         // For web, use the webPath directly as base64
-//         const response = await fetch(photo.webPath!);
-//         const blob = await response.blob();
-//         imageUrl = await blobToBase64(blob);
-//       } else {
-//         // For native platforms, use Filesystem to read the file
-//         const file = await Filesystem.readFile({
-//           path: photo.path!,
-//         });
-//         imageUrl = `data:image/jpeg;base64,${file.data}`;
-//       }
-
-//       fieldValue = imageUrl;
-//     }
-//   } catch (error) {
-//     console.error("Error capturing image:", error);
-//   }
-// };
+      form.value?.setFieldValue("imagem", imageUrl);
+    }
+  } catch (error) {
+    console.error("Error capturing image:", error);
+  }
+};
 
 const addItem = (object: any, list: any[]) => {
   list.push(object);
@@ -1321,7 +1325,6 @@ const route = useRoute();
 // TODO: finish form fill
 
 onMounted(async () => {
-  const id = route.params.id;
   if (!id) return;
 
   const fetchedCurriculum = await fetchCurriculumById(
