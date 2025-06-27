@@ -28,14 +28,16 @@
         </div>
         <swiper-container
           v-else
+          ref="swiper"
           slides-per-view="1"
           navigation="true"
           pagination="true"
           scrollbar="true"
           css-mode="true"
+          @swiperslidechange="onSlideChange"
         >
           <swiper-slide
-            v-for="curriculum in curricula"
+            v-for="(curriculum, index) in curricula"
             :key="curriculum.id"
             class="p-4 justify-items-center"
           >
@@ -101,7 +103,11 @@
                   </ion-button>
                 </div>
 
-                <default-curriculum :dados="curriculum" class="size-full" />
+                <default-curriculum
+                  :ref="(el) => setComponentRef(el, index)"
+                  :dados="curriculum"
+                  class="size-full"
+                />
               </ion-card-content>
             </ion-card>
           </swiper-slide>
@@ -129,11 +135,8 @@
 </template>
 
 <script setup lang="ts">
-import { useBreakpoints } from "@vueuse/core";
-
-import EditPage from "./EditPage.vue";
-
-import DefaultCurriculum from "../components/default-curriculum.vue";
+import { computed, ref } from "vue";
+import type { TemplateRef } from "vue";
 
 import {
   IonButton,
@@ -148,16 +151,21 @@ import {
   IonToolbar,
 } from "@ionic/vue";
 
-import Swiper from "swiper";
-import "swiper/css";
-
 import { addIcons } from "ionicons";
 import { addCircle, create, trash } from "ionicons/icons";
 
+import Swiper from "swiper";
+import "swiper/css";
+
 import { register as registerSwiper } from "swiper/element/bundle";
 
-// import { useDadosCurriculum } from "@/composables/dados-curriculum";
+import EditPage from "./EditPage.vue";
+
+import DefaultCurriculum from "../components/default-curriculum.vue";
+
 import { useCrudCurriculum } from "@/composables/crud-curriculum";
+
+import { useBreakpoints } from "@vueuse/core";
 
 import { useVueToPrint } from "vue-to-print";
 
@@ -197,6 +205,33 @@ registerSwiper();
 
 const { curricula, fetchCurricula, deleteCurriculum } = useCrudCurriculum();
 fetchCurricula();
+
+const activeIndex = ref(0);
+const componentRefs = ref<(InstanceType<typeof DefaultCurriculum> | null)[]>(
+  [],
+);
+
+const setComponentRef = (
+  el: InstanceType<typeof DefaultCurriculum> | null,
+  index: number,
+) => {
+  componentRefs.value[index] = el;
+};
+
+const onSlideChange = (event: Event) => {
+  const swiperEl = event.target as any;
+
+  activeIndex.value = swiperEl.swiper.activeIndex;
+};
+
+const activeComponent = computed<InstanceType<typeof DefaultCurriculum> | null>(
+  () => componentRefs.value[activeIndex.value] || null,
+);
+
+const { handlePrint } = useVueToPrint({
+  content: activeComponent.value!,
+  documentTitle: "AwesomeFileName",
+});
 </script>
 
 <style scoped>
