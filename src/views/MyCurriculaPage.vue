@@ -2,14 +2,16 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title class="ml-2">Meus Curricula</ion-title>
+        <ion-title class="ml-2 text-xs sm:text-sm md:text-2xl"
+        >Meus Curricula</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content class="flex flex-col" :fullscreen="true">
       <ion-header class="flex-0" collapse="condense">
         <ion-toolbar>
-          <ion-title size="large" class="ml-2">Meus Curricula</ion-title>
+          <ion-title size="large" class="ml-2 text-xs sm:text-sm md:text-2xl"
+          >Meus Curricula</ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -38,17 +40,67 @@
             :key="curriculum.id"
             class="p-4 justify-items-center"
           >
-            <ion-card class="z-0">
+            <ion-card class="z-0 w-auto">
               <ion-card-content class="relative p-2 justify-items-center">
-                <ion-button
-                  class="absolute right-5 top-5 z-50"
-                  shape="round"
-                  :router-link="`/edit/${curriculum.id}`"
-                ><span class="mt-1.5">Editar</span>&nbsp;<ion-icon
-                    name="create"
-                  /></ion-button>
+                <div class="absolute right-5 top-5 z-50 grid grid-flow-col sm:grid-flow-row gap-2 justify-items-end">
+                  <ion-button
+                    shape="round"
+                    :router-link="`/edit/${curriculum.id}`"
+                    :fill='
+                      breakpoints.greaterOrEqual("sm").value
+                      ? "solid"
+                      : "clear"
+                    '
+                    class="w-auto sm:w-50 text-xs sm:text-sm md:text-base"
+                  >
+                    <template
+                      v-if='
+                        breakpoints.greaterOrEqual("sm")
+                        .value
+                      '
+                    >
+                      <span class="hidden sm:block">Editar&nbsp;</span>
+                      <ion-icon name="create" />
+                    </template>
+                    <ion-icon
+                      v-else
+                      slot="icon-only"
+                      name="create"
+                      class="text-3xl"
+                    />
+                  </ion-button>
 
-                <default-curriculum :dados="curriculum" />
+                  <ion-button
+                    shape="round"
+                    color="danger"
+                    size="small"
+                    :fill='
+                      breakpoints.greaterOrEqual("sm").value
+                      ? "solid"
+                      : "clear"
+                    '
+                    class="sm:w-3/4 text-xs sm:text-sm md:text-base"
+                    @click="deleteCurriculum(curriculum.id!)"
+                  >
+                    <template
+                      v-if='
+                        breakpoints.greaterOrEqual("sm")
+                        .value
+                      '
+                    >
+                      <span class="hidden sm:block"
+                      >Excluir&nbsp;</span><ion-icon name="trash" />
+                    </template>
+                    <ion-icon
+                      v-else
+                      slot="icon-only"
+                      name="trash"
+                      class="text-3xl"
+                    />
+                  </ion-button>
+                </div>
+
+                <default-curriculum :dados="curriculum" class="size-full" />
               </ion-card-content>
             </ion-card>
           </swiper-slide>
@@ -56,7 +108,7 @@
 
         <ion-nav-link
           v-if="curricula.length > 0"
-          class="fixed right-10 bottom-5 z-50"
+          class="fixed left-1/2 transform -translate-x-1/2 md:left-auto md:translate-x-0 md:right-10 bottom-5 z-50"
           router-direction="forward"
           :component="EditPage"
         >
@@ -64,6 +116,7 @@
             shape="round"
             size="large"
             router-link="/create"
+            class="w-auto text-xs sm:text-sm md:text-base"
           >Adicionar Curriculum&nbsp;<ion-icon name="add-circle" /></ion-button>
         </ion-nav-link>
       </div>
@@ -95,7 +148,7 @@ import Swiper from "swiper";
 import "swiper/css";
 
 import { addIcons } from "ionicons";
-import { addCircle, create } from "ionicons/icons";
+import { addCircle, create, trash } from "ionicons/icons";
 
 import { register as registerSwiper } from "swiper/element/bundle";
 
@@ -109,6 +162,7 @@ const breakpoints = useBreakpoints({
   xl: 1280,
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const swiper = new Swiper(".swiper", {
   direction: "vertical",
   loop: true,
@@ -130,11 +184,12 @@ const swiper = new Swiper(".swiper", {
 addIcons({
   "add-circle": addCircle,
   create: create,
+  trash: trash,
 });
 
 registerSwiper();
 
-const { curricula, fetchCurricula } = useCrudCurriculum();
+const { curricula, fetchCurricula, deleteCurriculum } = useCrudCurriculum();
 fetchCurricula();
 </script>
 
