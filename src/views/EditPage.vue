@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title class="ml-2">
+        <ion-title>
           {{ id ? "Editar curriculum" : "Adicionar curriculum" }}
         </ion-title>
       </ion-toolbar>
@@ -17,7 +17,7 @@
           <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
           </ion-buttons>
-          <ion-title size="large" class="ml-2">
+          <ion-title>
             {{ id ? "Editar curriculum" : "Adicionar curriculum" }}
           </ion-title>
         </ion-toolbar>
@@ -161,7 +161,7 @@
                 >
                   <ion-grid>
                     <ion-row>
-                      <ion-col size="4">
+                      <ion-col size="12" size-sm="4">
                         <Field
                           :name="`contato[${index}].icone.d`"
                           v-slot="
@@ -226,7 +226,7 @@
                           </Field>
                         </ion-item>
                       </ion-col>
-                      <ion-col size="2" sizeLg="1">
+                      <ion-col size="2" size-lg="1">
                         <ion-button
                           color="primary"
                           class="w-full h-full !flex items-center justify-center"
@@ -516,7 +516,7 @@
                           </ion-col>
                         </ion-row>
                       </ion-col>
-                      <ion-col size="2" sizeLg="1">
+                      <ion-col size="2" size-lg="1">
                         <ion-button
                           color="primary"
                           class="w-full h-full !flex items-center justify-center"
@@ -765,7 +765,7 @@
                           </ion-col>
                         </ion-row>
                       </ion-col>
-                      <ion-col size="2" sizeLg="1">
+                      <ion-col size="2" size-lg="1">
                         <ion-button
                           color="primary"
                           class="w-full h-full !flex items-center justify-center"
@@ -838,7 +838,7 @@
                             ></ion-input>
                           </Field>
                         </ion-col>
-                        <ion-col size="2" sizeLg="1">
+                        <ion-col size="2" size-lg="1">
                           <ion-button
                             color="primary"
                             class="w-full h-full !flex items-center justify-center"
@@ -874,75 +874,93 @@
                     <ion-grid>
                       <ion-row>
                         <ion-col>
-                          <Field
-                            :name="`idiomas[${index}].lingua`"
-                            v-slot="
-                              {
-                                field,
-                                meta,
-                                errorMessage,
-                              }
-                            "
-                          >
-                            <ion-input
-                              v-bind="field"
-                              :placeholder="
-                                `Idioma #${
-                                  index + 1
-                                } *`
-                              "
-                              :class='
-                                !meta.valid
-                                ? "ion-touched ion-invalid"
-                                : ""
-                              '
-                              :errorText="errorMessage"
-                            ></ion-input>
-                          </Field>
+                          <ion-row>
+                            <ion-col>
+                              <Field
+                                :name="`idiomas[${index}].lingua`"
+                                v-slot="
+                                  {
+                                    field,
+                                    meta,
+                                    errorMessage,
+                                  }
+                                "
+                              >
+                                <ion-input
+                                  v-bind="field"
+                                  :placeholder="
+                                    `Idioma #${
+                                      index + 1
+                                    } *`
+                                  "
+                                  :class='
+                                    !meta.valid
+                                    ? "ion-touched ion-invalid"
+                                    : ""
+                                  '
+                                  :errorText="errorMessage"
+                                ></ion-input>
+                              </Field>
+                            </ion-col>
+
+                            <ion-col
+                              size="12"
+                              size-sm="4"
+                              size-md="3"
+                              size-lg="2"
+                            >
+                              <Field
+                                :name="`idiomas[${index}].nivel`"
+                                v-slot="
+                                  {
+                                    field,
+                                    meta,
+                                    errorMessage,
+                                    handleChange,
+                                  }
+                                "
+                              >
+                                <ion-select
+                                  placeholder="Nível *"
+                                  interface="popover"
+                                  :class='
+                                    !meta
+                                      .valid &&
+                                      meta
+                                        .touched
+                                    ? "ion-touched ion-invalid"
+                                    : ""
+                                  '
+                                  :modelValue="
+                                    field
+                                    .value
+                                  "
+                                  :errorText="errorMessage"
+                                  @ionChange="handleChange"
+                                >
+                                  <ion-select-option value="Básico"
+                                  >Básico</ion-select-option>
+                                  <ion-select-option value="Médio"
+                                  >Médio</ion-select-option>
+                                  <ion-select-option value="Avançado"
+                                  >Avançado</ion-select-option>
+                                </ion-select>
+                              </Field>
+                            </ion-col>
+                          </ion-row>
                         </ion-col>
 
-                        <ion-col size="1.5">
-                          <Field
-                            :name="`idiomas[${index}].nivel`"
-                            v-slot="
-                              {
-                                field,
-                                meta,
-                                errorMessage,
-                                handleChange,
-                              }
-                            "
-                          >
-                            <ion-select
-                              placeholder="Nível *"
-                              interface="popover"
-                              :class='
-                                !meta.valid &&
-                                  meta.touched
-                                ? "ion-touched ion-invalid"
-                                : ""
-                              '
-                              :modelValue="field.value"
-                              :errorText="errorMessage"
-                              @ionChange="handleChange"
-                            >
-                              <ion-select-option value="Básico"
-                              >Básico</ion-select-option>
-                              <ion-select-option value="Médio"
-                              >Médio</ion-select-option>
-                              <ion-select-option value="Avançado"
-                              >Avançado</ion-select-option>
-                            </ion-select>
-                          </Field>
-                        </ion-col>
-                        <ion-col size="2" sizeLg="1">
+                        <ion-col size="2" size-lg="1">
                           <ion-button
                             color="primary"
                             class="w-full h-full !flex items-center justify-center"
                             fill="clear"
                             @click="remove(index)"
                           >
-                            <ion-icon slot="icon-only" name="close"></ion-icon>
+                            <ion-icon
+                              slot="icon-only"
+                              name="close"
+                            ></ion-icon>
                           </ion-button>
                         </ion-col>
                       </ion-row>
@@ -984,7 +1002,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref, useTemplateRef } from "vue";
 
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 import {
   IonBackButton,
@@ -1022,9 +1040,10 @@ import { add, close, reload } from "ionicons/icons";
 
 import { Field, FieldArray, Form } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
+
 import z from "zod";
+
 import { useCrudCurriculum } from "@/composables/crud-curriculum";
-import { useRoute } from "vue-router";
 
 addIcons({
   add: add,
