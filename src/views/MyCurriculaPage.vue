@@ -10,8 +10,7 @@
     <ion-content class="flex flex-col" :fullscreen="true">
       <ion-header class="flex-0" collapse="condense">
         <ion-toolbar>
-          <ion-title size="large" class="ml-2 text-xs sm:text-sm md:text-2xl"
-          >Meus Curricula</ion-title>
+          <ion-title class="ml-2">Meus Curricula</ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -42,7 +41,9 @@
           >
             <ion-card class="z-0 w-auto">
               <ion-card-content class="relative p-2 justify-items-center">
-                <div class="absolute right-5 top-5 z-50 grid grid-flow-col sm:grid-flow-row gap-2 justify-items-end">
+                <div
+                  class="absolute right-5 top-5 z-50 grid grid-flow-col sm:grid-flow-row gap-2 justify-items-end"
+                >
                   <ion-button
                     shape="round"
                     :router-link="`/edit/${curriculum.id}`"
@@ -117,7 +118,10 @@
             size="large"
             router-link="/create"
             class="w-auto text-xs sm:text-sm md:text-base"
-          >Adicionar Curriculum&nbsp;<ion-icon name="add-circle" /></ion-button>
+          >Adicionar Curriculum&nbsp;<ion-icon
+              name="add-circle"
+              class="text-3xl"
+            /></ion-button>
         </ion-nav-link>
       </div>
     </ion-content>
