@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-// import { onMounted, reactive, ref } from "vue";
+import { useBreakpoints } from "@vueuse/core";
 
 import EditPage from "./EditPage.vue";
 
@@ -101,6 +101,13 @@ import { register as registerSwiper } from "swiper/element/bundle";
 
 // import { useDadosCurriculum } from "@/composables/dados-curriculum";
 import { useCrudCurriculum } from "@/composables/crud-curriculum";
+
+const breakpoints = useBreakpoints({
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+});
 
 const swiper = new Swiper(".swiper", {
   direction: "vertical",
