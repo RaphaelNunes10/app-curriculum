@@ -156,18 +156,19 @@
                 name="contato"
                 v-slot="{ fields, push, remove }"
               >
-                <div
+                <ion-item
                   v-for="(field, index) in fields"
                   :key="field.key"
                   class="grid gap-2"
                 >
                   <ion-grid>
                     <ion-row>
-                      <ion-col size="1.5">
+                      <ion-col size="4">
                         <Field
                           :name="`contato[${index}].icone.d`"
                           v-slot="
                             {
+                              field,
                               meta,
                               errorMessage,
                               handleChange,
@@ -183,6 +184,7 @@
                               ? "ion-touched ion-invalid"
                               : ""
                             '
+                            :modelValue="field.value"
                             :errorText="errorMessage"
                             @ionChange="handleChange"
                           >
@@ -239,7 +241,7 @@
                       </ion-col>
                     </ion-row>
                   </ion-grid>
-                </div>
+                </ion-item>
 
                 <ion-button
                   color="primary"
@@ -906,6 +908,7 @@
                             :name="`idiomas[${index}].nivel`"
                             v-slot="
                               {
+                                field,
                                 meta,
                                 errorMessage,
                                 handleChange,
@@ -921,6 +924,7 @@
                                 ? "ion-touched ion-invalid"
                                 : ""
                               '
+                              :modelValue="field.value"
                               :errorText="errorMessage"
                               @ionChange="handleChange"
                             >
