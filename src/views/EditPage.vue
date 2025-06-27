@@ -974,8 +974,9 @@
                 : "Adicionar curriculum"
               }}
             </ion-button>
-            {{ errorMessage }}
           </ion-card>
+
+          <p class="!flex justify-center text-red-600">{{ errorMessage }}</p>
         </Form>
       </div>
     </ion-content>
