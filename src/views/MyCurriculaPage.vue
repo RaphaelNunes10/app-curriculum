@@ -155,6 +155,8 @@ import { register as registerSwiper } from "swiper/element/bundle";
 // import { useDadosCurriculum } from "@/composables/dados-curriculum";
 import { useCrudCurriculum } from "@/composables/crud-curriculum";
 
+import { useVueToPrint } from "vue-to-print";
+
 const breakpoints = useBreakpoints({
   sm: 640,
   md: 768,

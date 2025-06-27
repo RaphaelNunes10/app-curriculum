@@ -64,6 +64,9 @@ importers:
       vue-router:
         specifier: ^4.5.0
         version: 4.5.1(vue@3.5.17(typescript@5.6.3))
+      vue-to-print:
+        specifier: ^1.4.0
+        version: 1.4.0(vue@3.5.17(typescript@5.6.3))
       zod:
         specifier: ^3.24.4
         version: 3.25.67
@@ -4730,6 +4733,13 @@ packages:
     peerDependencies:
       vue: ^3.2.0
 
+  vue-to-print@1.4.0:
+    resolution: {
+      integrity: sha512-HNq9BAvB7gTT3eQQasdvVfcsQzBcH/bfokFKToM8ABjZ35+brdKZXda5UCCB+9uiuKP8YEGfMzav8YeD3MtUPg==,
+    }
+    peerDependencies:
+      vue: ^3.0.0
+
   vue-tsc@2.2.10:
     resolution: {
       integrity: sha512-jWZ1xSaNbabEV3whpIDMbjVSVawjAyW+x1n3JeGQo7S0uv2n9F/JMgWW90tGWNFRKya4YwKMZgCtr0vRAM7DeQ==,
@@ -8270,6 +8280,10 @@ snapshots:
   vue-router@4.5.1(vue@3.5.17(typescript@5.6.3)):
     dependencies:
       "@vue/devtools-api": 6.6.4
+      vue: 3.5.17(typescript@5.6.3)
+
+  vue-to-print@1.4.0(vue@3.5.17(typescript@5.6.3)):
+    dependencies:
       vue: 3.5.17(typescript@5.6.3)
 
   vue-tsc@2.2.10(typescript@5.6.3):
