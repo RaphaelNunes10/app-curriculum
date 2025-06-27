@@ -29,11 +29,9 @@
       >
         <Form
           ref="form"
-          v-slot="{ values }"
           :validation-schema
           @submit="onSubmit"
         >
-          {{ values }}
           <ion-card class="mb-6">
             <ion-card-content>
               <div class="grid gap-2">
@@ -984,8 +982,6 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Corrigir e finalizar schema do formulário.
-
 import { onMounted, reactive, ref, useTemplateRef } from "vue";
 
 import { useRouter } from "vue-router";
@@ -1036,19 +1032,17 @@ addIcons({
   reload: reload,
 });
 
+const route = useRoute();
+
 const id = route.params.id;
 
 const {
   fetchCurriculumById,
-  createCurriculum, // updateCurriculum
+  createCurriculum,
+  updateCurriculum,
 } = useCrudCurriculum();
 
 const form = useTemplateRef("form");
-const contatoFieldArray = useTemplateRef("contato-field-array");
-const experienciaFieldArray = useTemplateRef("experiencia-field-array");
-const formacaoFieldArray = useTemplateRef("formacao-field-array");
-const habilidadesFieldArray = useTemplateRef("habilidades-field-array");
-const idiomasFieldArray = useTemplateRef("idiomas-field-array");
 
 const errorMessage = ref("");
 
@@ -1241,14 +1235,24 @@ const validationSchema = toTypedSchema(
   }),
 );
 
+const router = useRouter();
+
 async function onSubmit(values: any) {
   try {
-    await createCurriculum(values);
-    form.value?.resetForm();
-    useRouter().push("/");
+    if (id) {
+      await updateCurriculum(Number.parseInt(id as string) - 1, values);
+    } else {
+      await createCurriculum(values);
+    }
   } catch {
-    errorMessage.value = "Houve um erro interno ao cadastrar o curriculum.";
+    errorMessage.value = id
+      ? "Houve um erro interno ao atualizar o curriculum."
+      : "Houve um erro interno ao cadastrar o curriculum.";
+
+    return;
   }
+
+  router.push("/");
 }
 
 const modals = reactive({
@@ -1321,14 +1325,6 @@ const convertYear = (event: any) => {
     );
 };
 
-// const handleContatoIconeChange = (event: any, index: number) => {
-//   curriculum.contato![index].icone.d = event.detail.value;
-// };
-
-const route = useRoute();
-
-// TODO: finish form fill
-
 onMounted(async () => {
   if (!id) return;
 
@@ -1337,23 +1333,20 @@ onMounted(async () => {
   );
 
   if (fetchedCurriculum) {
-    form.value?.setFieldValue("nome", fetchedCurriculum.nome);
-    form.value?.setFieldValue("sobrenome", fetchedCurriculum.sobrenome);
-    form.value?.setFieldValue("sobre", fetchedCurriculum.sobre);
-    contatoFieldArray.value.replace(fetchedCurriculum.contato);
-    fetchedCurriculum.formacao.forEach((formacao, index) => {
-      // formacaoFieldArray.value.push({
-      //   universidade: "",
-      //   anoInicio: null,
-      //   anoFim: null,
-      //   curso: "",
-      // });
+    fetchedCurriculum.formacao.forEach(() => {
       addItem({
         isAnoInicioOpen: false,
         isAnoFimOpen: false,
       }, modals.formacao!);
     });
-    formacaoFieldArray.value.replace(fetchedCurriculum.formacao);
+    fetchedCurriculum.experiencia.forEach(() => {
+      addItem({
+        isAnoInicioOpen: false,
+        isAnoFimOpen: false,
+      }, modals.experiencia!);
+    });
+
+    form.value?.setValues(fetchedCurriculum);
   }
 });
 </script>
