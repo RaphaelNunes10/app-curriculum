@@ -2,8 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title class="ml-2 text-xs sm:text-sm md:text-2xl"
-        >Meus Curricula</ion-title>
+        <ion-title class="ml-2">Meus Curricula</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -43,9 +42,7 @@
           >
             <ion-card class="z-0 w-auto">
               <ion-card-content class="relative p-2 justify-items-center">
-                <div
-                  class="absolute right-5 top-5 z-50 grid grid-flow-col sm:grid-flow-row gap-2 justify-items-end"
-                >
+                <div class="absolute right-5 top-5 z-50 grid grid-cols-12 sm:grid-flow-row sm:auto-rows-auto gap-2 justify-items-end">
                   <ion-button
                     shape="round"
                     :router-link="`/edit/${curriculum.id}`"
@@ -54,7 +51,7 @@
                       ? "solid"
                       : "clear"
                     '
-                    class="w-auto sm:w-50 text-xs sm:text-sm md:text-base"
+                    class="sm:w-3/4 text-xs sm:text-sm md:text-base col-span-4 col-start-6 sm:col-span-12"
                   >
                     <template
                       v-if='
@@ -69,7 +66,7 @@
                       v-else
                       slot="icon-only"
                       name="create"
-                      class="text-3xl"
+                      class="text-3xl drop-shadow-xl"
                     />
                   </ion-button>
 
@@ -82,7 +79,7 @@
                       ? "solid"
                       : "clear"
                     '
-                    class="sm:w-3/4 text-xs sm:text-sm md:text-base"
+                    class="sm:w-1/2 text-xs col-span-3 sm:col-span-12"
                     @click="deleteCurriculum(curriculum.id!)"
                   >
                     <template
@@ -98,7 +95,7 @@
                       v-else
                       slot="icon-only"
                       name="trash"
-                      class="text-3xl"
+                      class="text-2xl drop-shadow-xl"
                     />
                   </ion-button>
                 </div>
