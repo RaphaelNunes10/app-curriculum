@@ -145,6 +145,20 @@
 
           <ion-card class="mb-6">
             <ion-card-content>
+              <div class="grid gap-2">
+                <ion-label position="stacked">Contato *</ion-label>
+                <FieldArray
+                  ref="contato-field-array"
+                  name="contato"
+                  v-slot="{ fields, push, remove }"
+                >
+                  <ion-item
+                    v-for="(field, index) in fields"
+                    :key="field.key"
+                  >
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size="12" size-md="4">
                           <Field
                             :name="`contato[${index}].icone`"
                             v-slot="
@@ -214,6 +228,9 @@
                               >Cel</ion-select-option>
                             </ion-select>
                           </Field>
+                        </ion-col>
+
+                        <ion-col size="10" size-lg="7">
                           <Field
                             :name="`contato[${index}].info`"
                             v-slot="
@@ -235,578 +252,593 @@
                               :errorText="errorMessage"
                             ></ion-input>
                           </Field>
-                        </ion-item>
-                      </ion-col>
-                      <ion-col size="2" size-lg="1">
-                        <ion-button
-                          color="primary"
-                          class="w-full h-full !flex items-center justify-center"
-                          fill="clear"
-                          @click="remove(index)"
-                          v-if="index > 0"
-                        >
-                          <ion-icon slot="icon-only" name="close"></ion-icon>
-                        </ion-button>
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
-                </ion-item>
+                        </ion-col>
 
-                <ion-button
-                  color="primary"
-                  expand="full"
-                  @click='
-                    push({
-                      icone: {
-                        d: "",
-                        size: 35,
-                      },
-                      info: "",
-                    })
-                  '
-                >Adicionar contato</ion-button>
-              </FieldArray>
+                        <ion-col size="2" size-lg="1">
+                          <ion-button
+                            color="primary"
+                            class="w-full h-full !flex items-center justify-center"
+                            fill="clear"
+                            @click="remove(index)"
+                            v-if="index > 0"
+                          >
+                            <ion-icon slot="icon-only" name="close"></ion-icon>
+                          </ion-button>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+
+                  <ion-button
+                    color="primary"
+                    expand="full"
+                    @click='
+                      push({
+                        icone: {
+                          d: "",
+                          size: null,
+                        },
+                        info: "",
+                      })
+                    '
+                  >Adicionar contato</ion-button>
+                </FieldArray>
+              </div>
             </ion-card-content>
           </ion-card>
 
           <ion-card class="mb-6">
             <ion-card-content>
-              <FieldArray
-                ref="experiencia-field-array"
-                name="experiencia"
-                v-slot="{ fields, push, remove }"
-              >
-                <div
-                  v-for="(field, index) in fields"
-                  :key="field.key"
-                  class="grid gap-2"
+              <div class="grid gap-2">
+                <FieldArray
+                  ref="experiencia-field-array"
+                  name="experiencia"
+                  v-slot="{ fields, push, remove }"
                 >
-                  <ion-label position="stacked"
-                  >Experiência {{
-                      fields.length > 1
-                      ? `#${index + 1}`
-                      : ""
-                    }}*</ion-label>
-                  <ion-grid>
-                    <ion-row>
-                      <ion-col>
-                        <ion-row>
-                          <ion-col size="12">
-                            <ion-item>
-                              <Field
-                                :name="`experiencia[${index}].empresa`"
-                                v-slot="
-                                  {
-                                    field,
-                                    meta,
-                                    errorMessage,
-                                  }
-                                "
-                              >
-                                <ion-input
-                                  v-bind="field"
-                                  placeholder="Empresa *"
-                                  :class='
-                                    !meta.valid
-                                    ? "ion-touched ion-invalid"
-                                    : ""
-                                  '
-                                  :errorText="errorMessage"
-                                ></ion-input>
-                              </Field>
-                            </ion-item>
-                          </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                          <ion-col size="6">
-                            <ion-item>
-                              <Field
-                                :name="`experiencia[${index}].anoInicio`"
-                                v-slot="
-                                  {
-                                    field,
-                                    setValue,
-                                    meta,
-                                    errorMessage,
-                                  }
-                                "
-                              >
-                                <ion-input
-                                  v-bind="field"
-                                  placeholder="Ano Início *"
-                                  :class='
-                                    !meta.valid
-                                    ? "ion-touched ion-invalid"
-                                    : ""
-                                  '
-                                  :errorText="errorMessage"
-                                  @ion-focus="
-                                    modals
-                                    .experiencia[
-                                      index
-                                    ]
-                                    .isAnoInicioOpen =
-                                      true
-                                  "
-                                ></ion-input>
-
-                                <ion-modal
-                                  :is-open="
-                                    modals
-                                    .experiencia[
-                                      index
-                                    ]
-                                    .isAnoInicioOpen
-                                  "
-                                  @did-dismiss="
-                                    modals
-                                    .experiencia[
-                                      index
-                                    ]
-                                    .isAnoInicioOpen =
-                                      false
+                  <div
+                    v-for="(field, index) in fields"
+                    :key="field.key"
+                    class="grid gap-2"
+                  >
+                    <ion-label position="stacked"
+                    >Experiência {{
+                        fields.length > 1
+                        ? `#${index + 1}`
+                        : ""
+                      }}*</ion-label>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col>
+                          <ion-row>
+                            <ion-col size="12">
+                              <ion-item>
+                                <Field
+                                  :name="`experiencia[${index}].empresa`"
+                                  v-slot="
+                                    {
+                                      field,
+                                      meta,
+                                      errorMessage,
+                                    }
                                   "
                                 >
-                                  <ion-datetime
-                                    presentation="year"
-                                    :prefer-wheel="true"
-                                    :show-default-buttons="true"
-                                    cancel-text="Cancelar"
-                                    done-text="Ok"
-                                    @ion-change="
-                                      setValue(
-                                        convertYear(
-                                          $event,
-                                        ),
-                                      )
-                                    "
-                                  ></ion-datetime>
-                                </ion-modal>
-                              </Field>
-                            </ion-item>
-                          </ion-col>
-                          <ion-col size="6">
-                            <ion-item>
-                              <Field
-                                :name="`experiencia[${index}].anoFim`"
-                                v-slot="
-                                  {
-                                    field,
-                                    setValue,
-                                    meta,
-                                    errorMessage,
-                                  }
-                                "
-                              >
-                                <ion-input
-                                  v-bind="field"
-                                  placeholder="Ano Fim *"
-                                  :class='
-                                    !meta.valid
-                                    ? "ion-touched ion-invalid"
-                                    : ""
-                                  '
-                                  :errorText="errorMessage"
-                                  @ion-focus="
-                                    modals
-                                    .experiencia[
-                                      index
-                                    ]
-                                    .isAnoFimOpen =
-                                      true
-                                  "
-                                ></ion-input>
+                                  <ion-input
+                                    v-bind="field"
+                                    placeholder="Empresa *"
+                                    :class='
+                                      !meta
+                                        .valid
+                                      ? "ion-touched ion-invalid"
+                                      : ""
+                                    '
+                                    :errorText="errorMessage"
+                                  ></ion-input>
+                                </Field>
+                              </ion-item>
+                            </ion-col>
+                          </ion-row>
 
-                                <ion-modal
-                                  :is-open="
-                                    modals
-                                    .experiencia[
-                                      index
-                                    ]
-                                    .isAnoFimOpen
-                                  "
-                                  @did-dismiss="
-                                    modals
-                                    .experiencia[
-                                      index
-                                    ]
-                                    .isAnoFimOpen =
-                                      false
+                          <ion-row>
+                            <ion-col size="6">
+                              <ion-item>
+                                <Field
+                                  :name="`experiencia[${index}].anoInicio`"
+                                  v-slot="
+                                    {
+                                      field,
+                                      setValue,
+                                      meta,
+                                      errorMessage,
+                                    }
                                   "
                                 >
-                                  <ion-datetime
-                                    presentation="year"
-                                    :prefer-wheel="true"
-                                    :show-default-buttons="true"
-                                    cancel-text="Cancelar"
-                                    done-text="Ok"
-                                    @ion-change="
-                                      setValue(
-                                        convertYear(
-                                          $event,
-                                        ),
-                                      )
+                                  <ion-input
+                                    v-bind="field"
+                                    placeholder="Ano Início *"
+                                    :class='
+                                      !meta
+                                        .valid
+                                      ? "ion-touched ion-invalid"
+                                      : ""
+                                    '
+                                    :errorText="errorMessage"
+                                    @ion-focus="
+                                      modals
+                                      .experiencia[
+                                        index
+                                      ]
+                                      .isAnoInicioOpen =
+                                        true
                                     "
-                                  ></ion-datetime>
-                                </ion-modal>
-                              </Field>
-                            </ion-item>
-                          </ion-col>
-                        </ion-row>
+                                  ></ion-input>
 
-                        <ion-row>
-                          <ion-col size="12">
-                            <ion-item>
-                              <Field
-                                :name="`experiencia[${index}].posicao`"
-                                v-slot="
-                                  {
-                                    field,
-                                    meta,
-                                    errorMessage,
-                                  }
-                                "
-                              >
-                                <ion-input
-                                  v-bind="field"
-                                  placeholder="Posicao *"
-                                  :class='
-                                    !meta.valid
-                                    ? "ion-touched ion-invalid"
-                                    : ""
-                                  '
-                                  :errorText="errorMessage"
-                                ></ion-input>
-                              </Field>
-                            </ion-item>
-                          </ion-col>
-                        </ion-row>
+                                  <ion-modal
+                                    :is-open="
+                                      modals
+                                      .experiencia[
+                                        index
+                                      ]
+                                      .isAnoInicioOpen
+                                    "
+                                    @did-dismiss="
+                                      modals
+                                      .experiencia[
+                                        index
+                                      ]
+                                      .isAnoInicioOpen =
+                                        false
+                                    "
+                                  >
+                                    <ion-datetime
+                                      presentation="year"
+                                      :prefer-wheel="true"
+                                      :show-default-buttons="true"
+                                      cancel-text="Cancelar"
+                                      done-text="Ok"
+                                      @ion-change="
+                                        setValue(
+                                          convertYear(
+                                            $event,
+                                          ),
+                                        )
+                                      "
+                                    ></ion-datetime>
+                                  </ion-modal>
+                                </Field>
+                              </ion-item>
+                            </ion-col>
+                            <ion-col size="6">
+                              <ion-item>
+                                <Field
+                                  :name="`experiencia[${index}].anoFim`"
+                                  v-slot="
+                                    {
+                                      field,
+                                      setValue,
+                                      meta,
+                                      errorMessage,
+                                    }
+                                  "
+                                >
+                                  <ion-input
+                                    v-bind="field"
+                                    placeholder="Ano Fim *"
+                                    :class='
+                                      !meta
+                                        .valid
+                                      ? "ion-touched ion-invalid"
+                                      : ""
+                                    '
+                                    :errorText="errorMessage"
+                                    @ion-focus="
+                                      modals
+                                      .experiencia[
+                                        index
+                                      ]
+                                      .isAnoFimOpen =
+                                        true
+                                    "
+                                  ></ion-input>
 
-                        <ion-row>
-                          <ion-col size="12">
-                            <ion-item>
-                              <Field
-                                :name="`experiencia[${index}].info`"
-                                v-slot="
-                                  {
-                                    field,
-                                    setValue,
-                                    meta,
-                                    errorMessage,
-                                  }
-                                "
-                              >
-                                <ion-textarea
-                                  :value='
-                                    field.value
-                                    .join(
-                                      "\n",
-                                    )
-                                  '
-                                  placeholder="Informação... (opcional)"
-                                  :class='
-                                    !meta.valid
-                                    ? "ion-touched ion-invalid"
-                                    : ""
-                                  '
-                                  :errorText="errorMessage"
-                                  @ionInput='
-                                    setValue(
-                                      $event
-                                        .target
-                                        .value!
-                                        .split(
-                                          "\n",
-                                        ),
-                                    )
-                                  '
-                                ></ion-textarea>
-                              </Field>
-                            </ion-item>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col size="2" size-lg="1">
-                        <ion-button
-                          color="primary"
-                          class="w-full h-full !flex items-center justify-center"
-                          fill="clear"
-                          @click="remove(index)"
-                          v-if="index > 0"
-                        >
-                          <ion-icon slot="icon-only" name="close"></ion-icon>
-                        </ion-button>
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
-                </div>
-                <ion-button
-                  color="primary"
-                  expand="full"
-                  @click='
-                    push({
-                      empresa: "",
-                      anoInicio: null,
-                      anoFim: null,
-                      posicao: "",
-                      info: [""],
-                    });
-                    addItem({
-                      isAnoInicioOpen: false,
-                      isAnoFimOpen: false,
-                    }, modals.experiencia!);
-                  '
-                >Adicionar Experiência</ion-button>
-              </FieldArray>
+                                  <ion-modal
+                                    :is-open="
+                                      modals
+                                      .experiencia[
+                                        index
+                                      ]
+                                      .isAnoFimOpen
+                                    "
+                                    @did-dismiss="
+                                      modals
+                                      .experiencia[
+                                        index
+                                      ]
+                                      .isAnoFimOpen =
+                                        false
+                                    "
+                                  >
+                                    <ion-datetime
+                                      presentation="year"
+                                      :prefer-wheel="true"
+                                      :show-default-buttons="true"
+                                      cancel-text="Cancelar"
+                                      done-text="Ok"
+                                      @ion-change="
+                                        setValue(
+                                          convertYear(
+                                            $event,
+                                          ),
+                                        )
+                                      "
+                                    ></ion-datetime>
+                                  </ion-modal>
+                                </Field>
+                              </ion-item>
+                            </ion-col>
+                          </ion-row>
+
+                          <ion-row>
+                            <ion-col size="12">
+                              <ion-item>
+                                <Field
+                                  :name="`experiencia[${index}].posicao`"
+                                  v-slot="
+                                    {
+                                      field,
+                                      meta,
+                                      errorMessage,
+                                    }
+                                  "
+                                >
+                                  <ion-input
+                                    v-bind="field"
+                                    placeholder="Posicao *"
+                                    :class='
+                                      !meta
+                                        .valid
+                                      ? "ion-touched ion-invalid"
+                                      : ""
+                                    '
+                                    :errorText="errorMessage"
+                                  ></ion-input>
+                                </Field>
+                              </ion-item>
+                            </ion-col>
+                          </ion-row>
+
+                          <ion-row>
+                            <ion-col size="12">
+                              <ion-item>
+                                <Field
+                                  :name="`experiencia[${index}].info`"
+                                  v-slot="
+                                    {
+                                      field,
+                                      setValue,
+                                      meta,
+                                      errorMessage,
+                                    }
+                                  "
+                                >
+                                  <ion-textarea
+                                    :value='
+                                      field
+                                      .value
+                                      .join(
+                                        "\n",
+                                      )
+                                    '
+                                    placeholder="Informação... (opcional)"
+                                    :class='
+                                      !meta
+                                        .valid
+                                      ? "ion-touched ion-invalid"
+                                      : ""
+                                    '
+                                    :errorText="errorMessage"
+                                    @ionInput='
+                                      setValue(
+                                        $event
+                                          .target
+                                          .value!
+                                          .split(
+                                            "\n",
+                                          ),
+                                      )
+                                    '
+                                  ></ion-textarea>
+                                </Field>
+                              </ion-item>
+                            </ion-col>
+                          </ion-row>
+                        </ion-col>
+                        <ion-col size="2" size-lg="1">
+                          <ion-button
+                            color="primary"
+                            class="w-full h-full !flex items-center justify-center"
+                            fill="clear"
+                            @click="remove(index)"
+                            v-if="index > 0"
+                          >
+                            <ion-icon slot="icon-only" name="close"></ion-icon>
+                          </ion-button>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </div>
+                  <ion-button
+                    color="primary"
+                    expand="full"
+                    @click='
+                      push({
+                        empresa: "",
+                        anoInicio: null,
+                        anoFim: null,
+                        posicao: "",
+                        info: [""],
+                      });
+                      addItem({
+                        isAnoInicioOpen: false,
+                        isAnoFimOpen: false,
+                      }, modals.experiencia!);
+                    '
+                  >Adicionar Experiência</ion-button>
+                </FieldArray>
+              </div>
             </ion-card-content>
           </ion-card>
 
           <ion-card class="mb-6">
             <ion-card-content>
-              <FieldArray
-                ref="formacao-field-array"
-                name="formacao"
-                v-slot="{ fields, push, remove }"
-              >
-                <div
-                  v-for="(field, index) in fields"
-                  :key="field.key"
-                  class="grid gap-2"
+              <div class="grid gap-2">
+                <FieldArray
+                  ref="formacao-field-array"
+                  name="formacao"
+                  v-slot="{ fields, push, remove }"
                 >
-                  <ion-label position="stacked"
-                  >Formação {{
-                      fields.length > 1
-                      ? `#${index + 1}`
-                      : ""
-                    }}*</ion-label>
-                  <ion-grid>
-                    <ion-row>
-                      <ion-col>
-                        <ion-row>
-                          <ion-col size="12">
-                            <ion-item>
-                              <Field
-                                :name="`formacao[${index}].universidade`"
-                                v-slot="
-                                  {
-                                    field,
-                                    meta,
-                                    errorMessage,
-                                  }
-                                "
-                              >
-                                <ion-input
-                                  v-bind="field"
-                                  placeholder="Universidade *"
-                                  :class='
-                                    !meta.valid
-                                    ? "ion-touched ion-invalid"
-                                    : ""
-                                  '
-                                  :errorText="errorMessage"
-                                ></ion-input>
-                              </Field>
-                            </ion-item>
-                          </ion-col>
-                        </ion-row>
-
-                        <ion-row>
-                          <ion-col size="6">
-                            <ion-item>
-                              <Field
-                                :name="`formacao[${index}].anoInicio`"
-                                v-slot="
-                                  {
-                                    field,
-                                    setValue,
-                                    meta,
-                                    errorMessage,
-                                  }
-                                "
-                              >
-                                <ion-input
-                                  v-bind="field"
-                                  placeholder="Ano Início *"
-                                  :class='
-                                    !meta.valid
-                                    ? "ion-touched ion-invalid"
-                                    : ""
-                                  '
-                                  :errorText="errorMessage"
-                                  @ion-focus="
-                                    modals
-                                    .formacao[
-                                      index
-                                    ]
-                                    .isAnoInicioOpen =
-                                      true
-                                  "
-                                ></ion-input>
-
-                                <ion-modal
-                                  :is-open="
-                                    modals
-                                    .formacao[
-                                      index
-                                    ]
-                                    .isAnoInicioOpen
-                                  "
-                                  @did-dismiss="
-                                    modals
-                                    .formacao[
-                                      index
-                                    ]
-                                    .isAnoInicioOpen =
-                                      false
+                  <div
+                    v-for="(field, index) in fields"
+                    :key="field.key"
+                    class="grid gap-2"
+                  >
+                    <ion-label position="stacked"
+                    >Formação {{
+                        fields.length > 1
+                        ? `#${index + 1}`
+                        : ""
+                      }}*</ion-label>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col>
+                          <ion-row>
+                            <ion-col size="12">
+                              <ion-item>
+                                <Field
+                                  :name="`formacao[${index}].universidade`"
+                                  v-slot="
+                                    {
+                                      field,
+                                      meta,
+                                      errorMessage,
+                                    }
                                   "
                                 >
-                                  <ion-datetime
-                                    presentation="year"
-                                    :prefer-wheel="true"
-                                    :show-default-buttons="true"
-                                    cancel-text="Cancelar"
-                                    done-text="Ok"
-                                    @ion-change="
-                                      setValue(
-                                        convertYear(
-                                          $event,
-                                        ),
-                                      )
-                                    "
-                                  ></ion-datetime>
-                                </ion-modal>
-                              </Field>
-                            </ion-item>
-                          </ion-col>
-                          <ion-col size="6">
-                            <ion-item>
-                              <Field
-                                :name="`formacao[${index}].anoFim`"
-                                v-slot="
-                                  {
-                                    field,
-                                    setValue,
-                                    meta,
-                                    errorMessage,
-                                  }
-                                "
-                              >
-                                <ion-input
-                                  v-bind="field"
-                                  placeholder="Ano Fim *"
-                                  :class='
-                                    !meta.valid
-                                    ? "ion-touched ion-invalid"
-                                    : ""
-                                  '
-                                  :errorText="errorMessage"
-                                  @ion-focus="
-                                    modals
-                                    .formacao[
-                                      index
-                                    ]
-                                    .isAnoFimOpen =
-                                      true
-                                  "
-                                ></ion-input>
+                                  <ion-input
+                                    v-bind="field"
+                                    placeholder="Universidade *"
+                                    :class='
+                                      !meta
+                                        .valid
+                                      ? "ion-touched ion-invalid"
+                                      : ""
+                                    '
+                                    :errorText="errorMessage"
+                                  ></ion-input>
+                                </Field>
+                              </ion-item>
+                            </ion-col>
+                          </ion-row>
 
-                                <ion-modal
-                                  :is-open="
-                                    modals
-                                    .formacao[
-                                      index
-                                    ]
-                                    .isAnoFimOpen
-                                  "
-                                  @did-dismiss="
-                                    modals
-                                    .formacao[
-                                      index
-                                    ]
-                                    .isAnoFimOpen =
-                                      false
+                          <ion-row>
+                            <ion-col size="6">
+                              <ion-item>
+                                <Field
+                                  :name="`formacao[${index}].anoInicio`"
+                                  v-slot="
+                                    {
+                                      field,
+                                      setValue,
+                                      meta,
+                                      errorMessage,
+                                    }
                                   "
                                 >
-                                  <ion-datetime
-                                    presentation="year"
-                                    :prefer-wheel="true"
-                                    :show-default-buttons="true"
-                                    cancel-text="Cancelar"
-                                    done-text="Ok"
-                                    @ion-change="
-                                      setValue(
-                                        convertYear(
-                                          $event,
-                                        ),
-                                      )
+                                  <ion-input
+                                    v-bind="field"
+                                    placeholder="Ano Início *"
+                                    :class='
+                                      !meta
+                                        .valid
+                                      ? "ion-touched ion-invalid"
+                                      : ""
+                                    '
+                                    :errorText="errorMessage"
+                                    @ion-focus="
+                                      modals
+                                      .formacao[
+                                        index
+                                      ]
+                                      .isAnoInicioOpen =
+                                        true
                                     "
-                                  ></ion-datetime>
-                                </ion-modal>
-                              </Field>
-                            </ion-item>
-                          </ion-col>
-                        </ion-row>
+                                  ></ion-input>
 
-                        <ion-row>
-                          <ion-col size="12">
-                            <ion-item>
-                              <Field
-                                :name="`formacao[${index}].curso`"
-                                v-slot="
-                                  {
-                                    field,
-                                    meta,
-                                    errorMessage,
-                                  }
-                                "
-                              >
-                                <ion-input
-                                  v-bind="field"
-                                  placeholder="Curso *"
-                                  :class='
-                                    !meta.valid
-                                    ? "ion-touched ion-invalid"
-                                    : ""
-                                  '
-                                  :errorText="errorMessage"
-                                ></ion-input>
-                              </Field>
-                            </ion-item>
-                          </ion-col>
-                        </ion-row>
-                      </ion-col>
-                      <ion-col size="2" size-lg="1">
-                        <ion-button
-                          color="primary"
-                          class="w-full h-full !flex items-center justify-center"
-                          fill="clear"
-                          @click="remove(index)"
-                          v-if="index > 0"
-                        >
-                          <ion-icon slot="icon-only" name="close"></ion-icon>
-                        </ion-button>
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
-                </div>
-                <ion-button
-                  color="primary"
-                  expand="full"
-                  @click='
-                    push({
-                      universidade: "",
-                      anoInicio: null,
-                      anoFim: null,
-                      curso: "",
-                    });
-                    addItem({
-                      isAnoInicioOpen: false,
-                      isAnoFimOpen: false,
-                    }, modals.formacao!);
-                  '
-                >Adicionar Formação</ion-button>
-              </FieldArray>
+                                  <ion-modal
+                                    :is-open="
+                                      modals
+                                      .formacao[
+                                        index
+                                      ]
+                                      .isAnoInicioOpen
+                                    "
+                                    @did-dismiss="
+                                      modals
+                                      .formacao[
+                                        index
+                                      ]
+                                      .isAnoInicioOpen =
+                                        false
+                                    "
+                                  >
+                                    <ion-datetime
+                                      presentation="year"
+                                      :prefer-wheel="true"
+                                      :show-default-buttons="true"
+                                      cancel-text="Cancelar"
+                                      done-text="Ok"
+                                      @ion-change="
+                                        setValue(
+                                          convertYear(
+                                            $event,
+                                          ),
+                                        )
+                                      "
+                                    ></ion-datetime>
+                                  </ion-modal>
+                                </Field>
+                              </ion-item>
+                            </ion-col>
+                            <ion-col size="6">
+                              <ion-item>
+                                <Field
+                                  :name="`formacao[${index}].anoFim`"
+                                  v-slot="
+                                    {
+                                      field,
+                                      setValue,
+                                      meta,
+                                      errorMessage,
+                                    }
+                                  "
+                                >
+                                  <ion-input
+                                    v-bind="field"
+                                    placeholder="Ano Fim *"
+                                    :class='
+                                      !meta
+                                        .valid
+                                      ? "ion-touched ion-invalid"
+                                      : ""
+                                    '
+                                    :errorText="errorMessage"
+                                    @ion-focus="
+                                      modals
+                                      .formacao[
+                                        index
+                                      ]
+                                      .isAnoFimOpen =
+                                        true
+                                    "
+                                  ></ion-input>
+
+                                  <ion-modal
+                                    :is-open="
+                                      modals
+                                      .formacao[
+                                        index
+                                      ]
+                                      .isAnoFimOpen
+                                    "
+                                    @did-dismiss="
+                                      modals
+                                      .formacao[
+                                        index
+                                      ]
+                                      .isAnoFimOpen =
+                                        false
+                                    "
+                                  >
+                                    <ion-datetime
+                                      presentation="year"
+                                      :prefer-wheel="true"
+                                      :show-default-buttons="true"
+                                      cancel-text="Cancelar"
+                                      done-text="Ok"
+                                      @ion-change="
+                                        setValue(
+                                          convertYear(
+                                            $event,
+                                          ),
+                                        )
+                                      "
+                                    ></ion-datetime>
+                                  </ion-modal>
+                                </Field>
+                              </ion-item>
+                            </ion-col>
+                          </ion-row>
+
+                          <ion-row>
+                            <ion-col size="12">
+                              <ion-item>
+                                <Field
+                                  :name="`formacao[${index}].curso`"
+                                  v-slot="
+                                    {
+                                      field,
+                                      meta,
+                                      errorMessage,
+                                    }
+                                  "
+                                >
+                                  <ion-input
+                                    v-bind="field"
+                                    placeholder="Curso *"
+                                    :class='
+                                      !meta
+                                        .valid
+                                      ? "ion-touched ion-invalid"
+                                      : ""
+                                    '
+                                    :errorText="errorMessage"
+                                  ></ion-input>
+                                </Field>
+                              </ion-item>
+                            </ion-col>
+                          </ion-row>
+                        </ion-col>
+                        <ion-col size="2" size-lg="1">
+                          <ion-button
+                            color="primary"
+                            class="w-full h-full !flex items-center justify-center"
+                            fill="clear"
+                            @click="remove(index)"
+                            v-if="index > 0"
+                          >
+                            <ion-icon slot="icon-only" name="close"></ion-icon>
+                          </ion-button>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </div>
+                  <ion-button
+                    color="primary"
+                    expand="full"
+                    @click='
+                      push({
+                        universidade: "",
+                        anoInicio: null,
+                        anoFim: null,
+                        curso: "",
+                      });
+                      addItem({
+                        isAnoInicioOpen: false,
+                        isAnoFimOpen: false,
+                      }, modals.formacao!);
+                    '
+                  >Adicionar Formação</ion-button>
+                </FieldArray>
+              </div>
             </ion-card-content>
           </ion-card>
 
@@ -884,81 +916,67 @@
                   <ion-item v-for="(field, index) in fields" :key="field.key">
                     <ion-grid>
                       <ion-row>
-                        <ion-col>
-                          <ion-row>
-                            <ion-col>
-                              <Field
-                                :name="`idiomas[${index}].lingua`"
-                                v-slot="
-                                  {
-                                    field,
-                                    meta,
-                                    errorMessage,
-                                  }
-                                "
-                              >
-                                <ion-input
-                                  v-bind="field"
-                                  :placeholder="
-                                    `Idioma #${
-                                      index + 1
-                                    } *`
-                                  "
-                                  :class='
-                                    !meta.valid
-                                    ? "ion-touched ion-invalid"
-                                    : ""
-                                  '
-                                  :errorText="errorMessage"
-                                ></ion-input>
-                              </Field>
-                            </ion-col>
+                        <ion-col size="12" size-md="9.5">
+                          <Field
+                            :name="`idiomas[${index}].lingua`"
+                            v-slot="
+                              {
+                                field,
+                                meta,
+                                errorMessage,
+                              }
+                            "
+                          >
+                            <ion-input
+                              v-bind="field"
+                              :placeholder="
+                                `Idioma #${
+                                  index + 1
+                                } *`
+                              "
+                              :class='
+                                !meta.valid
+                                ? "ion-touched ion-invalid"
+                                : ""
+                              '
+                              :errorText="errorMessage"
+                            ></ion-input>
+                          </Field>
+                        </ion-col>
 
-                            <ion-col
-                              size="12"
-                              size-sm="4"
-                              size-md="3"
-                              size-lg="2"
+                        <ion-col size="10" size-md="1.5">
+                          <Field
+                            :name="`idiomas[${index}].nivel`"
+                            v-slot="
+                              {
+                                field,
+                                meta,
+                                errorMessage,
+                                handleChange,
+                              }
+                            "
+                          >
+                            <ion-select
+                              placeholder="Nível *"
+                              interface="popover"
+                              :class='
+                                !meta.valid &&
+                                  meta.touched
+                                ? "ion-touched ion-invalid"
+                                : ""
+                              '
+                              :modelValue="field.value"
+                              :errorText="errorMessage"
+                              @ionChange="handleChange"
                             >
-                              <Field
-                                :name="`idiomas[${index}].nivel`"
-                                v-slot="
-                                  {
-                                    field,
-                                    meta,
-                                    errorMessage,
-                                    handleChange,
-                                  }
-                                "
-                              >
-                                <ion-select
-                                  placeholder="Nível *"
-                                  interface="popover"
-                                  :class='
-                                    !meta
-                                      .valid &&
-                                      meta
-                                        .touched
-                                    ? "ion-touched ion-invalid"
-                                    : ""
-                                  '
-                                  :modelValue="
-                                    field
-                                    .value
-                                  "
-                                  :errorText="errorMessage"
-                                  @ionChange="handleChange"
-                                >
-                                  <ion-select-option value="Básico"
-                                  >Básico</ion-select-option>
-                                  <ion-select-option value="Médio"
-                                  >Médio</ion-select-option>
-                                  <ion-select-option value="Avançado"
-                                  >Avançado</ion-select-option>
-                                </ion-select>
-                              </Field>
-                            </ion-col>
-                          </ion-row>
+                              <ion-select-option value="Básico"
+                              >Básico</ion-select-option>
+                              <ion-select-option value="Médio"
+                              >Médio</ion-select-option>
+                              <ion-select-option value="Avançado"
+                              >Avançado</ion-select-option>
+                            </ion-select>
+                          </Field>
                         </ion-col>
 
                         <ion-col size="2" size-lg="1">
