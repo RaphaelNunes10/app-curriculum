@@ -45,6 +45,35 @@
                 <div class="absolute right-5 top-5 z-50 grid grid-cols-12 sm:grid-flow-row sm:auto-rows-auto gap-2 justify-items-end">
                   <ion-button
                     shape="round"
+                    color="warning"
+                    size="small"
+                    :fill='
+                      breakpoints.greaterOrEqual("sm").value
+                      ? "solid"
+                      : "clear"
+                    '
+                    class="w-auto sm:w-50 text-xs sm:text-sm md:text-base order-last sm:order-none col-span-6 col-start-7 sm:col-span-12 sm:col-start-auto mt-2 sm:mt-0"
+                    @click="handlePrint()"
+                  >
+                    <template
+                      v-if='
+                        breakpoints.greaterOrEqual("sm")
+                        .value
+                      '
+                    >
+                      <span class="hidden sm:block"
+                      >Imprimir&nbsp;</span><ion-icon name="print" />
+                    </template>
+                    <ion-icon
+                      v-else
+                      slot="icon-only"
+                      name="print"
+                      class="text-3xl drop-shadow-xl"
+                    />
+                  </ion-button>
+
+                  <ion-button
+                    shape="round"
                     :router-link="`/edit/${curriculum.id}`"
                     :fill='
                       breakpoints.greaterOrEqual("sm").value
@@ -149,7 +178,7 @@ import {
 } from "@ionic/vue";
 
 import { addIcons } from "ionicons";
-import { addCircle, create, trash } from "ionicons/icons";
+import { addCircle, create, print, trash } from "ionicons/icons";
 
 import Swiper from "swiper";
 import "swiper/css";
@@ -196,6 +225,7 @@ addIcons({
   "add-circle": addCircle,
   create: create,
   trash: trash,
+  print: print,
 });
 
 registerSwiper();
