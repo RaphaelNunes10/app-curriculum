@@ -238,6 +238,8 @@ const componentRefs = ref<(InstanceType<typeof DefaultCurriculum> | null)[]>(
   [],
 );
 
+// TODO: Finalizar impressão
+
 const setComponentRef = (
   el: InstanceType<typeof DefaultCurriculum> | null,
   index: number,
