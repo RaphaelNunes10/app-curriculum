@@ -180,17 +180,7 @@
                                 : ""
                               '
                               :modelValue="field.value"
-                              :compareWith="
-                                (
-                                  a: any,
-                                  b: any,
-                                ) => {
-                                  return a?.d ===
-                                      b?.d &&
-                                    a?.size ===
-                                      b?.size;
-                                }
-                              "
+                              :compareWith="contatoIconeCompare"
                               :errorText="errorMessage"
                               @ionChange="handleChange"
                             >
@@ -1093,6 +1083,16 @@ const {
 const form = useTemplateRef("form");
 
 const errorMessage = ref("");
+
+const contatoIconeCompare = (
+  a: any,
+  b: any,
+) => {
+  return a?.d ===
+      b?.d &&
+    a?.size ===
+      b?.size;
+};
 
 const validationSchema = toTypedSchema(
   z.object({

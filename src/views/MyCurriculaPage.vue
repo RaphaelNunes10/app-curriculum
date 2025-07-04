@@ -27,38 +27,55 @@
         </div>
         <swiper-container
           v-else
-          ref="swiper"
           slides-per-view="1"
           navigation="true"
           pagination="true"
           scrollbar="true"
           css-mode="true"
-          @swiperslidechange="onSlideChange"
         >
           <swiper-slide
             v-for="(curriculum, index) in curricula"
             :key="curriculum.id"
             class="p-4 justify-items-center"
+            ref="curricula-to-print"
           >
             <ion-card class="z-0 w-auto">
               <ion-card-content class="relative p-2 justify-items-center">
-                <div class="absolute right-5 top-5 z-50 grid grid-cols-12 sm:grid-flow-row sm:auto-rows-auto gap-2 justify-items-end">
+                <div
+                  class="absolute right-5 top-5 z-50 grid grid-cols-12 sm:grid-flow-row sm:auto-rows-auto gap-2 justify-items-end"
+                >
                   <ion-button
                     shape="round"
-                    color="warning"
+                    color="yellow"
                     size="small"
                     :fill='
-                      breakpoints.greaterOrEqual("sm").value
+                      breakpoints.greaterOrEqual("sm")
+                        .value
                       ? "solid"
                       : "clear"
                     '
                     class="w-auto sm:w-50 text-xs sm:text-sm md:text-base order-last sm:order-none col-span-6 col-start-7 sm:col-span-12 sm:col-start-auto mt-2 sm:mt-0"
-                    @click="handlePrint()"
+                    @click='
+                      printComponent(
+                        index,
+                        `${
+                          curriculum.nome.replace(" ", "-")
+                            .toLowerCase()
+                        }-${
+                          curriculum.sobrenome.replace(
+                            " ",
+                            "-",
+                          ).toLowerCase()
+                        }-curriculum`,
+                      )
+                    '
                   >
                     <template
                       v-if='
-                        breakpoints.greaterOrEqual("sm")
-                        .value
+                        breakpoints.greaterOrEqual(
+                          "sm",
+                        )
+                          .value
                       '
                     >
                       <span class="hidden sm:block"
@@ -75,8 +92,10 @@
                   <ion-button
                     shape="round"
                     :router-link="`/edit/${curriculum.id}`"
+                    size="small"
                     :fill='
-                      breakpoints.greaterOrEqual("sm").value
+                      breakpoints.greaterOrEqual("sm")
+                        .value
                       ? "solid"
                       : "clear"
                     '
@@ -84,8 +103,10 @@
                   >
                     <template
                       v-if='
-                        breakpoints.greaterOrEqual("sm")
-                        .value
+                        breakpoints.greaterOrEqual(
+                          "sm",
+                        )
+                          .value
                       '
                     >
                       <span class="hidden sm:block">Editar&nbsp;</span>
@@ -104,17 +125,20 @@
                     color="danger"
                     size="small"
                     :fill='
-                      breakpoints.greaterOrEqual("sm").value
+                      breakpoints.greaterOrEqual("sm")
+                        .value
                       ? "solid"
                       : "clear"
                     '
-                    class="sm:w-1/2 text-xs col-span-3 sm:col-span-12"
+                    class="sm:w-3/5 text-xs col-span-3 sm:col-span-12"
                     @click="deleteCurriculum(curriculum.id!)"
                   >
                     <template
                       v-if='
-                        breakpoints.greaterOrEqual("sm")
-                        .value
+                        breakpoints.greaterOrEqual(
+                          "sm",
+                        )
+                          .value
                       '
                     >
                       <span class="hidden sm:block"
@@ -130,9 +154,9 @@
                 </div>
 
                 <default-curriculum
-                  :ref="(el) => setComponentRef(el, index)"
                   :dados="curriculum"
                   class="size-full"
+                  :ref="(el) => registerRef(el, index)"
                 />
               </ion-card-content>
             </ion-card>
@@ -162,7 +186,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import type { TemplateRef } from "vue";
+import type { ComponentPublicInstance, Ref, TemplateRef } from "vue";
 
 import {
   IonButton,
@@ -191,7 +215,7 @@ import DefaultCurriculum from "../components/default-curriculum.vue";
 
 import { useCrudCurriculum } from "@/composables/crud-curriculum";
 
-import { useBreakpoints } from "@vueuse/core";
+import { templateRef, useBreakpoints } from "@vueuse/core";
 
 import { useVueToPrint } from "vue-to-print";
 
@@ -233,34 +257,26 @@ registerSwiper();
 const { curricula, fetchCurricula, deleteCurriculum } = useCrudCurriculum();
 fetchCurricula();
 
-const activeIndex = ref(0);
-const componentRefs = ref<(InstanceType<typeof DefaultCurriculum> | null)[]>(
-  [],
-);
+const componentRefs = ref<HTMLElement[]>([]);
 
-// TODO: Finalizar impressão
-
-const setComponentRef = (
-  el: InstanceType<typeof DefaultCurriculum> | null,
-  index: number,
-) => {
-  componentRefs.value[index] = el;
+const registerRef = (el: HTMLElement | null, index: number) => {
+  if (el) componentRefs.value[index] = el;
 };
 
-const onSlideChange = (event: Event) => {
-  const swiperEl = event.target as any;
+const selectedRef = ref(null) as unknown as Ref<
+  HTMLElement | ComponentPublicInstance
+>;
 
-  activeIndex.value = swiperEl.swiper.activeIndex;
+const printComponent = (index: number, documentTitle: string) => {
+  selectedRef.value = componentRefs.value[index];
+
+  const { handlePrint } = useVueToPrint({
+    content: selectedRef,
+    documentTitle,
+  });
+
+  handlePrint();
 };
-
-const activeComponent = computed<InstanceType<typeof DefaultCurriculum> | null>(
-  () => componentRefs.value[activeIndex.value] || null,
-);
-
-const { handlePrint } = useVueToPrint({
-  content: activeComponent.value!,
-  documentTitle: "AwesomeFileName",
-});
 </script>
 
 <style scoped>
