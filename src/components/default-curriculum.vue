@@ -63,7 +63,7 @@
           width="73.024994"
           height="48.683331"
           style="image-rendering: optimizeSpeed"
-          preserveAspectRatio="none"
+          preserveAspectRatio="meet"
           :xlink:href="dados.imagem"
           x="19.562456"
           y="20.63653"
@@ -76,7 +76,7 @@
             style="font-size: 3.175px; stroke-width: 0.264583"
           >
             <tspan
-              style="font-variant: normal; font-weight: 900; font-size: 17.8911px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+              style="font-variant: normal; font-weight: 900; font-size: 11px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
               x="103.48952"
               dx="0 0.28525519 0.28449431 0.28542751 0.28537139 0.2845245 0.28449431"
               y="36.896034"
@@ -91,7 +91,7 @@
             style="font-size: 3.175px; stroke-width: 0.264583"
           >
             <tspan
-              style="font-variant: normal; font-weight: 900; font-size: 17.8911px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+              style="font-variant: normal; font-weight: 900; font-size: 11px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
               x="103.48952"
               dx="0 0.2846711 0.28537139 0.28542751 0.28474653"
               y="53.829369"
