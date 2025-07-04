@@ -145,61 +145,75 @@
 
           <ion-card class="mb-6">
             <ion-card-content>
-              <ion-label position="stacked">Contato *</ion-label>
-              <FieldArray
-                ref="contato-field-array"
-                name="contato"
-                v-slot="{ fields, push, remove }"
-              >
-                <ion-item
-                  v-for="(field, index) in fields"
-                  :key="field.key"
-                  class="grid gap-2"
-                >
-                  <ion-grid>
-                    <ion-row>
-                      <ion-col size="12" size-sm="4">
-                        <Field
-                          :name="`contato[${index}].icone.d`"
-                          v-slot="
-                            {
-                              field,
-                              meta,
-                              errorMessage,
-                              handleChange,
-                            }
-                          "
-                        >
-                          <ion-select
-                            placeholder="Ícone *"
-                            interface="popover"
-                            :class='
-                              !meta.valid &&
-                                meta.touched
-                              ? "ion-touched ion-invalid"
-                              : ""
-                            '
-                            :modelValue="field.value"
-                            :errorText="errorMessage"
-                            @ionChange="handleChange"
+                          <Field
+                            :name="`contato[${index}].icone`"
+                            v-slot="
+                              {
+                                field,
+                                meta,
+                                errorMessage,
+                                handleChange,
+                              }
+                            "
                           >
-                            <ion-select-option
-                              value="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4l-8 5l-8-5V6l8 5l8-5z"
-                            >Mail</ion-select-option>
-                            <ion-select-option
-                              value="M13.95 4.24C11.86 1 7.58.04 4.27 2.05C1.04 4.06 0 8.44 2.09 11.67l.17.26l-.7 2.62l2.62-.7l.26.17c1.13.61 2.36.96 3.58.96c1.31 0 2.62-.35 3.75-1.05c3.23-2.1 4.19-6.39 2.18-9.71Zm-1.83 6.74c-.35.52-.79.87-1.4.96c-.35 0-.79.17-2.53-.52c-1.48-.7-2.71-1.84-3.58-3.15c-.52-.61-.79-1.4-.87-2.19c0-.7.26-1.31.7-1.75c.17-.17.35-.26.52-.26h.44c.17 0 .35 0 .44.35c.17.44.61 1.49.61 1.58c.09.09.05.76-.35 1.14c-.22.25-.26.26-.17.44c.35.52.79 1.05 1.22 1.49c.52.44 1.05.79 1.66 1.05c.17.09.35.09.44-.09c.09-.17.52-.61.7-.79c.17-.17.26-.17.44-.09l1.4.7c.17.09.35.17.44.26c.09.26.09.61-.09.87Z"
-                            >Whatsapp</ion-select-option>
-                            <ion-select-option
-                              value="M19.95 21q-3.125 0-6.175-1.362t-5.55-3.863t-3.862-5.55T3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.238t.325.562l.65 3.5q.05.4-.025.675T9.4 8.45L6.975 10.9q.5.925 1.187 1.787t1.513 1.663q.775.775 1.625 1.438T13.1 17l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.1.575.363T21 15.9v4.05q0 .45-.3.75t-.75.3"
-                            >Phone</ion-select-option>
-                            <ion-select-option
-                              value="M10 20h4v-1h-4zm-3 3q-.825 0-1.412-.587T5 21V3q0-.825.588-1.412T7 1h10q.825 0 1.413.588T19 3v18q0 .825-.587 1.413T17 23zm0-7h10V6H7z"
-                            >Cel</ion-select-option>
-                          </ion-select>
-                        </Field>
-                      </ion-col>
-                      <ion-col>
-                        <ion-item>
+                            <ion-select
+                              placeholder="Ícone *"
+                              interface="popover"
+                              :class='
+                                !meta.valid &&
+                                  meta.touched
+                                ? "ion-touched ion-invalid"
+                                : ""
+                              '
+                              :modelValue="field.value"
+                              :compareWith="
+                                (
+                                  a: any,
+                                  b: any,
+                                ) => {
+                                  return a?.d ===
+                                      b?.d &&
+                                    a?.size ===
+                                      b?.size;
+                                }
+                              "
+                              :errorText="errorMessage"
+                              @ionChange="handleChange"
+                            >
+                              <ion-select-option
+                                :value='
+                                  {
+                                    d: "M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4l-8 5l-8-5V6l8 5l8-5z",
+                                    size: 0.3,
+                                  }
+                                '
+                              >Mail</ion-select-option>
+                              <ion-select-option
+                                :value='
+                                  {
+                                    d: "M13.95 4.24C11.86 1 7.58.04 4.27 2.05C1.04 4.06 0 8.44 2.09 11.67l.17.26l-.7 2.62l2.62-.7l.26.17c1.13.61 2.36.96 3.58.96c1.31 0 2.62-.35 3.75-1.05c3.23-2.1 4.19-6.39 2.18-9.71Zm-1.83 6.74c-.35.52-.79.87-1.4.96c-.35 0-.79.17-2.53-.52c-1.48-.7-2.71-1.84-3.58-3.15c-.52-.61-.79-1.4-.87-2.19c0-.7.26-1.31.7-1.75c.17-.17.35-.26.52-.26h.44c.17 0 .35 0 .44.35c.17.44.61 1.49.61 1.58c.09.09.05.76-.35 1.14c-.22.25-.26.26-.17.44c.35.52.79 1.05 1.22 1.49c.52.44 1.05.79 1.66 1.05c.17.09.35.09.44-.09c.09-.17.52-.61.7-.79c.17-.17.26-.17.44-.09l1.4.7c.17.09.35.17.44.26c.09.26.09.61-.09.87Z",
+                                    size: 0.45,
+                                  }
+                                '
+                              >Whatsapp</ion-select-option>
+                              <ion-select-option
+                                :value='
+                                  {
+                                    d: "M19.95 21q-3.125 0-6.175-1.362t-5.55-3.863t-3.862-5.55T3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.238t.325.562l.65 3.5q.05.4-.025.675T9.4 8.45L6.975 10.9q.5.925 1.187 1.787t1.513 1.663q.775.775 1.625 1.438T13.1 17l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.1.575.363T21 15.9v4.05q0 .45-.3.75t-.75.3",
+                                    size: 0.3,
+                                  }
+                                '
+                              >Phone</ion-select-option>
+                              <ion-select-option
+                                :value='
+                                  {
+                                    d: "M10 20h4v-1h-4zm-3 3q-.825 0-1.412-.587T5 21V3q0-.825.588-1.412T7 1h10q.825 0 1.413.588T19 3v18q0 .825-.587 1.413T17 23zm0-7h10V6H7z",
+                                    size: 0.3,
+                                  }
+                                '
+                              >Cel</ion-select-option>
+                            </ion-select>
+                          </Field>
                           <Field
                             :name="`contato[${index}].info`"
                             v-slot="
@@ -1118,7 +1132,7 @@ const validationSchema = toTypedSchema(
       {
         icone: {
           d: "",
-          size: 0.45,
+          size: null,
         },
         info: "",
       },
