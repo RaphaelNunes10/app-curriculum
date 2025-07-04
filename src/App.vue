@@ -1,7 +1,7 @@
 <template>
   <div class="prose dark:prose-invert w-full">
     <ion-app>
-      <ion-router-outlet />
+      <ion-router-outlet :key="$route.fullPath" />
     </ion-app>
   </div>
 </template>

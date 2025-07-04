@@ -3,7 +3,7 @@
     <ion-header :translucent="true">
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
+          <ion-back-button default-href="/"></ion-back-button>
         </ion-buttons>
         <ion-title>
           {{ id ? "Editar curriculum" : "Adicionar curriculum" }}
@@ -14,9 +14,6 @@
     <ion-content class="flex flex-col" :fullscreen="true">
       <ion-header class="flex-0" collapse="condense">
         <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-          </ion-buttons>
           <ion-title>
             {{ id ? "Editar curriculum" : "Adicionar curriculum" }}
           </ion-title>
