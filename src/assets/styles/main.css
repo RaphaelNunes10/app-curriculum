@@ -18,3 +18,10 @@
   --ion-color-shade: var(--ion-color-yellow-shade);
   --ion-color-tint: var(--ion-color-yellow-tint);
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-color-yellow-contrast: #000000;
+    --ion-color-yellow-contrast-rgb: 0,0,0;
+  }
+}
