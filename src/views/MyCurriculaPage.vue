@@ -17,7 +17,10 @@
         id="container"
         class="flex-0 relative h-full"
       >
-        <div v-if="curricula.length == 0" class="justify-items-center">
+        <div
+          v-if="curricula.length == 0"
+          class="grid justify-items-center gap-4"
+        >
           <h2>
             Adicione um curriculum para iniciar!
           </h2>
@@ -36,14 +39,12 @@
           <swiper-slide
             v-for="(curriculum, index) in curricula"
             :key="curriculum.id"
-            class="p-4 justify-items-center"
+            class="p-4 grid justify-items-center"
             ref="curricula-to-print"
           >
             <ion-card class="z-0 w-auto">
-              <ion-card-content class="relative p-2 justify-items-center">
-                <div
-                  class="absolute right-5 top-5 z-50 grid grid-cols-12 sm:grid-flow-row sm:auto-rows-auto gap-2 justify-items-end"
-                >
+              <ion-card-content class="relative p-2 grid justify-items-center">
+                <div class="absolute right-5 top-5 z-50 grid grid-cols-12 sm:grid-flow-row sm:auto-rows-auto gap-2 justify-items-end">
                   <ion-button
                     shape="round"
                     color="yellow"
