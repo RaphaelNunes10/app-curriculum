@@ -185,8 +185,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import type { ComponentPublicInstance, Ref, TemplateRef } from "vue";
+import { ref } from "vue";
+import type { ComponentPublicInstance, Ref } from "vue";
 
 import {
   IonButton,
@@ -215,7 +215,7 @@ import DefaultCurriculum from "../components/default-curriculum.vue";
 
 import { useCrudCurriculum } from "@/composables/crud-curriculum";
 
-import { templateRef, useBreakpoints } from "@vueuse/core";
+import { useBreakpoints } from "@vueuse/core";
 
 import { useVueToPrint } from "vue-to-print";
 
