@@ -153,11 +153,12 @@
                   </ion-button>
                 </div>
 
-                <default-curriculum
-                  :dados="curriculum"
-                  class="size-full"
-                  :ref="(el) => registerRef(el, index)"
-                />
+                <div :ref="(el) => registerRef(el, index)" class="size-full">
+                  <default-curriculum
+                    :dados="curriculum"
+                    class="size-full"
+                  />
+                </div>
               </ion-card-content>
             </ion-card>
           </swiper-slide>
@@ -259,13 +260,18 @@ fetchCurricula();
 
 const componentRefs = ref<HTMLElement[]>([]);
 
-const registerRef = (el: HTMLElement | null, index: number) => {
-  if (el) componentRefs.value[index] = el;
+const registerRef = (
+  el: Element | ComponentPublicInstance | null,
+  index: number,
+) => {
+  if (el && el instanceof HTMLElement) {
+    componentRefs.value[index] = el;
+  } else if (el && "$el" in el && el.$el instanceof HTMLElement) {
+    componentRefs.value[index] = el.$el;
+  }
 };
 
-const selectedRef = ref(null) as unknown as Ref<
-  HTMLElement | ComponentPublicInstance
->;
+const selectedRef = ref<HTMLElement>() as Ref<HTMLElement>;
 
 const printComponent = (index: number, documentTitle: string) => {
   selectedRef.value = componentRefs.value[index];
