@@ -24,8 +24,7 @@
           <h2>
             Adicione um curriculum para iniciar!
           </h2>
-          <br>
-          <ion-button shape="round" size="large" router-link="/edit">Adicionar
+          <ion-button shape="round" size="large" router-link="/create">Adicionar
             Curriculum&nbsp;<ion-icon name="add-circle" /></ion-button>
         </div>
         <swiper-container
