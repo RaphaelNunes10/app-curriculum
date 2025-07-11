@@ -189,6 +189,12 @@
 import { ref } from "vue";
 import type { ComponentPublicInstance, Ref } from "vue";
 
+import EditPage from "./EditPage.vue";
+
+import DefaultCurriculum from "../components/default-curriculum.vue";
+
+import { Capacitor } from "@capacitor/core";
+
 import {
   IonButton,
   IonCard,
@@ -209,10 +215,6 @@ import Swiper from "swiper";
 import "swiper/css";
 
 import { register as registerSwiper } from "swiper/element/bundle";
-
-import EditPage from "./EditPage.vue";
-
-import DefaultCurriculum from "../components/default-curriculum.vue";
 
 import { useCrudCurriculum } from "@/composables/crud-curriculum";
 
