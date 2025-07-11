@@ -221,6 +221,7 @@ import { useCrudCurriculum } from "@/composables/crud-curriculum";
 import { useBreakpoints } from "@vueuse/core";
 
 import { useVueToPrint } from "vue-to-print";
+import { Printer } from "@bcyesil/capacitor-plugin-printer";
 
 const breakpoints = useBreakpoints({
   sm: 640,
@@ -275,15 +276,36 @@ const registerRef = (
 
 const selectedRef = ref<HTMLElement>() as Ref<HTMLElement>;
 
-const printComponent = (index: number, documentTitle: string) => {
-  selectedRef.value = componentRefs.value[index];
+const printComponentNative = (html: string, documentTitle: string) => {
+  Printer.print({
+    content: html,
+    name: documentTitle,
+    orientation: "portrait",
+  });
+};
 
+const printComponentWeb = (
+  element: Ref<HTMLElement, HTMLElement>,
+  documentTitle: string,
+) => {
   const { handlePrint } = useVueToPrint({
-    content: selectedRef,
+    content: element,
     documentTitle,
   });
 
   handlePrint();
+};
+
+const printComponent = (index: number, documentTitle: string) => {
+  selectedRef.value = componentRefs.value[index];
+
+  const htmlStringToPrint = selectedRef.value?.innerHTML || "";
+
+  if (Capacitor.isNativePlatform()) {
+    printComponentNative(htmlStringToPrint, documentTitle);
+  } else {
+    printComponentWeb(selectedRef, documentTitle);
+  }
 };
 </script>
 
