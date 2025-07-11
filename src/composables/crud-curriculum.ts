@@ -33,29 +33,43 @@ export function useCrudCurriculum() {
     await fetchCurricula();
   };
 
-  const updateCurriculum = async (index: number, curriculum: Curriculum) => {
-    curricula.value[index] = curriculum;
+  const updateCurriculum = async (
+    id: number,
+    updatedCurriculum: Curriculum,
+  ) => {
+    const index = curricula.value.findIndex((curriculum) =>
+      curriculum.id === id
+    );
 
-    await Preferences.set({
-      key: "curricula",
-      value: JSON.stringify(curricula.value),
-    });
+    if (index !== -1) {
+      const updatedList = [...curricula.value];
 
-    await fetchCurricula();
+      updatedList[index] = updatedCurriculum;
+
+      curricula.value = updatedList;
+
+      await Preferences.set({
+        key: "curricula",
+        value: JSON.stringify(updatedList),
+      });
+    }
   };
 
   const deleteCurriculum = async (id: number) => {
     const index = curricula.value.findIndex((curriculum) =>
       curriculum.id === id
     );
-    curricula.value.splice(index, 1);
 
-    await Preferences.set({
-      key: "curricula",
-      value: JSON.stringify(curricula.value),
-    });
+    if (index !== -1) {
+      const updatedCurricula = [...curricula.value].splice(index, 1);
 
-    await fetchCurricula();
+      curricula.value = updatedCurricula;
+
+      await Preferences.set({
+        key: "curricula",
+        value: JSON.stringify(updatedCurricula),
+      });
+    }
   };
 
   return {

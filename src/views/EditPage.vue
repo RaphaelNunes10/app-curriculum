@@ -1304,7 +1304,7 @@ const router = useRouter();
 async function onSubmit(values: any) {
   try {
     if (id) {
-      await updateCurriculum(Number.parseInt(id as string) - 1, values);
+      await updateCurriculum(Number.parseInt(id as string), values);
     } else {
       await createCurriculum(values);
     }
