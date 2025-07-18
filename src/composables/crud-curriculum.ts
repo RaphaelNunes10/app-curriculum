@@ -66,7 +66,8 @@ export function useCrudCurriculum() {
     );
 
     if (index !== -1) {
-      const updatedCurricula = [...curricula.value].splice(index, 1);
+      const updatedCurricula = [...curricula.value];
+      updatedCurricula.splice(index, 1);
 
       curricula.value = updatedCurricula;
 
