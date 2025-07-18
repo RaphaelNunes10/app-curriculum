@@ -6,7 +6,7 @@
           <ion-back-button default-href="/"></ion-back-button>
         </ion-buttons>
         <ion-title>
-          {{ id ? "Editar curriculum" : "Adicionar curriculum" }}
+          {{ id ? "Editar currículo" : "Adicionar currículo" }}
         </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -15,7 +15,7 @@
       <ion-header class="flex-0" collapse="condense">
         <ion-toolbar>
           <ion-title>
-            {{ id ? "Editar curriculum" : "Adicionar curriculum" }}
+            {{ id ? "Editar currículo" : "Adicionar currículo" }}
           </ion-title>
         </ion-toolbar>
       </ion-header>
@@ -1082,8 +1082,8 @@
             <ion-button type="submit" color="primary" shape="round">
               {{
                 id
-                ? "Editar curriculum"
-                : "Adicionar curriculum"
+                ? "Editar currículo"
+                : "Adicionar currículo"
               }}
             </ion-button>
           </ion-card>
@@ -1408,8 +1408,8 @@ async function onSubmit(values: any) {
     }
   } catch {
     errorMessage.value = id
-      ? "Houve um erro interno ao atualizar o curriculum."
-      : "Houve um erro interno ao cadastrar o curriculum.";
+      ? "Houve um erro interno ao atualizar o currículo."
+      : "Houve um erro interno ao cadastrar o currículo.";
 
     return;
   }

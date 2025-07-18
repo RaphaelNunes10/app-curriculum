@@ -2,14 +2,14 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title class="ml-2">Meus Curricula</ion-title>
+        <ion-title class="ml-2">Meus Currículos</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content class="flex flex-col" :fullscreen="true">
       <ion-header class="flex-0" collapse="condense">
         <ion-toolbar>
-          <ion-title class="ml-2">Meus Curricula</ion-title>
+          <ion-title class="ml-2">Meus Currículos</ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -22,10 +22,10 @@
           class="grid justify-items-center gap-4"
         >
           <h2>
-            Adicione um curriculum para iniciar!
+            Adicione um currículo para iniciar!
           </h2>
           <ion-button shape="round" size="large" router-link="/create">Adicionar
-            Curriculum&nbsp;<ion-icon name="add-circle" /></ion-button>
+            currículo&nbsp;<ion-icon name="add-circle" /></ion-button>
         </div>
         <swiper-container
           v-else
@@ -175,7 +175,7 @@
             size="large"
             router-link="/create"
             class="w-auto text-xs sm:text-sm md:text-base"
-          >Adicionar Curriculum&nbsp;<ion-icon
+          >Adicionar Currículo&nbsp;<ion-icon
               name="add-circle"
               class="text-3xl"
             /></ion-button>
