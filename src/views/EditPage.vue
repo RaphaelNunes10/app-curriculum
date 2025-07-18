@@ -620,7 +620,7 @@
                             <ion-col size="12">
                               <ion-item>
                                 <Field
-                                  :name="`formacao[${index}].universidade`"
+                                  :name="`formacao[${index}].curso`"
                                   v-slot="
                                     {
                                       field,
@@ -631,7 +631,7 @@
                                 >
                                   <ion-input
                                     v-bind="field"
-                                    placeholder="Universidade *"
+                                    placeholder="Curso *"
                                     :class='
                                       !meta
                                         .valid
@@ -788,7 +788,7 @@
                             <ion-col size="12">
                               <ion-item>
                                 <Field
-                                  :name="`formacao[${index}].curso`"
+                                  :name="`formacao[${index}].universidade`"
                                   v-slot="
                                     {
                                       field,
@@ -799,7 +799,7 @@
                                 >
                                   <ion-input
                                     v-bind="field"
-                                    placeholder="Curso *"
+                                    placeholder="Universidade *"
                                     :class='
                                       !meta
                                         .valid
