@@ -1112,7 +1112,7 @@ const contatoIconeCompare = (
 
 const validationSchema = toTypedSchema(
   z.object({
-    id: z.number().optional(),
+    id: z.string().optional(),
     imagem: z.string().nullish().optional(),
     nome: z.string().nonempty("Nome é obrigatório").default(""),
     sobrenome: z.string().nonempty("Sobrenome é obrigatório").default(""),
@@ -1304,7 +1304,7 @@ const router = useRouter();
 async function onSubmit(values: any) {
   try {
     if (id) {
-      await updateCurriculum(Number.parseInt(id as string), values);
+      await updateCurriculum(id as string, values);
     } else {
       await createCurriculum(values);
     }
@@ -1393,7 +1393,7 @@ onMounted(async () => {
   if (!id) return;
 
   const fetchedCurriculum = await fetchCurriculumById(
-    Number.parseInt(id as string),
+    id as string,
   );
 
   if (fetchedCurriculum) {

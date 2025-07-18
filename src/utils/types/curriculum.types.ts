@@ -35,7 +35,7 @@ interface Idioma {
 }
 
 export interface Curriculum {
-  id?: number;
+  id?: string;
   imagem?: string | null;
   nome: string;
   sobrenome: string;

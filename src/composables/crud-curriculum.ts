@@ -13,7 +13,7 @@ export function useCrudCurriculum() {
     value ? (curricula.value = JSON.parse(value)) : (curricula.value = []);
   };
 
-  const fetchCurriculumById = async (queryId: number) => {
+  const fetchCurriculumById = async (queryId: string) => {
     const { value } = await Preferences.get({ key: "curricula" });
     const curricula: Curriculum[] = value ? JSON.parse(value) : [];
 
@@ -23,7 +23,12 @@ export function useCrudCurriculum() {
   };
 
   const createCurriculum = async (curriculum: Curriculum) => {
-    curricula.value.push(curriculum);
+    const newCurriculum = {
+      ...curriculum,
+      id: curriculum.id ?? crypto.randomUUID(),
+    };
+
+    curricula.value.push(newCurriculum);
 
     await Preferences.set({
       key: "curricula",
@@ -34,7 +39,7 @@ export function useCrudCurriculum() {
   };
 
   const updateCurriculum = async (
-    id: number,
+    id: string,
     updatedCurriculum: Curriculum,
   ) => {
     const index = curricula.value.findIndex((curriculum) =>
@@ -55,7 +60,7 @@ export function useCrudCurriculum() {
     }
   };
 
-  const deleteCurriculum = async (id: number) => {
+  const deleteCurriculum = async (id: string) => {
     const index = curricula.value.findIndex((curriculum) =>
       curriculum.id === id
     );
