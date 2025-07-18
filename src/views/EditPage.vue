@@ -26,6 +26,7 @@
       >
         <Form
           ref="form"
+          v-slot="{ validateField }"
           :validation-schema
           @submit="onSubmit"
         >
@@ -265,7 +266,12 @@
                             color="primary"
                             class="w-full h-full !flex items-center justify-center"
                             fill="clear"
-                            @click="remove(index)"
+                            @click='
+                              remove(index);
+                              validateField(
+                                "contato",
+                              );
+                            '
                             v-if="index > 0"
                           >
                             <ion-icon slot="icon-only" name="close"></ion-icon>
@@ -285,9 +291,16 @@
                           size: null,
                         },
                         info: "",
-                      })
+                      });
+                      validateField(
+                        "contato",
+                      );
                     '
                   >Adicionar contato</ion-button>
+
+                  <Field name="contato" as="div" v-slot="{ errorMessage }">
+                    <p class="text-[#f24c58]">{{ errorMessage }}</p>
+                  </Field>
                 </FieldArray>
               </div>
             </ion-card-content>
@@ -563,7 +576,12 @@
                             color="primary"
                             class="w-full h-full !flex items-center justify-center"
                             fill="clear"
-                            @click="remove(index)"
+                            @click='
+                              remove(index);
+                              validateField(
+                                "experiencia",
+                              );
+                            '
                             v-if="index > 0"
                           >
                             <ion-icon slot="icon-only" name="close"></ion-icon>
@@ -587,8 +605,15 @@
                         isAnoInicioOpen: false,
                         isAnoFimOpen: false,
                       }, modals.experiencia!);
+                      validateField(
+                        "experiencia",
+                      );
                     '
                   >Adicionar Experiência</ion-button>
+
+                  <Field name="experiencia" as="div" v-slot="{ errorMessage }">
+                    <p class="text-[#f24c58]">{{ errorMessage }}</p>
+                  </Field>
                 </FieldArray>
               </div>
             </ion-card-content>
@@ -818,7 +843,12 @@
                             color="primary"
                             class="w-full h-full !flex items-center justify-center"
                             fill="clear"
-                            @click="remove(index)"
+                            @click='
+                              remove(index);
+                              validateField(
+                                "formacao",
+                              );
+                            '
                             v-if="index > 0"
                           >
                             <ion-icon slot="icon-only" name="close"></ion-icon>
@@ -841,8 +871,15 @@
                         isAnoInicioOpen: false,
                         isAnoFimOpen: false,
                       }, modals.formacao!);
+                      validateField(
+                        "formacao",
+                      );
                     '
                   >Adicionar Formação</ion-button>
+
+                  <Field name="formacao" as="div" v-slot="{ errorMessage }">
+                    <p class="text-[#f24c58]">{{ errorMessage }}</p>
+                  </Field>
                 </FieldArray>
               </div>
             </ion-card-content>
@@ -892,7 +929,12 @@
                             color="primary"
                             class="w-full h-full !flex items-center justify-center"
                             fill="clear"
-                            @click="remove(index)"
+                            @click='
+                              remove(index);
+                              validateField(
+                                "habilidades",
+                              );
+                            '
                           >
                             <ion-icon slot="icon-only" name="close"></ion-icon>
                           </ion-button>
@@ -903,8 +945,15 @@
                   <ion-button
                     color="primary"
                     expand="full"
-                    @click='push("")'
+                    @click='
+                      push("");
+                      validateField("habilidades");
+                    '
                   >Adicionar habilidade</ion-button>
+
+                  <Field name="habilidades" as="div" v-slot="{ errorMessage }">
+                    <p class="text-[#f24c58]">{{ errorMessage }}</p>
+                  </Field>
                 </FieldArray>
               </div>
             </ion-card-content>
@@ -990,7 +1039,12 @@
                             color="primary"
                             class="w-full h-full !flex items-center justify-center"
                             fill="clear"
-                            @click="remove(index)"
+                            @click='
+                              remove(index);
+                              validateField(
+                                "idiomas",
+                              );
+                            '
                           >
                             <ion-icon
                               slot="icon-only"
@@ -1009,9 +1063,16 @@
                       push({
                         lingua: "",
                         nivel: "",
-                      })
+                      });
+                      validateField(
+                        "idiomas",
+                      );
                     '
                   >Adicionar idioma</ion-button>
+
+                  <Field name="idiomas" as="div" v-slot="{ errorMessage }">
+                    <p class="text-[#f24c58]">{{ errorMessage }}</p>
+                  </Field>
                 </FieldArray>
               </div>
             </ion-card-content>
@@ -1027,7 +1088,7 @@
             </ion-button>
           </ion-card>
 
-          <p class="!flex justify-center text-red-600">{{ errorMessage }}</p>
+          <p class="!flex justify-center text-[#f24c58]">{{ errorMessage }}</p>
         </Form>
       </div>
     </ion-content>
@@ -1114,55 +1175,74 @@ const validationSchema = toTypedSchema(
   z.object({
     id: z.string().optional(),
     imagem: z.string().nullish().optional(),
-    nome: z.string().nonempty("Nome é obrigatório").default(""),
-    sobrenome: z.string().nonempty("Sobrenome é obrigatório").default(""),
-    sobre: z.array(z.string().nullish()).superRefine((line, ctx) => {
-      if (line[0]?.length == 0) {
-        ctx.addIssue({
-          code: "custom",
-          path: [0, "sobre"],
-          message: `Descreva suas experiências`,
-        });
-      }
-    }).default([
-      "",
-    ]),
+    nome: z.string().max(10, { message: "Nome muito longo" }).nonempty(
+      "Nome é obrigatório",
+    ).default(""),
+    sobrenome: z.string().max(10, { message: "Sobrenome muito longo" })
+      .nonempty("Sobrenome é obrigatório").default(
+        "",
+      ),
+    sobre: z.array(
+      z.string().max(30, {
+        message:
+          'Uma das linhas no campo "Sobre Mim" está muito longa. Reduza ou quebre a linha',
+      }).nullish(),
+    ).max(6, {
+      message: 'Você só pode adicionar até 6 linhas no campo "Sobre Mim"',
+    })
+      .superRefine(
+        (line, ctx) => {
+          if (line[0]?.length == 0) {
+            ctx.addIssue({
+              code: "custom",
+              path: [0, "sobre"],
+              message: `Descreva suas experiências`,
+            });
+          }
+        },
+      ).default([
+        "",
+      ]),
     contato: z.array(
       z.object({
         icone: z.object({
           d: z.string().nullish(),
           size: z.number().nullish(),
         }),
-        info: z.string().nonempty("Contato é obrigatório"),
+        info: z.string().max(14, { message: "Contato muito longo" }).nonempty(
+          "Contato é obrigatório",
+        ),
         listIndex: z.number().optional(),
       }),
-    ).superRefine((data, ctx) => {
-      data.forEach((fields, index) => {
-        if (fields.icone.d?.length == 0) {
-          ctx.addIssue({
-            code: "custom",
-            path: [index, "icone.d"],
-            message: `Ícone é obrigatório`,
-          });
-        }
+    ).max(3, { message: "Você só pode adicionar até 3 contatos" }).superRefine(
+      (data, ctx) => {
+        data.forEach((fields, index) => {
+          if (fields.icone.d?.length == 0) {
+            ctx.addIssue({
+              code: "custom",
+              path: [index, "icone.d"],
+              message: `Ícone é obrigatório`,
+            });
+          }
 
-        if (!fields.icone.size) {
-          ctx.addIssue({
-            code: "custom",
-            path: [index, "icone.size"],
-            message: `Tamanho do icone é obrigatório`,
-          });
-        }
+          if (!fields.icone.size) {
+            ctx.addIssue({
+              code: "custom",
+              path: [index, "icone.size"],
+              message: `Tamanho do icone é obrigatório`,
+            });
+          }
 
-        if (fields.info.length == 0) {
-          ctx.addIssue({
-            code: "custom",
-            path: [index, "info"],
-            message: `Informação do contato é obrigatória`,
-          });
-        }
-      });
-    }).default([
+          if (fields.info.length == 0) {
+            ctx.addIssue({
+              code: "custom",
+              path: [index, "info"],
+              message: `Informação do contato é obrigatória`,
+            });
+          }
+        });
+      },
+    ).default([
       {
         icone: {
           d: "",
@@ -1173,99 +1253,113 @@ const validationSchema = toTypedSchema(
     ]),
     experiencia: z.array(
       z.object({
-        empresa: z.string().nullish(),
+        empresa: z.string().max(25, { message: "Empresa muito longa" })
+          .nullish(),
         anoInicio: z.number().nullish(),
         anoFim: z.number().nullish(),
-        posicao: z.string().nullish(),
-        info: z.array(z.string().nullish().optional()),
+        posicao: z.string().max(27, { message: "Posição muito longa" })
+          .nullish(),
+        info: z.array(
+          z.string().max(30, {
+            message:
+              'Uma das linhas no campo "Informaçao" está muito longa. Reduza ou quebre a linha',
+          }).nullish().optional(),
+        ).max(4, {
+          message: 'Você só pode adicionar até 4 linhas no campo "Informaçao"',
+        }),
         listIndex: z.number().optional(),
       }),
-    ).superRefine((data, ctx) => {
-      data.forEach((fields, index) => {
-        if (fields.empresa?.length == 0) {
-          ctx.addIssue({
-            code: "custom",
-            path: [index, "empresa"],
-            message: `Empresa é obrigatória`,
-          });
-        }
+    ).max(3, { message: "Você só pode adicionar até 3 experiências" })
+      .superRefine((data, ctx) => {
+        data.forEach((fields, index) => {
+          if (fields.empresa?.length == 0) {
+            ctx.addIssue({
+              code: "custom",
+              path: [index, "empresa"],
+              message: `Empresa é obrigatória`,
+            });
+          }
 
-        if (!fields.anoInicio) {
-          ctx.addIssue({
-            code: "custom",
-            path: [index, "anoInicio"],
-            message: `Ano de inicio é obrigatório`,
-          });
-        }
+          if (!fields.anoInicio) {
+            ctx.addIssue({
+              code: "custom",
+              path: [index, "anoInicio"],
+              message: `Ano de inicio é obrigatório`,
+            });
+          }
 
-        if (!fields.anoFim) {
-          ctx.addIssue({
-            code: "custom",
-            path: [index, "anoFim"],
-            message: `Ano de saída é obrigatório`,
-          });
-        }
+          if (!fields.anoFim) {
+            ctx.addIssue({
+              code: "custom",
+              path: [index, "anoFim"],
+              message: `Ano de saída é obrigatório`,
+            });
+          }
 
-        if (fields.posicao?.length == 0) {
-          ctx.addIssue({
-            code: "custom",
-            path: [index, "posicao"],
-            message: `Posição é obrigatória`,
-          });
-        }
-      });
-    }).default([
-      {
-        empresa: "",
-        anoInicio: null,
-        anoFim: null,
-        posicao: "",
-        info: [""],
-      },
-    ]),
+          if (fields.posicao?.length == 0) {
+            ctx.addIssue({
+              code: "custom",
+              path: [index, "posicao"],
+              message: `Posição é obrigatória`,
+            });
+          }
+        });
+      }).default([
+        {
+          empresa: "",
+          anoInicio: null,
+          anoFim: null,
+          posicao: "",
+          info: [""],
+        },
+      ]),
     formacao: z.array(
       z.object({
-        curso: z.string().nullish(),
+        curso: z.string().max(14, { message: "Curso muito longo" }).nullish(),
         anoInicio: z.number().nullish(),
         anoFim: z.number().nullish(),
-        universidade: z.string().nullish(),
+        universidade: z.string().max(15, {
+          message: "Universidade muito longa",
+        }).nullish(),
         listIndex: z.number().optional(),
       }),
-    ).superRefine((data, ctx) => {
-      data.forEach((fields, index) => {
-        if (fields.curso?.length == 0) {
-          ctx.addIssue({
-            code: "custom",
-            path: [index, "curso"],
-            message: `Curso é obrigatório`,
-          });
-        }
+    ).max(2, { message: "Você só pode adicionar até 2 formações" }).superRefine(
+      (data, ctx) => {
+        data.forEach((fields, index) => {
+          if (fields.curso?.length == 0) {
+            ctx.addIssue({
+              code: "custom",
+              path: [index, "curso"],
+              message: `Curso é obrigatório`,
+            });
+          }
 
-        if (!fields.anoInicio) {
-          ctx.addIssue({
-            code: "custom",
-            path: [index, "anoInicio"],
-            message: `Ano de inicio é obrigatório`,
-          });
-        }
+          if (!fields.anoInicio) {
+            ctx.addIssue({
+              code: "custom",
+              path: [index, "anoInicio"],
+              message: `Ano de inicio é obrigatório`,
+            });
+          }
 
-        if (!fields.anoFim) {
-          ctx.addIssue({
-            code: "custom",
-            path: [index, "anoFim"],
-            message: `Ano de conclusão é obrigatório`,
-          });
-        }
+          if (!fields.anoFim) {
+            ctx.addIssue({
+              code: "custom",
+              path: [index, "anoFim"],
+              message: `Ano de conclusão é obrigatório`,
+            });
+          }
 
-        if (fields.universidade?.length == 0) {
-          ctx.addIssue({
-            code: "custom",
-            path: [index, "universidade"],
-            message: `Universidade é obrigatória`,
-          });
-        }
-      });
-    }).default([
+          if (fields.universidade?.length == 0) {
+            ctx.addIssue({
+              code: "custom",
+              path: [index, "universidade"],
+              message: `Universidade é obrigatória`,
+            });
+          }
+        });
+      },
+    ).default([
       {
         curso: "",
         anoInicio: null,
@@ -1273,29 +1367,33 @@ const validationSchema = toTypedSchema(
         universidade: "",
       },
     ]),
-    habilidades: z.array(z.string().nonempty("Habilidade é obrigatória"))
-      .nullish(),
+    habilidades: z.array(
+      z.string().max(16, { message: "Habilidade muito longa" }).nonempty(
+        "Habilidade é obrigatória",
+      ),
+    ).max(5, { message: "Você só pode adicionar até 5 habilidades" }).nullish(),
     idiomas: z.array(
       z.object({
-        lingua: z.string().nullish(),
+        lingua: z.string().max(11, { message: "Lingua muito longa" }).nullish(),
         nivel: z.enum(["Básico", "Médio", "Avançado"], {
           message: "Nível é obrigatório",
         }).nullish(),
         listIndex: z.number().optional(),
       }),
-    ).nullish().superRefine((data, ctx) => {
-      if (data && data?.length > 0) {
-        data?.forEach((fields, index) => {
-          if (!fields.lingua || fields.lingua?.length == 0) {
-            ctx.addIssue({
-              code: "custom",
-              path: [index, "lingua"],
-              message: `Lingua é obrigatória`,
-            });
-          }
-        });
-      }
-    }),
+    ).max(3, { message: "Você só pode adicionar até 3 idiomas" }).nullish()
+      .superRefine((data, ctx) => {
+        if (data && data?.length > 0) {
+          data?.forEach((fields, index) => {
+            if (!fields.lingua || fields.lingua?.length == 0) {
+              ctx.addIssue({
+                code: "custom",
+                path: [index, "lingua"],
+                message: `Lingua é obrigatória`,
+              });
+            }
+          });
+        }
+      }),
   }),
 );
 
