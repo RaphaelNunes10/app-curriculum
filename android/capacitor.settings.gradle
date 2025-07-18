@@ -3,7 +3,7 @@ include ':capacitor-android'
 project(':capacitor-android').projectDir = new File('../node_modules/.pnpm/@capacitor+android@7.4.2_@capacitor+core@7.4.2/node_modules/@capacitor/android/capacitor')
 
 include ':bcyesil-capacitor-plugin-printer'
-project(':bcyesil-capacitor-plugin-printer').projectDir = new File('../node_modules/.pnpm/@bcyesil+capacitor-plugin-p_20c45968639a7181d6b4fbb831cf7ba5/node_modules/@bcyesil/capacitor-plugin-printer/android')
+project(':bcyesil-capacitor-plugin-printer').projectDir = new File('../node_modules/.pnpm/@bcyesil+capacitor-plugin-printer@0.0.5_@capacitor+core@7.4.2/node_modules/@bcyesil/capacitor-plugin-printer/android')
 
 include ':capacitor-app'
 project(':capacitor-app').projectDir = new File('../node_modules/.pnpm/@capacitor+app@7.0.0_@capacitor+core@7.4.2/node_modules/@capacitor/app/android')
