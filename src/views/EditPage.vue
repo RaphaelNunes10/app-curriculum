@@ -1374,7 +1374,7 @@ const validationSchema = toTypedSchema(
     ).max(5, { message: "Você só pode adicionar até 5 habilidades" }).nullish(),
     idiomas: z.array(
       z.object({
-        lingua: z.string().max(11, { message: "Lingua muito longa" }).nullish(),
+        lingua: z.string().max(11, { message: "Idioma muito longo" }).nullish(),
         nivel: z.enum(["Básico", "Médio", "Avançado"], {
           message: "Nível é obrigatório",
         }).nullish(),
@@ -1388,7 +1388,7 @@ const validationSchema = toTypedSchema(
               ctx.addIssue({
                 code: "custom",
                 path: [index, "lingua"],
-                message: `Lingua é obrigatória`,
+                message: `Idioma é obrigatório`,
               });
             }
           });
