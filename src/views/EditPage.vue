@@ -1175,15 +1175,15 @@ const validationSchema = toTypedSchema(
   z.object({
     id: z.string().optional(),
     imagem: z.string().nullish().optional(),
-    nome: z.string().max(10, { message: "Nome muito longo" }).nonempty(
+    nome: z.string().max(30, { message: "Nome muito longo" }).nonempty(
       "Nome é obrigatório",
     ).default(""),
-    sobrenome: z.string().max(10, { message: "Sobrenome muito longo" })
+    sobrenome: z.string().max(30, { message: "Sobrenome muito longo" })
       .nonempty("Sobrenome é obrigatório").default(
         "",
       ),
     sobre: z.array(
-      z.string().max(30, {
+      z.string().max(35, {
         message:
           'Uma das linhas no campo "Sobre Mim" está muito longa. Reduza ou quebre a linha',
       }).nullish(),
@@ -1209,7 +1209,7 @@ const validationSchema = toTypedSchema(
           d: z.string().nullish(),
           size: z.number().nullish(),
         }),
-        info: z.string().max(14, { message: "Contato muito longo" }).nonempty(
+        info: z.string().max(30, { message: "Contato muito longo" }).nonempty(
           "Contato é obrigatório",
         ),
         listIndex: z.number().optional(),
@@ -1253,14 +1253,14 @@ const validationSchema = toTypedSchema(
     ]),
     experiencia: z.array(
       z.object({
-        empresa: z.string().max(25, { message: "Empresa muito longa" })
+        empresa: z.string().max(55, { message: "Empresa muito longa" })
           .nullish(),
         anoInicio: z.number().nullish(),
         anoFim: z.number().nullish(),
-        posicao: z.string().max(27, { message: "Posição muito longa" })
+        posicao: z.string().max(60, { message: "Posição muito longa" })
           .nullish(),
         info: z.array(
-          z.string().max(30, {
+          z.string().max(35, {
             message:
               'Uma das linhas no campo "Informaçao" está muito longa. Reduza ou quebre a linha',
           }).nullish().optional(),
@@ -1315,10 +1315,10 @@ const validationSchema = toTypedSchema(
       ]),
     formacao: z.array(
       z.object({
-        curso: z.string().max(14, { message: "Curso muito longo" }).nullish(),
+        curso: z.string().max(30, { message: "Curso muito longo" }).nullish(),
         anoInicio: z.number().nullish(),
         anoFim: z.number().nullish(),
-        universidade: z.string().max(15, {
+        universidade: z.string().max(30, {
           message: "Universidade muito longa",
         }).nullish(),
         listIndex: z.number().optional(),
@@ -1368,13 +1368,13 @@ const validationSchema = toTypedSchema(
       },
     ]),
     habilidades: z.array(
-      z.string().max(16, { message: "Habilidade muito longa" }).nonempty(
+      z.string().max(25, { message: "Habilidade muito longa" }).nonempty(
         "Habilidade é obrigatória",
       ),
     ).max(5, { message: "Você só pode adicionar até 5 habilidades" }).nullish(),
     idiomas: z.array(
       z.object({
-        lingua: z.string().max(11, { message: "Idioma muito longo" }).nullish(),
+        lingua: z.string().max(10, { message: "Idioma muito longo" }).nullish(),
         nivel: z.enum(["Básico", "Médio", "Avançado"], {
           message: "Nível é obrigatório",
         }).nullish(),

@@ -72,14 +72,14 @@
           <text
             xml:space="preserve"
             x="103.48952"
-            y="36.896034"
+            y="40.896034"
             style="font-size: 3.175px; stroke-width: 0.264583"
           >
             <tspan
-              style="font-variant: normal; font-weight: 900; font-size: 11px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+              style="font-variant: normal; font-weight: 900; font-size: 8px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
               x="103.48952"
               dx="0 0.28525519 0.28449431 0.28542751 0.28537139 0.2845245 0.28449431"
-              y="36.896034"
+              y="40.896034"
             >
               {{ dados.nome }}
             </tspan>
@@ -91,7 +91,7 @@
             style="font-size: 3.175px; stroke-width: 0.264583"
           >
             <tspan
-              style="font-variant: normal; font-weight: 900; font-size: 11px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+              style="font-variant: normal; font-weight: 900; font-size: 8px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
               x="103.48952"
               dx="0 0.2846711 0.28537139 0.28542751 0.28474653"
               y="53.829369"
