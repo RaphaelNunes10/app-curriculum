@@ -5,12 +5,6 @@ formulários, desenvolvido utilizando Vue, Ionic e Capacitor.
 
 Desenvolvido pelo aluno da Visual Mídia, Raphael Nunes dos Santos.
 
-## Download e Instalação
-
-⚠️ Aplicativo disponível apenas para Android ⚠️
-
-Baixar o arquivo APK em "releases" e abrir com o instalador de pacotes padrão do sistema Android.
-
 ## Recursos:
 
 - Cadastro de multiplos currículos
@@ -45,7 +39,7 @@ O uso parcial do código-fonte em outros projetos é permitido, desde que:
 - Não seja comprometida a credibilidade do autor original em relação a este
   projeto;
 - Não sejam divulgados dados pessoais eventualmente presentes neste projeto, com
-  exceção do nome do autor (como informações de contato visíveis nesta página,
+  exceção do nome do autor (como informações de contato visíveis na página "sobre",
   não incluídas no código-fonte).
 
 Em caso de redistribuição, recomenda-se realizar um _fork_ deste repositório em
