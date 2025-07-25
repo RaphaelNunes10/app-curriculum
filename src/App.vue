@@ -1,12 +1,14 @@
 <template>
-  <div class="prose dark:prose-invert w-full">
-    <ion-app>
+  <ion-app>
+    <DefaultLayout>
       <ion-router-outlet :key="$route.fullPath" />
-    </ion-app>
-  </div>
+    </DefaultLayout>
+  </ion-app>
 </template>
 
 <script setup lang="ts">
 import "./assets/styles/main.css";
+
+import DefaultLayout from "./layouts/DefaultLayout.vue";
 import { IonApp, IonRouterOutlet } from "@ionic/vue";
 </script>
