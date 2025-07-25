@@ -62,6 +62,19 @@
           >
             <ion-card class="z-0 w-auto">
               <ion-card-content class="relative p-2 grid justify-items-center">
+                <div
+                  v-if='
+                    breakpoints.smallerOrEqual(
+                      "sm",
+                    )
+                      .value
+                  '
+                  class="
+                    absolute top-0 right-0 w-full h-full pointer-events-none
+                    [background-image:linear-gradient(-135deg,rgba(0,0,0,0.5)_0%,transparent_30%)]
+                  "
+                >
+                </div>
                 <div class="absolute right-5 top-5 z-50 grid grid-cols-12 sm:grid-flow-row sm:auto-rows-auto gap-2 justify-items-end">
                   <ion-button
                     shape="round"
@@ -104,7 +117,7 @@
                       v-else
                       slot="icon-only"
                       name="print"
-                      class="text-3xl drop-shadow-xl"
+                      class="text-3xl [filter:drop-shadow(4px_0_0_rgba(0,0,0,0.3))drop-shadow(4px_2px_0_rgba(0,0,0,0.3))]"
                     />
                   </ion-button>
 
@@ -135,7 +148,7 @@
                       v-else
                       slot="icon-only"
                       name="create"
-                      class="text-3xl drop-shadow-xl"
+                      class="text-3xl [filter:drop-shadow(4px_0_0_rgba(0,0,0,0.3))drop-shadow(4px_2px_0_rgba(0,0,0,0.3))]"
                     />
                   </ion-button>
 
@@ -167,7 +180,7 @@
                       v-else
                       slot="icon-only"
                       name="trash"
-                      class="text-2xl drop-shadow-xl"
+                      class="text-2xl [filter:drop-shadow(4px_0_0_rgba(0,0,0,0.3))drop-shadow(4px_2px_0_rgba(0,0,0,0.3))]"
                     />
                   </ion-button>
                 </div>
@@ -185,7 +198,7 @@
 
         <ion-nav-link
           v-if="curricula.length > 0"
-          class="fixed left-1/2 transform -translate-x-1/2 md:left-auto md:translate-x-0 md:right-10 bottom-5 z-50"
+          class="fixed left-1/2 transform -translate-x-1/2 md:left-auto md:translate-x-0 md:right-10 bottom-16 md:bottom-5 z-50"
           router-direction="forward"
           :component="EditPage"
         >
@@ -193,8 +206,8 @@
             shape="round"
             size="large"
             router-link="/create"
-            class="w-auto text-xs sm:text-sm md:text-base"
-          >Adicionar Currículo&nbsp;<ion-icon
+            class="w-auto text-[0.8rem] sm:text-sm md:text-base"
+          >Novo Currículo&nbsp;<ion-icon
               name="add-circle"
               class="text-3xl"
             /></ion-button>
