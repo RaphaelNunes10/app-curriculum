@@ -17,6 +17,23 @@
         id="container"
         class="flex-0 relative h-full"
       >
+        <ion-nav-link
+          class="fixed left-1/2 transform -translate-x-1/2 md:left-auto md:translate-x-0 md:right-10 bottom-5 md:bottom-auto md:top-20 z-50"
+          router-direction="forward"
+          :component="EditPage"
+        >
+          <ion-button
+            shape="round"
+            size="small"
+            fill="clear"
+            router-link="/about"
+            class="w-auto text-[0.6rem] md:text-xs"
+          >Sobre&nbsp;<ion-icon
+              name="information-circle-outline"
+              class="text-xl md:text-2xl"
+            /></ion-button>
+        </ion-nav-link>
+
         <div
           v-if="curricula.length == 0"
           class="grid justify-items-center gap-4"
@@ -24,9 +41,11 @@
           <h2>
             Adicione um currículo para iniciar!
           </h2>
+
           <ion-button shape="round" size="large" router-link="/create">Adicionar
             currículo&nbsp;<ion-icon name="add-circle" /></ion-button>
         </div>
+
         <swiper-container
           v-else
           slides-per-view="1"
@@ -209,7 +228,13 @@ import {
 } from "@ionic/vue";
 
 import { addIcons } from "ionicons";
-import { addCircle, create, print, trash } from "ionicons/icons";
+import {
+  addCircle,
+  create,
+  informationCircleOutline,
+  print,
+  trash,
+} from "ionicons/icons";
 
 import Swiper from "swiper";
 import "swiper/css";
@@ -254,6 +279,7 @@ addIcons({
   create: create,
   trash: trash,
   print: print,
+  "information-circle-outline": informationCircleOutline,
 });
 
 registerSwiper();

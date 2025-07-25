@@ -7,12 +7,23 @@ import { defineConfig } from "vite";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import Markdown from "unplugin-vue-markdown/vite";
+import { attrs } from "@mdit/plugin-attrs";
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      include: [/\.vue$/, /\.md$/],
+    }),
     legacy(),
     tailwindcss(),
+    Markdown({
+      markdownItSetup(md) {
+        md.use(attrs);
+      },
+      headEnabled: true,
+    }),
   ],
   resolve: {
     alias: {

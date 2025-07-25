@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@source "./src/assets/markdown";
 
 :root {
   --ion-color-yellow: #ffc409;
