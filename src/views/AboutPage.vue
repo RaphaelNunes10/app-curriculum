@@ -26,7 +26,6 @@
       >
         <AboutText />
         <LicenseText />
-        <ContactText />
       </div>
     </ion-content>
   </ion-page>
@@ -35,7 +34,6 @@
 <script setup lang="ts">
 import AboutText from "../assets/markdown/about.md";
 import LicenseText from "../assets/markdown/license.md";
-import ContactText from "../assets/markdown/contact.md";
 
 import {
   IonBackButton,
