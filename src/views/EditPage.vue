@@ -5,6 +5,7 @@
         <ion-buttons slot="start">
           <ion-back-button default-href="/"></ion-back-button>
         </ion-buttons>
+
         <ion-title>
           {{ id ? "Editar currículo" : "Adicionar currículo" }}
         </ion-title>
@@ -34,6 +35,7 @@
             <ion-card-content>
               <div class="grid gap-2">
                 <ion-label position="stacked">Imagem</ion-label>
+
                 <Field :name="`imagem`" v-slot="{ field }">
                   <div
                     v-if="field.value"
@@ -43,6 +45,7 @@
                       :src="field.value"
                       class="aspect-square object-cover hover:object-contain"
                     />
+
                     <ion-button
                       color="primary"
                       shape="round"
@@ -52,6 +55,7 @@
                       <ion-icon slot="icon-only" name="reload"></ion-icon>
                     </ion-button>
                   </div>
+
                   <ion-button
                     v-else
                     color="primary"
@@ -70,6 +74,7 @@
             <ion-card-content>
               <div class="grid gap-2">
                 <ion-label position="stacked">Nome *</ion-label>
+
                 <ion-item>
                   <Field
                     name="nome.text"
@@ -97,6 +102,7 @@
                 </ion-item>
 
                 <ion-label position="stacked">Sobrenome *</ion-label>
+
                 <ion-item>
                   <Field
                     name="sobrenome.text"
@@ -130,6 +136,7 @@
             <ion-card-content>
               <div class="grid gap-2">
                 <ion-label position="stacked">Sobre Mim *</ion-label>
+
                 <ion-item>
                   <Field
                     name="sobre.text"
@@ -175,6 +182,7 @@
             <ion-card-content>
               <div class="grid gap-2">
                 <ion-label position="stacked">Contato *</ion-label>
+
                 <FieldArray
                   ref="contato-field-array"
                   name="contato"
@@ -220,6 +228,7 @@
                                   }
                                 '
                               >Mail</ion-select-option>
+
                               <ion-select-option
                                 :value='
                                   {
@@ -228,6 +237,7 @@
                                   }
                                 '
                               >Whatsapp</ion-select-option>
+
                               <ion-select-option
                                 :value='
                                   {
@@ -236,6 +246,7 @@
                                   }
                                 '
                               >Phone</ion-select-option>
+
                               <ion-select-option
                                 :value='
                                   {
@@ -244,6 +255,7 @@
                                   }
                                 '
                               >Cel</ion-select-option>
+
                               <ion-select-option
                                 :value='
                                   {
@@ -252,6 +264,7 @@
                                   }
                                 '
                               >WWW</ion-select-option>
+
                               <ion-select-option
                                 :value='
                                   {
@@ -365,6 +378,7 @@
                         ? `#${index + 1}`
                         : ""
                       }}*</ion-label>
+
                     <ion-grid>
                       <ion-row>
                         <ion-col>
@@ -474,6 +488,7 @@
                                 </Field>
                               </ion-item>
                             </ion-col>
+
                             <ion-col size="6">
                               <ion-item>
                                 <Field
@@ -636,6 +651,7 @@
                             </ion-col>
                           </ion-row>
                         </ion-col>
+
                         <ion-col size="2" size-lg="1">
                           <ion-button
                             color="primary"
@@ -655,6 +671,7 @@
                       </ion-row>
                     </ion-grid>
                   </div>
+
                   <ion-button
                     color="primary"
                     expand="full"
@@ -826,6 +843,7 @@
                                 </Field>
                               </ion-item>
                             </ion-col>
+
                             <ion-col size="6">
                               <ion-item>
                                 <Field
@@ -932,6 +950,7 @@
                             </ion-col>
                           </ion-row>
                         </ion-col>
+
                         <ion-col size="2" size-lg="1">
                           <ion-button
                             color="primary"
@@ -951,6 +970,7 @@
                       </ion-row>
                     </ion-grid>
                   </div>
+
                   <ion-button
                     color="primary"
                     expand="full"
@@ -992,6 +1012,7 @@
             <ion-card-content>
               <div class="grid gap-2">
                 <ion-label position="stacked">Habilidades (opcional)</ion-label>
+
                 <FieldArray
                   ref="habilidades-field-array"
                   name="habilidades"
@@ -1034,6 +1055,7 @@
                             ></ion-input>
                           </Field>
                         </ion-col>
+
                         <ion-col size="2" size-lg="1">
                           <ion-button
                             color="primary"
@@ -1052,6 +1074,7 @@
                       </ion-row>
                     </ion-grid>
                   </ion-item>
+
                   <ion-button
                     color="primary"
                     expand="full"
@@ -1076,6 +1099,7 @@
             <ion-card-content>
               <div class="grid gap-2">
                 <ion-label position="stacked">Idiomas (opcional)</ion-label>
+
                 <FieldArray
                   ref="idiomas-field-array"
                   name="idiomas"

@@ -64,7 +64,7 @@
           height="48.683331"
           style="image-rendering: optimizeSpeed"
           preserveAspectRatio="meet"
-          :xlink:href="dados.imagem"
+          :xlink:href="dados?.imagem"
           x="19.562456"
           y="20.63653"
         />
@@ -120,7 +120,7 @@
             </tspan>
           </text>
           <g>
-            <g v-for="(contato, index) in dados.contato" :key="index">
+            <g v-for="(contato, index) in dados?.contato" :key="index">
               <path
                 :d="`${contato.icone.d}`"
                 :transform="
@@ -193,7 +193,7 @@
               FORMAÇÃO
             </tspan>
           </text>
-          <g v-for="(formacao, index) in dados.formacao" :key="index">
+          <g v-for="(formacao, index) in dados?.formacao" :key="index">
             <text
               xml:space="preserve"
               x="28.081341"
@@ -249,7 +249,7 @@
               EXPERIÊNCIA
             </tspan>
           </text>
-          <g v-for="(experiencia, index) in dados.experiencia" :key="index">
+          <g v-for="(experiencia, index) in dados?.experiencia" :key="index">
             <g>
               <text
                 xml:space="preserve"
@@ -329,7 +329,7 @@
               </tspan>
             </text>
             <text
-              v-for="(habilidade, index) in dados.habilidades"
+              v-for="(habilidade, index) in dados?.habilidades"
               :key="index"
               xml:space="preserve"
               x="28.081341"
@@ -362,7 +362,7 @@
               </tspan>
             </text>
             <text
-              v-for="(idioma, index) in dados.idiomas"
+              v-for="(idioma, index) in dados?.idiomas"
               :key="index"
               xml:space="preserve"
               x="28.081341"
@@ -373,19 +373,6 @@
                 {{ idioma.lingua?.text }}, {{ idioma.nivel }}
               </tspan>
             </text>
-            <!-- <text
-              xml:space="preserve"
-              x="28.081341"
-              y="274.46228"
-              style="font-size: 3.175px; stroke-width: 0.264583"
-            >
-              <tspan
-                style="font-variant: normal; font-weight: 300; font-size: 4.09046px; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
-                dx="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -0.0015392664"
-              >
-                Espanhol, Intermediário
-              </tspan>
-            </text> -->
           </g>
         </g>
       </g>

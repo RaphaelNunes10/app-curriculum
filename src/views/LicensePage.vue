@@ -5,6 +5,7 @@
         <ion-buttons slot="start">
           <ion-back-button default-href="/"></ion-back-button>
         </ion-buttons>
+
         <ion-title>
           Licença
         </ion-title>

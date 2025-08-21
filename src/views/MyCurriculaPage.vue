@@ -75,6 +75,7 @@
                   "
                 >
                 </div>
+
                 <div class="absolute right-5 top-5 z-50 grid grid-cols-12 sm:grid-flow-row sm:auto-rows-auto gap-2 justify-items-end">
                   <ion-button
                     shape="round"
@@ -113,6 +114,7 @@
                       <span class="hidden sm:block"
                       >Imprimir&nbsp;</span><ion-icon name="print" />
                     </template>
+
                     <ion-icon
                       v-else
                       slot="icon-only"
@@ -142,8 +144,10 @@
                       '
                     >
                       <span class="hidden sm:block">Editar&nbsp;</span>
+
                       <ion-icon name="create" />
                     </template>
+
                     <ion-icon
                       v-else
                       slot="icon-only"
@@ -173,9 +177,11 @@
                           .value
                       '
                     >
-                      <span class="hidden sm:block"
-                      >Excluir&nbsp;</span><ion-icon name="trash" />
+                      <span class="hidden sm:block">Excluir&nbsp;</span>
+
+                      <ion-icon name="trash" />
                     </template>
+
                     <ion-icon
                       v-else
                       slot="icon-only"
@@ -210,7 +216,8 @@
           >Novo Currículo&nbsp;<ion-icon
               name="add-circle"
               class="text-3xl"
-            /></ion-button>
+            />
+          </ion-button>
         </ion-nav-link>
       </div>
     </ion-content>

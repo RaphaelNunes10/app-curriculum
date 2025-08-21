@@ -5,6 +5,7 @@
         <ion-buttons slot="start">
           <ion-back-button default-href="/"></ion-back-button>
         </ion-buttons>
+
         <ion-title>
           Sobre
         </ion-title>
@@ -25,6 +26,7 @@
         class="flex-0 relative container mx-auto p-6"
       >
         <AboutText />
+
         <LicenseText />
       </div>
     </ion-content>

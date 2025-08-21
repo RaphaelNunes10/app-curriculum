@@ -12,7 +12,10 @@
             ? ""
             : `- ${new Date().getFullYear()}`
           }} Raphael Nunes dos Santos.
-          <ion-label router-link="/license-info" class="underline cursor-pointer">
+          <ion-label
+            router-link="/license-info"
+            class="underline cursor-pointer"
+          >
             Licensed under MPL 2.0.
           </ion-label>
         </ion-title>

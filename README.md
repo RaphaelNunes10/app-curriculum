@@ -39,8 +39,8 @@ O uso parcial do código-fonte em outros projetos é permitido, desde que:
 - Não seja comprometida a credibilidade do autor original em relação a este
   projeto;
 - Não sejam divulgados dados pessoais eventualmente presentes neste projeto, com
-  exceção do nome do autor (como informações de contato visíveis na página "sobre",
-  não incluídas no código-fonte).
+  exceção do nome do autor (como informações de contato visíveis na página
+  "sobre", não incluídas no código-fonte).
 
 Em caso de redistribuição, recomenda-se realizar um _fork_ deste repositório em
 plataformas como GitHub, Bitbucket, etc., a fim de manter a rastreabilidade das
