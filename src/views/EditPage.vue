@@ -27,7 +27,7 @@
       >
         <Form
           ref="form"
-          v-slot="{ validateField }"
+          v-slot="{ meta, validateField }"
           :validation-schema
           @submit="onSubmit"
         >
