@@ -92,13 +92,15 @@
                       printComponent(
                         index,
                         `${
-                          curriculum.nome.replace(" ", "-")
+                          (curriculum.nome.text as string)
+                            .replace(" ", "-")
                             .toLowerCase()
                         }-${
-                          curriculum.sobrenome.replace(
-                            " ",
-                            "-",
-                          ).toLowerCase()
+                          (curriculum.sobrenome
+                            .text as string).replace(
+                              " ",
+                              "-",
+                            ).toLowerCase()
                         }-curriculum`,
                       )
                     '
