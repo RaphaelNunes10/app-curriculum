@@ -3,33 +3,38 @@ interface Icone {
   size?: number | null;
 }
 
+interface SVGText {
+  text: string | string[] | null;
+  fontSize: number;
+}
+
 interface Contato {
   icone: Icone;
-  info: string;
+  info: SVGText;
   listIndex?: number;
 }
 
 interface Experiencia {
-  empresa?: string | null;
+  empresa?: SVGText;
   anoInicio?: number | null;
   anoFim?: number | null;
-  posicao?: string | null;
-  info: (string | null | undefined)[];
+  posicao?: SVGText;
+  info: SVGText | undefined;
   listIndex?: number;
 }
 
 interface Formacao {
-  curso?: string | null;
+  curso?: SVGText;
   anoInicio?: number | null;
   anoFim?: number | null;
-  universidade?: string | null;
+  universidade?: SVGText;
   listIndex?: number;
 }
 
 type Nivel = "Básico" | "Médio" | "Avançado";
 
 interface Idioma {
-  lingua?: string | null;
+  lingua?: SVGText;
   nivel?: Nivel | null;
   listIndex?: number;
 }
@@ -37,12 +42,12 @@ interface Idioma {
 export interface Curriculum {
   id?: string;
   imagem?: string | null;
-  nome: string;
-  sobrenome: string;
+  nome: SVGText;
+  sobrenome: SVGText;
   contato: Contato[];
-  sobre: (string | null | undefined)[];
+  sobre: SVGText;
   experiencia: Experiencia[];
   formacao: Formacao[];
-  habilidades?: string[] | null;
+  habilidades?: SVGText[] | null;
   idiomas?: Idioma[] | null;
 }

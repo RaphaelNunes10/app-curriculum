@@ -71,7 +71,10 @@
               <div class="grid gap-2">
                 <ion-label position="stacked">Nome *</ion-label>
                 <ion-item>
-                  <Field name="nome" v-slot="{ field, meta, errorMessage }">
+                  <Field
+                    name="nome.text"
+                    v-slot="{ field, meta, errorMessage }"
+                  >
                     <ion-input
                       v-bind="field"
                       placeholder="Seu Nome"
@@ -81,6 +84,14 @@
                         : ""
                       '
                       :errorText="errorMessage"
+                      @ionInput='
+                        () =>
+                        adjustFont(
+                          "nome",
+                          110,
+                          "Ruda-Black",
+                        )
+                      '
                     ></ion-input>
                   </Field>
                 </ion-item>
@@ -88,7 +99,7 @@
                 <ion-label position="stacked">Sobrenome *</ion-label>
                 <ion-item>
                   <Field
-                    name="sobrenome"
+                    name="sobrenome.text"
                     v-slot="{ field, meta, errorMessage }"
                   >
                     <ion-input
@@ -100,6 +111,14 @@
                         : ""
                       '
                       :errorText="errorMessage"
+                      @ionInput='
+                        () =>
+                        adjustFont(
+                          "sobrenome",
+                          110,
+                          "Ruda-Black",
+                        )
+                      '
                     ></ion-input>
                   </Field>
                 </ion-item>
@@ -113,7 +132,7 @@
                 <ion-label position="stacked">Sobre Mim *</ion-label>
                 <ion-item>
                   <Field
-                    name="sobre"
+                    name="sobre.text"
                     v-slot="
                       {
                         field,
@@ -125,11 +144,6 @@
                   >
                     <ion-textarea
                       :value='field.value!.join("\n")'
-                      @ionInput='
-                        setValue($event
-                        .target.value!
-                        .split("\n"))
-                      '
                       placeholder="Sobre..."
                       :class='
                         !meta.valid
@@ -137,6 +151,19 @@
                         : ""
                       '
                       :errorText="errorMessage"
+                      @ionInput='
+                        (event) => {
+                          setValue(event
+                            .target.value!
+                            .split("\n"));
+
+                          adjustFontMultiline(
+                            "sobre",
+                            110,
+                            30,
+                          );
+                        }
+                      '
                     ></ion-textarea>
                   </Field>
                 </ion-item>
@@ -239,7 +266,7 @@
 
                         <ion-col size="10" size-lg="7">
                           <Field
-                            :name="`contato[${index}].info`"
+                            :name="`contato[${index}].info.text`"
                             v-slot="
                               {
                                 field,
@@ -257,6 +284,13 @@
                                 : ""
                               '
                               :errorText="errorMessage"
+                              @ionInput="
+                                () =>
+                                adjustFont(
+                                  `contato[${index}].info`,
+                                  55,
+                                )
+                              "
                             ></ion-input>
                           </Field>
                         </ion-col>
@@ -284,18 +318,24 @@
                   <ion-button
                     color="primary"
                     expand="full"
-                    @click='
+                    @click="
                       push({
                         icone: {
-                          d: "",
-                          size: null,
+                          d: meta.initialValues?.contato[0]
+                            .icone
+                            .d,
+                          size: meta.initialValues?.contato[0]
+                            .icone.size,
                         },
-                        info: "",
-                      });
-                      validateField(
-                        "contato",
-                      );
-                    '
+                        info: {
+                          text: meta.initialValues?.contato[0]
+                            .info.text,
+                          fontSize: meta.initialValues
+                            ?.contato[0]
+                            .info.fontSize,
+                        },
+                      })
+                    "
                   >Adicionar contato</ion-button>
 
                   <Field name="contato" as="div" v-slot="{ errorMessage }">
@@ -332,7 +372,7 @@
                             <ion-col size="12">
                               <ion-item>
                                 <Field
-                                  :name="`experiencia[${index}].empresa`"
+                                  :name="`experiencia[${index}].empresa.text`"
                                   v-slot="
                                     {
                                       field,
@@ -351,6 +391,14 @@
                                       : ""
                                     '
                                     :errorText="errorMessage"
+                                    @ionInput='
+                                      () =>
+                                      adjustFont(
+                                        `experiencia[${index}].empresa`,
+                                        112,
+                                        "Ruda",
+                                      )
+                                    '
                                   ></ion-input>
                                 </Field>
                               </ion-item>
@@ -500,7 +548,7 @@
                             <ion-col size="12">
                               <ion-item>
                                 <Field
-                                  :name="`experiencia[${index}].posicao`"
+                                  :name="`experiencia[${index}].posicao.text`"
                                   v-slot="
                                     {
                                       field,
@@ -519,6 +567,13 @@
                                       : ""
                                     '
                                     :errorText="errorMessage"
+                                    @ionInput="
+                                      () =>
+                                      adjustFont(
+                                        `experiencia[${index}].posicao`,
+                                        110,
+                                      )
+                                    "
                                   ></ion-input>
                                 </Field>
                               </ion-item>
@@ -529,7 +584,7 @@
                             <ion-col size="12">
                               <ion-item>
                                 <Field
-                                  :name="`experiencia[${index}].info`"
+                                  :name="`experiencia[${index}].info.text`"
                                   v-slot="
                                     {
                                       field,
@@ -556,14 +611,24 @@
                                     '
                                     :errorText="errorMessage"
                                     @ionInput='
-                                      setValue(
-                                        $event
-                                          .target
-                                          .value!
-                                          .split(
-                                            "\n",
-                                          ),
-                                      )
+                                      (
+                                        event,
+                                      ) => {
+                                        setValue(
+                                          event
+                                            .target
+                                            .value!
+                                            .split(
+                                              "\n",
+                                            ),
+                                        );
+
+                                        adjustFontMultiline(
+                                          `experiencia[${index}].info`,
+                                          110,
+                                          20,
+                                        );
+                                      }
                                     '
                                   ></ion-textarea>
                                 </Field>
@@ -593,22 +658,36 @@
                   <ion-button
                     color="primary"
                     expand="full"
-                    @click='
+                    @click="
                       push({
-                        empresa: "",
-                        anoInicio: null,
-                        anoFim: null,
-                        posicao: "",
-                        info: [""],
+                        empresa: {
+                          text: meta.initialValues?.experiencia[0]
+                            .empresa.text,
+                          fontSize: meta.initialValues
+                            ?.experiencia[0].empresa.fontSize,
+                        },
+                        anoInicio: meta.initialValues
+                          ?.experiencia[0].anoInicio,
+                        anoFim: meta.initialValues?.experiencia[0]
+                          .anoFim,
+                        posicao: {
+                          text: meta.initialValues?.experiencia[0]
+                            .posicao.text,
+                          fontSize: meta.initialValues
+                            ?.experiencia[0].fontSize,
+                        },
+                        info: {
+                          text: meta.initialValues?.experiencia[0]
+                            .info.text,
+                          fontSize: meta.initialValues
+                            ?.experiencia[0].info.fontSize,
+                        },
                       });
                       addItem({
                         isAnoInicioOpen: false,
                         isAnoFimOpen: false,
                       }, modals.experiencia!);
-                      validateField(
-                        "experiencia",
-                      );
-                    '
+                    "
                   >Adicionar Experiência</ion-button>
 
                   <Field name="experiencia" as="div" v-slot="{ errorMessage }">
@@ -645,7 +724,7 @@
                             <ion-col size="12">
                               <ion-item>
                                 <Field
-                                  :name="`formacao[${index}].curso`"
+                                  :name="`formacao[${index}].curso.text`"
                                   v-slot="
                                     {
                                       field,
@@ -664,6 +743,14 @@
                                       : ""
                                     '
                                     :errorText="errorMessage"
+                                    @ionInput='
+                                      () =>
+                                      adjustFont(
+                                        `formacao[${index}].curso`,
+                                        64,
+                                        "Ruda",
+                                      )
+                                    '
                                   ></ion-input>
                                 </Field>
                               </ion-item>
@@ -813,7 +900,7 @@
                             <ion-col size="12">
                               <ion-item>
                                 <Field
-                                  :name="`formacao[${index}].universidade`"
+                                  :name="`formacao[${index}].universidade.text`"
                                   v-slot="
                                     {
                                       field,
@@ -832,6 +919,13 @@
                                       : ""
                                     '
                                     :errorText="errorMessage"
+                                    @ionInput="
+                                      () =>
+                                      adjustFont(
+                                        `formacao[${index}].universidade`,
+                                        62,
+                                      )
+                                    "
                                   ></ion-input>
                                 </Field>
                               </ion-item>
@@ -860,21 +954,30 @@
                   <ion-button
                     color="primary"
                     expand="full"
-                    @click='
+                    @click="
                       push({
-                        universidade: "",
-                        anoInicio: null,
-                        anoFim: null,
-                        curso: "",
+                        curso: {
+                          text: meta.initialValues?.formacao[0]
+                            .curso.text,
+                          fontSize: meta.initialValues
+                            ?.formacao[0].curso.fontSize,
+                        },
+                        anoInicio: meta.initialValues?.formacao[0]
+                          .anoInicio,
+                        anoFim: meta.initialValues?.formacao[0]
+                          .anoFim,
+                        universidade: {
+                          text: meta.initialValues?.formacao[0]
+                            .universidade.text,
+                          fontSize: meta.initialValues
+                            ?.formacao[0].universidade.fontSize,
+                        },
                       });
                       addItem({
                         isAnoInicioOpen: false,
                         isAnoFimOpen: false,
                       }, modals.formacao!);
-                      validateField(
-                        "formacao",
-                      );
-                    '
+                    "
                   >Adicionar Formação</ion-button>
 
                   <Field name="formacao" as="div" v-slot="{ errorMessage }">
@@ -899,7 +1002,7 @@
                       <ion-row>
                         <ion-col>
                           <Field
-                            :name="`habilidades[${index}]`"
+                            :name="`habilidades[${index}].text`"
                             v-slot="
                               {
                                 field,
@@ -921,6 +1024,13 @@
                                 : ""
                               '
                               :errorText="errorMessage"
+                              @ionInput="
+                                () =>
+                                adjustFont(
+                                  `habilidades[${index}]`,
+                                  62,
+                                )
+                              "
                             ></ion-input>
                           </Field>
                         </ion-col>
@@ -946,7 +1056,10 @@
                     color="primary"
                     expand="full"
                     @click='
-                      push("");
+                      push({
+                        text: "",
+                        fontSize: 4.09046,
+                      });
                       validateField("habilidades");
                     '
                   >Adicionar habilidade</ion-button>
@@ -973,7 +1086,7 @@
                       <ion-row>
                         <ion-col size="12" size-md="9.5">
                           <Field
-                            :name="`idiomas[${index}].lingua`"
+                            :name="`idiomas[${index}].lingua.text`"
                             v-slot="
                               {
                                 field,
@@ -995,6 +1108,13 @@
                                 : ""
                               '
                               :errorText="errorMessage"
+                              @ionInput="
+                                () =>
+                                adjustFont(
+                                  `idiomas[${index}].lingua`,
+                                  46,
+                                )
+                              "
                             ></ion-input>
                           </Field>
                         </ion-col>
@@ -1061,12 +1181,12 @@
                     expand="full"
                     @click='
                       push({
-                        lingua: "",
+                        lingua: {
+                          text: "",
+                          fontSize: 4.09046,
+                        },
                         nivel: "",
                       });
-                      validateField(
-                        "idiomas",
-                      );
                     '
                   >Adicionar idioma</ion-button>
 
@@ -1139,6 +1259,8 @@ import { toTypedSchema } from "@vee-validate/zod";
 
 import z from "zod";
 
+import get from "lodash/get";
+
 import { useCrudCurriculum } from "@/composables/crud-curriculum";
 
 addIcons({
@@ -1175,22 +1297,40 @@ const validationSchema = toTypedSchema(
   z.object({
     id: z.string().optional(),
     imagem: z.string().nullish().optional(),
-    nome: z.string().max(30, { message: "Nome muito longo" }).nonempty(
-      "Nome é obrigatório",
-    ).default(""),
-    sobrenome: z.string().max(30, { message: "Sobrenome muito longo" })
-      .nonempty("Sobrenome é obrigatório").default(
-        "",
-      ),
-    sobre: z.array(
-      z.string().max(35, {
-        message:
-          'Uma das linhas no campo "Sobre Mim" está muito longa. Reduza ou quebre a linha',
-      }).nullish(),
-    ).max(6, {
-      message: 'Você só pode adicionar até 6 linhas no campo "Sobre Mim"',
-    })
-      .superRefine(
+    nome: z.object({
+      text: z.string().nonempty("Nome é obrigatório"),
+      fontSize: z.number(),
+    }).superRefine((data, ctx) => {
+      if (data.fontSize <= 3) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["text"],
+          message: "Nome muito longo",
+        });
+      }
+    }).default({
+      text: "",
+      fontSize: 17.8911,
+    }),
+    sobrenome: z.object({
+      text: z.string().nonempty("Sobrenome é obrigatório"),
+      fontSize: z.number(),
+    }).superRefine((data, ctx) => {
+      if (data.fontSize <= 3) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["text"],
+          message: "Sobrenome muito longo",
+        });
+      }
+    }).default({
+      text: "",
+      fontSize: 17.8911,
+    }),
+    sobre: z.object({
+      text: z.array(
+        z.string().nullish(),
+      ).superRefine(
         (line, ctx) => {
           if (line[0]?.length == 0) {
             ctx.addIssue({
@@ -1200,18 +1340,39 @@ const validationSchema = toTypedSchema(
             });
           }
         },
-      ).default([
-        "",
-      ]),
+      ),
+      fontSize: z.number(),
+    }).superRefine((data, ctx) => {
+      if (data.fontSize <= 3) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["text"],
+          message:
+            'Texto do campo "Sobre" muito longo. Reduza o número de linhas e/ou quebre-as para caber',
+        });
+      }
+    }).default({
+      text: [""],
+      fontSize: 4.09046,
+    }),
     contato: z.array(
       z.object({
         icone: z.object({
           d: z.string().nullish(),
           size: z.number().nullish(),
         }),
-        info: z.string().max(30, { message: "Contato muito longo" }).nonempty(
-          "Contato é obrigatório",
-        ),
+        info: z.object({
+          text: z.string().nonempty("Contato é obrigatório"),
+          fontSize: z.number(),
+        }).superRefine((data, ctx) => {
+          if (data.fontSize <= 3) {
+            ctx.addIssue({
+              code: "custom",
+              path: ["text"],
+              message: "Contato muito longo",
+            });
+          }
+        }),
         listIndex: z.number().optional(),
       }),
     ).max(3, { message: "Você só pode adicionar até 3 contatos" }).superRefine(
@@ -1225,15 +1386,7 @@ const validationSchema = toTypedSchema(
             });
           }
 
-          if (!fields.icone.size) {
-            ctx.addIssue({
-              code: "custom",
-              path: [index, "icone.size"],
-              message: `Tamanho do icone é obrigatório`,
-            });
-          }
-
-          if (fields.info.length == 0) {
+          if (fields.info.text.length == 0) {
             ctx.addIssue({
               code: "custom",
               path: [index, "info"],
@@ -1248,88 +1401,146 @@ const validationSchema = toTypedSchema(
           d: "",
           size: null,
         },
-        info: "",
+        info: {
+          text: "",
+          fontSize: 4.09046,
+        },
       },
     ]),
     experiencia: z.array(
       z.object({
-        empresa: z.string().max(55, { message: "Empresa muito longa" })
-          .nullish(),
+        empresa: z.object({
+          text: z.string().nullish(),
+          fontSize: z.number(),
+        }).superRefine((data, ctx) => {
+          if (data.fontSize <= 3) {
+            ctx.addIssue({
+              code: "custom",
+              path: ["text"],
+              message: "Empresa muito longa",
+            });
+          }
+        }),
         anoInicio: z.number().nullish(),
         anoFim: z.number().nullish(),
-        posicao: z.string().max(60, { message: "Posição muito longa" })
-          .nullish(),
-        info: z.array(
-          z.string().max(35, {
-            message:
-              'Uma das linhas no campo "Informaçao" está muito longa. Reduza ou quebre a linha',
-          }).nullish().optional(),
-        ).max(4, {
-          message: 'Você só pode adicionar até 4 linhas no campo "Informaçao"',
+        posicao: z.object({
+          text: z.string().nullish(),
+          fontSize: z.number(),
+        }).superRefine((data, ctx) => {
+          if (data.fontSize <= 3) {
+            ctx.addIssue({
+              code: "custom",
+              path: ["text"],
+              message: "Posição muito longa",
+            });
+          }
+        }),
+        info: z.object({
+          text: z.array(
+            z.string().nullish().optional(),
+          ),
+          fontSize: z.number(),
+        }).superRefine((data, ctx) => {
+          if (data.fontSize <= 3) {
+            ctx.addIssue({
+              code: "custom",
+              path: ["text"],
+              message:
+                'Texto do campo "Informação" muito longo. Reduza o número de linhas e/ou quebre-as para caber',
+            });
+          }
         }),
         listIndex: z.number().optional(),
       }),
-    ).max(3, { message: "Você só pode adicionar até 3 experiências" })
-      .superRefine((data, ctx) => {
-        data.forEach((fields, index) => {
-          if (fields.empresa?.length == 0) {
-            ctx.addIssue({
-              code: "custom",
-              path: [index, "empresa"],
-              message: `Empresa é obrigatória`,
-            });
-          }
+    ).superRefine((data, ctx) => {
+      data.forEach((fields, index) => {
+        if (fields.empresa?.text?.length == 0) {
+          ctx.addIssue({
+            code: "custom",
+            path: [index, "empresa.text"],
+            message: `Empresa é obrigatória`,
+          });
+        }
 
-          if (!fields.anoInicio) {
-            ctx.addIssue({
-              code: "custom",
-              path: [index, "anoInicio"],
-              message: `Ano de inicio é obrigatório`,
-            });
-          }
+        if (!fields.anoInicio) {
+          ctx.addIssue({
+            code: "custom",
+            path: [index, "anoInicio"],
+            message: `Ano de inicio é obrigatório`,
+          });
+        }
 
-          if (!fields.anoFim) {
-            ctx.addIssue({
-              code: "custom",
-              path: [index, "anoFim"],
-              message: `Ano de saída é obrigatório`,
-            });
-          }
+        if (!fields.anoFim) {
+          ctx.addIssue({
+            code: "custom",
+            path: [index, "anoFim"],
+            message: `Ano de saída é obrigatório`,
+          });
+        }
 
-          if (fields.posicao?.length == 0) {
-            ctx.addIssue({
-              code: "custom",
-              path: [index, "posicao"],
-              message: `Posição é obrigatória`,
-            });
-          }
-        });
-      }).default([
-        {
-          empresa: "",
-          anoInicio: null,
-          anoFim: null,
-          posicao: "",
-          info: [""],
+        if (fields.posicao?.text?.length == 0) {
+          ctx.addIssue({
+            code: "custom",
+            path: [index, "posicao.text"],
+            message: `Posição é obrigatória`,
+          });
+        }
+      });
+    }).default([
+      {
+        empresa: {
+          text: "",
+          fontSize: 4.77573,
         },
-      ]),
+        anoInicio: null,
+        anoFim: null,
+        posicao: {
+          text: "",
+          fontSize: 4.42383,
+        },
+        info: {
+          text: [""],
+          fontSize: 4.09046,
+        },
+      },
+    ]),
     formacao: z.array(
       z.object({
-        curso: z.string().max(30, { message: "Curso muito longo" }).nullish(),
+        curso: z.object({
+          text: z.string().nullish(),
+          fontSize: z.number(),
+        }).superRefine((data, ctx) => {
+          if (data.fontSize <= 3) {
+            ctx.addIssue({
+              code: "custom",
+              path: ["text"],
+              message: "Curso muito longo",
+            });
+          }
+        }),
         anoInicio: z.number().nullish(),
         anoFim: z.number().nullish(),
-        universidade: z.string().max(30, {
-          message: "Universidade muito longa",
-        }).nullish(),
+        universidade: z.object({
+          text: z.string().nullish(),
+          fontSize: z.number(),
+        }).superRefine((data, ctx) => {
+          if (data.fontSize <= 3) {
+            ctx.addIssue({
+              code: "custom",
+              path: ["text"],
+              message: "Universidade muito longa",
+            });
+          }
+        }),
         listIndex: z.number().optional(),
       }),
     ).max(2, { message: "Você só pode adicionar até 2 formações" }).superRefine(
       (data, ctx) => {
         data.forEach((fields, index) => {
-          if (fields.curso?.length == 0) {
+          if (fields.curso?.text?.length == 0) {
             ctx.addIssue({
               code: "custom",
-              path: [index, "curso"],
+              path: [index, "curso.text"],
               message: `Curso é obrigatório`,
             });
           }
@@ -1350,10 +1561,10 @@ const validationSchema = toTypedSchema(
             });
           }
 
-          if (fields.universidade?.length == 0) {
+          if (fields.universidade?.text?.length == 0) {
             ctx.addIssue({
               code: "custom",
-              path: [index, "universidade"],
+              path: [index, "universidade.text"],
               message: `Universidade é obrigatória`,
             });
           }
@@ -1361,33 +1572,70 @@ const validationSchema = toTypedSchema(
       },
     ).default([
       {
-        curso: "",
+        curso: {
+          text: "",
+          fontSize: 4.77573,
+        },
         anoInicio: null,
         anoFim: null,
-        universidade: "",
+        universidade: {
+          text: "",
+          fontSize: 4.42383,
+        },
       },
     ]),
     habilidades: z.array(
-      z.string().max(25, { message: "Habilidade muito longa" }).nonempty(
-        "Habilidade é obrigatória",
-      ),
+      z.object({
+        text: z.string().nonempty(
+          "Habilidade é obrigatória",
+        ),
+        fontSize: z.number(),
+      }).superRefine((data, ctx) => {
+        if (data.fontSize <= 3) {
+          ctx.addIssue({
+            code: "custom",
+            path: ["text"],
+            message: "Habilidade muito longa",
+          });
+        }
+      }).default({
+        text: "",
+        fontSize: 4.09046,
+      }),
     ).max(5, { message: "Você só pode adicionar até 5 habilidades" }).nullish(),
     idiomas: z.array(
       z.object({
-        lingua: z.string().max(10, { message: "Idioma muito longo" }).nullish(),
+        lingua: z.object({
+          text: z.string().nullish(),
+          fontSize: z.number(),
+        }).superRefine((data, ctx) => {
+          if (data.fontSize <= 3) {
+            ctx.addIssue({
+              code: "custom",
+              path: ["text"],
+              message: "Idioma muito longo",
+            });
+          }
+        }),
         nivel: z.enum(["Básico", "Médio", "Avançado"], {
           message: "Nível é obrigatório",
         }).nullish(),
         listIndex: z.number().optional(),
+      }).default({
+        lingua: {
+          text: "",
+          fontSize: 4.09046,
+        },
+        nivel: null,
       }),
     ).max(3, { message: "Você só pode adicionar até 3 idiomas" }).nullish()
       .superRefine((data, ctx) => {
         if (data && data?.length > 0) {
           data?.forEach((fields, index) => {
-            if (!fields.lingua || fields.lingua?.length == 0) {
+            if (!fields.lingua.text || fields.lingua?.text?.length == 0) {
               ctx.addIssue({
                 code: "custom",
-                path: [index, "lingua"],
+                path: [index, "lingua.text"],
                 message: `Idioma é obrigatório`,
               });
             }
@@ -1485,6 +1733,88 @@ const convertYear = (event: any) => {
         .value as string)
         .split("-")[0],
     );
+};
+
+const adjustFont = async (
+  fieldPath: string,
+  maxWidth: number,
+  fontFamily: string = "Nunito-Light",
+  minFontSize: number = 3,
+  fontDecrease: number = 1,
+) => {
+  await document.fonts.ready;
+
+  const fieldData = get(form.value?.values, fieldPath);
+
+  const text = fieldData?.text;
+
+  if (!fieldData || !text) return;
+
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  if (!context) return;
+
+  const baseFontSize = get(
+    form.value?.meta.initialValues,
+    `${fieldPath}.fontSize`,
+    12,
+  );
+  let fontSize = baseFontSize;
+
+  context.font = `${fontSize}px ${fontFamily}`;
+
+  let textWidth = context.measureText(text).width;
+
+  while (textWidth > maxWidth && fontSize > minFontSize) {
+    fontSize -= fontDecrease;
+    context.font = `${fontSize}px ${fontFamily}`;
+    textWidth = context.measureText(text).width;
+  }
+
+  form.value?.setFieldValue(`${fieldPath}.fontSize`, fontSize);
+};
+
+const adjustFontMultiline = async (
+  fieldPath: string,
+  maxWidth: number,
+  maxHeight: number,
+  fontFamily: string = "Nunito-Light",
+  minFontSize: number = 3,
+  fontDecrease: number = 1,
+  lineHeightPx: number = 5,
+) => {
+  await document.fonts.ready;
+
+  const fieldData = get(form.value?.values, fieldPath);
+  const lines = fieldData?.text;
+  if (!fieldData || !lines) return;
+
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  if (!context) return;
+
+  const baseFontSize = get(
+    form.value?.meta.initialValues,
+    `${fieldPath}.fontSize`,
+    12,
+  );
+  let fontSize = baseFontSize;
+
+  const fits = (size: number) => {
+    context.font = `${size}px ${fontFamily}`;
+    const widestLine = Math.max(
+      ...lines.map((line: string) => context.measureText(line).width),
+    );
+    const totalHeight = (lines.length - 1) * lineHeightPx + size;
+
+    return widestLine <= maxWidth && totalHeight <= maxHeight;
+  };
+
+  while (!fits(fontSize) && fontSize > minFontSize) {
+    fontSize -= fontDecrease;
+  }
+
+  form.value?.setFieldValue(`${fieldPath}.fontSize`, fontSize);
 };
 
 onMounted(async () => {

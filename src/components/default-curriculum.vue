@@ -76,12 +76,12 @@
             style="font-size: 3.175px; stroke-width: 0.264583"
           >
             <tspan
-              style="font-variant: normal; font-weight: 900; font-size: 8px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+              :style="`font-variant: normal; font-weight: 900; font-size: ${dados?.nome.fontSize}; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`"
               x="103.48952"
               dx="0 0.28525519 0.28449431 0.28542751 0.28537139 0.2845245 0.28449431"
               y="40.896034"
             >
-              {{ dados.nome }}
+              {{ dados?.nome.text }}
             </tspan>
           </text>
           <text
@@ -91,12 +91,16 @@
             style="font-size: 3.175px; stroke-width: 0.264583"
           >
             <tspan
-              style="font-variant: normal; font-weight: 900; font-size: 8px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+              :style="
+                `font-variant: normal; font-weight: 900; font-size: ${
+                  dados?.sobrenome.fontSize ?? 17.8911
+                }; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`
+              "
               x="103.48952"
               dx="0 0.2846711 0.28537139 0.28542751 0.28474653"
               y="53.829369"
             >
-              {{ dados.sobrenome }}
+              {{ dados?.sobrenome.text }}
             </tspan>
           </text>
         </g>
@@ -132,11 +136,11 @@
                 style="font-size: 3.175px; stroke-width: 0.264583"
               >
                 <tspan
-                  style="font-variant: normal; font-weight: 300; font-size: 4.09046px; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+                  :style="`font-variant: normal; font-weight: 300; font-size: ${contato.info.fontSize}; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`"
                   x="36.10054"
                   :y="96.090752 + index * 10"
                 >
-                  {{ contato.info }}
+                  {{ contato.info.text }}
                 </tspan>
               </text>
             </g>
@@ -164,9 +168,9 @@
             style="font-size: 4.09046px; line-height: 1.35; stroke-width: 0.264583"
           >
             <tspan
-              v-for="(linhaSobre, index) in dados.sobre"
+              v-for="(linhaSobre, index) in dados?.sobre.text"
               :key="index"
-              style="font-style: normal; font-variant: normal; font-weight: 300; font-stretch: normal; font-size: 4.09046px; line-height: 1.35; font-family: Nunito-Light; -inkscape-font-specification: 'Nunito-Light Light'; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+              :style="`font-style: normal; font-variant: normal; font-weight: 300; font-stretch: normal; font-size: ${dados?.sobre.fontSize}; line-height: 1.35; font-family: Nunito-Light; -inkscape-font-specification: 'Nunito-Light Light'; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`"
               x="103.49005"
               :y="96.094856 + index * 5"
             >
@@ -196,8 +200,8 @@
               :y="146.37514 + index * 23"
               style="font-size: 3.175px; stroke-width: 0.264583"
             >
-              <tspan style="font-variant: normal; font-weight: normal; font-size: 4.77573px; font-family: Ruda; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583">
-                {{ formacao.curso }}
+              <tspan :style="`font-variant: normal; font-weight: normal; font-size: ${formacao.curso?.fontSize}; font-family: Ruda; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`">
+                {{ formacao.curso?.text }}
               </tspan>
             </text>
             <text
@@ -224,8 +228,8 @@
               :y="159.40234 + index * 23"
               style="font-size: 3.175px; stroke-width: 0.264583"
             >
-              <tspan style="font-variant: normal; font-weight: 300; font-size: 4.42383px; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583">
-                {{ formacao.universidade }}
+              <tspan :style="`font-variant: normal; font-weight: 300; font-size: ${formacao.universidade?.fontSize}; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`">
+                {{ formacao.universidade?.text }}
               </tspan>
             </text>
           </g>
@@ -253,8 +257,8 @@
                 :y="146.37514 + index * 47.5"
                 style="font-size: 3.175px; stroke-width: 0.264583"
               >
-                <tspan style="font-variant: normal; font-weight: normal; font-size: 4.77573px; font-family: Ruda; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583">
-                  {{ experiencia.empresa }}
+                <tspan :style="`font-variant: normal; font-weight: normal; font-size: ${experiencia.empresa?.fontSize}; font-family: Ruda; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`">
+                  {{ experiencia.empresa?.text }}
                 </tspan>
               </text>
               <text
@@ -282,11 +286,11 @@
                 style="font-size: 3.175px; stroke-width: 0.264583"
               >
                 <tspan
-                  style="font-variant: normal; font-weight: 300; font-size: 4.42383px; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+                  :style="`font-variant: normal; font-weight: 300; font-size: ${experiencia.posicao?.fontSize}; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`"
                   x="103.49005"
                   :y="159.40234 + index * 47.5"
                 >
-                  {{ experiencia.posicao }}
+                  {{ experiencia.posicao?.text }}
                 </tspan>
               </text>
             </g>
@@ -297,9 +301,9 @@
               style="font-size: 4.09046px; stroke-width: 0.264583"
             >
               <tspan
-                v-for="(linhaInfo, indexLinha) in experiencia.info"
+                v-for="(linhaInfo, indexLinha) in experiencia.info?.text"
                 :key="indexLinha"
-                style="font-style: normal; font-variant: normal; font-weight: 300; font-stretch: normal; font-size: 4.09046px; line-height: 1.35; font-family: Nunito-Light; -inkscape-font-specification: 'Nunito-Light Light'; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+                :style="`font-style: normal; font-variant: normal; font-weight: 300; font-stretch: normal; font-size: ${experiencia.info?.fontSize}; line-height: 1.35; font-family: Nunito-Light; -inkscape-font-specification: 'Nunito-Light Light'; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`"
                 x="103.49005"
                 :y="(167.70168 + index * 47.5) + indexLinha * 5"
               >
@@ -333,10 +337,10 @@
               style="font-size: 3.175px; stroke-width: 0.264583"
             >
               <tspan
-                style="font-variant: normal; font-weight: 300; font-size: 4.09046px; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+                :style="`font-variant: normal; font-weight: 300; font-size: ${habilidade.fontSize}; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`"
                 dx="0 0 -0.0015392664"
               >
-                {{ habilidade }}
+                {{ habilidade.text }}
               </tspan>
             </text>
           </g>
@@ -365,8 +369,8 @@
               :y="267.31854 + index * 7"
               style="font-size: 3.175px; stroke-width: 0.264583"
             >
-              <tspan style="font-variant: normal; font-weight: 300; font-size: 4.09046px; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583">
-                {{ idioma.lingua }}, {{ idioma.nivel }}
+              <tspan :style="`font-variant: normal; font-weight: 300; font-size: ${idioma.lingua?.fontSize}; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`">
+                {{ idioma.lingua?.text }}, {{ idioma.nivel }}
               </tspan>
             </text>
             <!-- <text
