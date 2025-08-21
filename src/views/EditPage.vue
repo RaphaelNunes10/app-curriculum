@@ -47,9 +47,18 @@
                     />
 
                     <ion-button
+                      color="danger"
+                      shape="round"
+                      class="w-10 absolute right-0 top-0 mx-auto aspect-square"
+                      @click="removeImagem"
+                    >
+                      <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-button>
+
+                    <ion-button
                       color="primary"
                       shape="round"
-                      class="w-10 absolute top-0 right-0 mx-auto aspect-square"
+                      class="w-10 absolute right-0 bottom-0 mx-auto aspect-square"
                       @click="addImagem"
                     >
                       <ion-icon slot="icon-only" name="reload"></ion-icon>
@@ -1276,7 +1285,7 @@ import { Filesystem } from "@capacitor/filesystem";
 import { Capacitor } from "@capacitor/core";
 
 import { addIcons } from "ionicons";
-import { add, close, reload } from "ionicons/icons";
+import { add, close, reload, trash } from "ionicons/icons";
 
 import { Field, FieldArray, Form } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
@@ -1290,6 +1299,7 @@ import { useCrudCurriculum } from "@/composables/crud-curriculum";
 addIcons({
   add: add,
   close: close,
+  trash: trash,
   reload: reload,
 });
 
@@ -1740,6 +1750,10 @@ const addImagem = async () => {
   } catch (error) {
     console.error("Error capturing image:", error);
   }
+};
+
+const removeImagem = async () => {
+  form.value?.setFieldValue("imagem", null);
 };
 
 const addItem = (object: any, list: any[]) => {
