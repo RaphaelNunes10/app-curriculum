@@ -107,6 +107,38 @@
         <g>
           <text
             xml:space="preserve"
+            x="103.49005"
+            y="82.393639"
+            style="font-size: 3.175px; stroke-width: 0.264583"
+          >
+            <tspan
+              style="font-variant: normal; font-weight: 900; font-size: 4.23333px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+              x="103.49005"
+              y="82.393639"
+            >
+              SOBRE MIM
+            </tspan>
+          </text>
+          <text
+            xml:space="preserve"
+            x="103.49005"
+            y="96.094856"
+            style="font-size: 4.09046px; line-height: 1.35; stroke-width: 0.264583"
+          >
+            <tspan
+              v-for="(linhaSobre, index) in dados?.sobre.text"
+              :key="index"
+              :style="`font-style: normal; font-variant: normal; font-weight: 300; font-stretch: normal; font-size: ${dados?.sobre.fontSize}; line-height: 1.35; font-family: Nunito-Light; -inkscape-font-specification: 'Nunito-Light Light'; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`"
+              x="103.49005"
+              :y="96.094856 + index * 5"
+            >
+              {{ linhaSobre }}
+            </tspan>
+          </text>
+        </g>
+        <g>
+          <text
+            xml:space="preserve"
             x="27.901714"
             y="82.393639"
             style="font-size: 3.175px; stroke-width: 0.264583"
@@ -144,94 +176,6 @@
                 </tspan>
               </text>
             </g>
-          </g>
-        </g>
-        <g>
-          <text
-            xml:space="preserve"
-            x="103.49005"
-            y="82.393639"
-            style="font-size: 3.175px; stroke-width: 0.264583"
-          >
-            <tspan
-              style="font-variant: normal; font-weight: 900; font-size: 4.23333px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
-              x="103.49005"
-              y="82.393639"
-            >
-              SOBRE MIM
-            </tspan>
-          </text>
-          <text
-            xml:space="preserve"
-            x="103.49005"
-            y="96.094856"
-            style="font-size: 4.09046px; line-height: 1.35; stroke-width: 0.264583"
-          >
-            <tspan
-              v-for="(linhaSobre, index) in dados?.sobre.text"
-              :key="index"
-              :style="`font-style: normal; font-variant: normal; font-weight: 300; font-stretch: normal; font-size: ${dados?.sobre.fontSize}; line-height: 1.35; font-family: Nunito-Light; -inkscape-font-specification: 'Nunito-Light Light'; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`"
-              x="103.49005"
-              :y="96.094856 + index * 5"
-            >
-              {{ linhaSobre }}
-            </tspan>
-          </text>
-        </g>
-        <g>
-          <text
-            xml:space="preserve"
-            x="27.901714"
-            y="131.21922"
-            style="font-size: 3.175px; stroke-width: 0.264583"
-          >
-            <tspan
-              style="font-variant: normal; font-weight: 900; font-size: 4.23333px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
-              x="27.901714"
-              y="131.21922"
-            >
-              FORMAÇÃO
-            </tspan>
-          </text>
-          <g v-for="(formacao, index) in dados?.formacao" :key="index">
-            <text
-              xml:space="preserve"
-              x="28.081341"
-              :y="146.37514 + index * 23"
-              style="font-size: 3.175px; stroke-width: 0.264583"
-            >
-              <tspan :style="`font-variant: normal; font-weight: normal; font-size: ${formacao.curso?.fontSize}; font-family: Ruda; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`">
-                {{ formacao.curso?.text }}
-              </tspan>
-            </text>
-            <text
-              xml:space="preserve"
-              x="28.081341"
-              :y="152.94672 + index * 23"
-              style="font-size: 3.175px; stroke-width: 0.264583"
-            >
-              <tspan
-                style="font-variant: normal; font-weight: normal; font-size: 4.07194px; font-family: Ruda; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
-                dx="0 -0.0021578516 -0.0022836903 -0.0020255574 -0.0021982035 0 -0.0021578516 -0.0022836903 -0.0021578516"
-              >
-                {{ formacao.anoInicio }}
-                {{
-                  formacao.anoFim
-                  ? `- ${formacao.anoFim}`
-                  : ""
-                }}
-              </tspan>
-            </text>
-            <text
-              xml:space="preserve"
-              x="28.081341"
-              :y="159.40234 + index * 23"
-              style="font-size: 3.175px; stroke-width: 0.264583"
-            >
-              <tspan :style="`font-variant: normal; font-weight: 300; font-size: ${formacao.universidade?.fontSize}; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`">
-                {{ formacao.universidade?.text }}
-              </tspan>
-            </text>
           </g>
         </g>
         <g>
@@ -308,6 +252,62 @@
                 :y="(167.70168 + index * 47.5) + indexLinha * 5"
               >
                 {{ linhaInfo }}
+              </tspan>
+            </text>
+          </g>
+        </g>
+        <g>
+          <text
+            xml:space="preserve"
+            x="27.901714"
+            y="131.21922"
+            style="font-size: 3.175px; stroke-width: 0.264583"
+          >
+            <tspan
+              style="font-variant: normal; font-weight: 900; font-size: 4.23333px; font-family: Ruda-Black; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+              x="27.901714"
+              y="131.21922"
+            >
+              FORMAÇÃO
+            </tspan>
+          </text>
+          <g v-for="(formacao, index) in dados?.formacao" :key="index">
+            <text
+              xml:space="preserve"
+              x="28.081341"
+              :y="146.37514 + index * 23"
+              style="font-size: 3.175px; stroke-width: 0.264583"
+            >
+              <tspan :style="`font-variant: normal; font-weight: normal; font-size: ${formacao.curso?.fontSize}; font-family: Ruda; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`">
+                {{ formacao.curso?.text }}
+              </tspan>
+            </text>
+            <text
+              xml:space="preserve"
+              x="28.081341"
+              :y="152.94672 + index * 23"
+              style="font-size: 3.175px; stroke-width: 0.264583"
+            >
+              <tspan
+                style="font-variant: normal; font-weight: normal; font-size: 4.07194px; font-family: Ruda; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583"
+                dx="0 -0.0021578516 -0.0022836903 -0.0020255574 -0.0021982035 0 -0.0021578516 -0.0022836903 -0.0021578516"
+              >
+                {{ formacao.anoInicio }}
+                {{
+                  formacao.anoFim
+                  ? `- ${formacao.anoFim}`
+                  : ""
+                }}
+              </tspan>
+            </text>
+            <text
+              xml:space="preserve"
+              x="28.081341"
+              :y="159.40234 + index * 23"
+              style="font-size: 3.175px; stroke-width: 0.264583"
+            >
+              <tspan :style="`font-variant: normal; font-weight: 300; font-size: ${formacao.universidade?.fontSize}; font-family: Nunito-Light; writing-mode: lr-tb; fill: #000000; fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 0.264583`">
+                {{ formacao.universidade?.text }}
               </tspan>
             </text>
           </g>
