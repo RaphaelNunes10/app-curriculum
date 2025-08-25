@@ -102,7 +102,7 @@
                         () =>
                         adjustFont(
                           "nome",
-                          110,
+                          100,
                           "Ruda-Black",
                         )
                       '
@@ -130,7 +130,7 @@
                         () =>
                         adjustFont(
                           "sobrenome",
-                          110,
+                          100,
                           "Ruda-Black",
                         )
                       '
