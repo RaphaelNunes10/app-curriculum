@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">curriculum-App</string>
-    <string name="title_activity_main">curriculum-App</string>
+    <string name="app_name">Currículo Na Mão</string>
+    <string name="title_activity_main">Currículo Na Mão</string>
     <string name="package_name">com.RN10.app</string>
     <string name="custom_url_scheme">com.RN10.app</string>
 </resources>

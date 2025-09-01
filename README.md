@@ -1,4 +1,4 @@
-# APP Curriculum IONIC/VUE
+# Currículo Na Mão IONIC/VUE
 
 Aplicativo para prencher modelos de currículo de maneira prática através de
 formulários, desenvolvido utilizando Vue, Ionic e Capacitor.
