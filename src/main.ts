@@ -36,12 +36,16 @@ import "./theme/variables.css";
 
 import { createHead } from "@unhead/vue/client";
 
+import { StatusBar } from "@capacitor/status-bar";
+
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
 
 const head = createHead();
 app.use(head);
+
+StatusBar.setOverlaysWebView({ overlay: false });
 
 router.isReady().then(() => {
   app.mount("#app");
