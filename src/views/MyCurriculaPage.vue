@@ -169,7 +169,7 @@
                       : "clear"
                     '
                     class="sm:w-3/5 text-xs col-span-3 sm:col-span-12"
-                    @click="deleteCurriculum(curriculum.id!)"
+                    @click="isDeleteAlertOpen[index] = true"
                   >
                     <template
                       v-if='
@@ -192,6 +192,14 @@
                     />
                   </ion-button>
                 </div>
+
+                <ion-alert
+                  :is-open="isDeleteAlertOpen[index]"
+                  header="Excluir Currículo"
+                  message="Deseja realmente excluir este currículo?"
+                  :buttons="makeDeleteAlertButtons(index)"
+                  @didDismiss="isDeleteAlertOpen[index] = false"
+                />
 
                 <div :ref="(el) => registerRef(el, index)" class="size-full">
                   <default-curriculum
@@ -227,7 +235,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { reactive, ref, watch } from "vue";
 import type { ComponentPublicInstance, Ref } from "vue";
 
 import EditPage from "./EditPage.vue";
@@ -308,6 +316,34 @@ registerSwiper();
 
 const { curricula, fetchCurricula, deleteCurriculum } = useCrudCurriculum();
 fetchCurricula();
+
+const isDeleteAlertOpen = reactive<boolean[]>([]);
+
+const makeDeleteAlertButtons = (index: number) => [
+  {
+    text: "Não",
+    role: "cancel",
+    handler: () => {
+      isDeleteAlertOpen[index] = false;
+    },
+  },
+  {
+    text: "Sim",
+    role: "confirm",
+    handler: () => {
+      deleteCurriculum(curricula.value[index].id!);
+      isDeleteAlertOpen[index] = false;
+    },
+  },
+];
+
+watch(curricula, (newCurricula) => {
+  isDeleteAlertOpen.splice(
+    0,
+    isDeleteAlertOpen.length,
+    ...newCurricula.map(() => false),
+  );
+}, { immediate: true });
 
 const componentRefs = ref<HTMLElement[]>([]);
 

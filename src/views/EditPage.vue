@@ -50,7 +50,7 @@
                       color="danger"
                       shape="round"
                       class="w-10 absolute right-0 top-0 mx-auto aspect-square"
-                      @click="removeImagem"
+                      @click="isRemoveImageAlertOpen = true"
                     >
                       <ion-icon slot="icon-only" name="trash"></ion-icon>
                     </ion-button>
@@ -63,6 +63,14 @@
                     >
                       <ion-icon slot="icon-only" name="reload"></ion-icon>
                     </ion-button>
+
+                    <ion-alert
+                      :is-open="isRemoveImageAlertOpen"
+                      header="Remover Imagem"
+                      message="Deseja realmente remover esta imagem?"
+                      :buttons="removeImageAlertButtons"
+                      @didDismiss="isRemoveImageAlertOpen = false"
+                    />
                   </div>
 
                   <ion-button
@@ -1755,6 +1763,26 @@ const addImagem = async () => {
 const removeImagem = async () => {
   form.value?.setFieldValue("imagem", null);
 };
+
+const isRemoveImageAlertOpen = ref(false);
+
+const removeImageAlertButtons = [
+  {
+    text: "Não",
+    role: "cancel",
+    handler: () => {
+      isRemoveImageAlertOpen.value = false;
+    },
+  },
+  {
+    text: "Sim",
+    role: "confirm",
+    handler: () => {
+      removeImagem();
+      isRemoveImageAlertOpen.value = false;
+    },
+  },
+];
 
 const addItem = (object: any, list: any[]) => {
   list.push(object);
