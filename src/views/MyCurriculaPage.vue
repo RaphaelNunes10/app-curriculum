@@ -1,15 +1,15 @@
 <template>
   <ion-page>
     <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title class="ml-2">Meus Currículos</ion-title>
+      <ion-toolbar class="px-3">
+        <ion-title>Meus Currículos</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content class="flex flex-col" :fullscreen="true">
       <ion-header class="flex-0" collapse="condense">
-        <ion-toolbar>
-          <ion-title class="ml-2">Meus Currículos</ion-title>
+        <ion-toolbar class="px-3">
+          <ion-title>Meus Currículos</ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -71,7 +71,7 @@
                   '
                   class="
                     absolute top-0 right-0 w-full h-full pointer-events-none
-                    [background-image:linear-gradient(-135deg,rgba(0,0,0,0.5)_0%,transparent_30%)]
+                    [background-image:linear-gradient(-135deg,rgba(0,0,0,0.5)_0%,transparent_20%)]
                   "
                 >
                 </div>

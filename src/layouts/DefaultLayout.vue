@@ -6,7 +6,7 @@
       </div>
     </ion-content>
     <ion-footer>
-      <ion-toolbar class="p-1 sm:p-2">
+      <ion-toolbar class="pl-3 sm:px-4">
         <ion-title class="text-[0.6rem] sm:text-sm">© 2025{{
             new Date().getFullYear() == 2025
             ? ""
