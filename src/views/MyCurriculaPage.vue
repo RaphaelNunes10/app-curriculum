@@ -392,6 +392,3 @@ const printComponent = (index: number, documentTitle: string) => {
   }
 };
 </script>
-
-<style scoped>
-</style>
