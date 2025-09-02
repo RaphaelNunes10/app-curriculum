@@ -1,5 +1,7 @@
 # Currículo Na Mão IONIC/VUE
 
+![GitHub Release](https://img.shields.io/github/v/release/RaphaelNunes10/app-curriculum)
+
 Aplicativo para prencher modelos de currículo de maneira prática através de
 formulários, desenvolvido utilizando Vue, Ionic e Capacitor.
 
@@ -13,6 +15,12 @@ Desenvolvido pelo aluno da Visual Mídia, Raphael Nunes dos Santos.
 - Modelo de currículo profissional
 - Formulário com validação completa
 - Layout híbrido para dispositivos mobile (ios/android) e navegadores web
+
+## Instalação:
+
+⚠️ Apenas disponível para Android ⚠️
+
+Para instalar, basta baixar o arquivo ".apk" da versão mais recente, disponível em "[Releases](https://github.com/RaphaelNunes10/app-curriculum/releases/tag/stable)" e abrir com o gerenciador de pacotes padrão do Android em seu smartphone.
 
 ## Licença
 
