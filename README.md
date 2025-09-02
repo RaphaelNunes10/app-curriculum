@@ -1,6 +1,6 @@
 # Currículo Na Mão IONIC/VUE
 
-[![GitHub Release](https://img.shields.io/github/v/release/RaphaelNunes10/app-curriculum?display_name=release)](https://github.com/RaphaelNunes10/app-curriculum/releases/tag/stable)
+[![GitHub Release](https://img.shields.io/github/v/release/RaphaelNunes10/app-curriculum?display_name=release)](https://github.com/RaphaelNunes10/app-curriculum/releases)
 
 Aplicativo para prencher modelos de currículo de maneira prática através de
 formulários, desenvolvido utilizando Vue, Ionic e Capacitor.
