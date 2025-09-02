@@ -21,9 +21,8 @@ Desenvolvido pelo aluno da Visual Mídia, Raphael Nunes dos Santos.
 ⚠️ Apenas disponível para Android ⚠️
 
 Para instalar, basta baixar o arquivo ".apk" da versão mais recente, disponível
-em
-"[Releases](https://github.com/RaphaelNunes10/app-curriculum/releases/tag/stable)"
-e abrir com o gerenciador de pacotes padrão do Android em seu smartphone.
+em "[Releases](https://github.com/RaphaelNunes10/app-curriculum/releases)" e
+abrir com o gerenciador de pacotes padrão do Android em seu smartphone.
 
 ## Licença
 
