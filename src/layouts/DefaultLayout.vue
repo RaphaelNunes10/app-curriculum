@@ -21,30 +21,35 @@
         </ion-title>
         <ion-buttons slot="end">
           <a
+            v-if='
+              breakpoints.greaterOrEqual(
+                "sm",
+              )
+                .value
+            '
             href="https://github.com/RaphaelNunes10/app-curriculum"
             class="text-sm text-white! underline"
-          ><span
-              v-if='
-                breakpoints.greaterOrEqual(
-                  "sm",
-                )
-                  .value
-              '
-            >github.com/RaphaelNunes10/app-curriculum</span>
-            <ion-button
-              v-else
-              shape="round"
-              size="small"
-              fill="clear"
-              class="sm:w-3/5 text-xs col-span-3 sm:col-span-12"
-            >
-              <ion-icon
-                slot="icon-only"
-                name="logo-github"
-                class="text-2xl text-white!"
-              />
-            </ion-button>
+          ><span>github.com/RaphaelNunes10/app-curriculum</span>
           </a>
+          <ion-button
+            v-else
+            shape="round"
+            size="small"
+            fill="clear"
+            class="sm:w-3/5 text-xs col-span-3 sm:col-span-12"
+            @click='
+              Browser.open({
+                url:
+                  "https://github.com/RaphaelNunes10/app-curriculum",
+              })
+            '
+          >
+            <ion-icon
+              slot="icon-only"
+              name="logo-github"
+              class="text-2xl text-white!"
+            />
+          </ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-footer>
@@ -62,6 +67,8 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/vue";
+
+import { Browser } from "@capacitor/browser";
 
 import { useBreakpoints } from "@vueuse/core";
 

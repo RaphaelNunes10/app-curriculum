@@ -16,6 +16,9 @@ importers:
       "@capacitor/app":
         specifier: 7.0.0
         version: 7.0.0(@capacitor/core@7.4.2)
+      "@capacitor/browser":
+        specifier: ^7.0.2
+        version: 7.0.2(@capacitor/core@7.4.2)
       "@capacitor/camera":
         specifier: ^7.0.1
         version: 7.0.1(@capacitor/core@7.4.2)
@@ -830,6 +833,13 @@ packages:
     }
     engines: { node: ">=10.3.0" }
     hasBin: true
+
+  "@capacitor/browser@7.0.2":
+    resolution: {
+      integrity: sha512-5kySTunCtH+2sezmTjgDfwvspW7GW/hslQECZeLIRM2qefnxjGTc3fmCTeILYK5EuvcxMs+8sF5BhmzzKqOzuQ==,
+    }
+    peerDependencies:
+      "@capacitor/core": ">=7.0.0"
 
   "@capacitor/camera@7.0.1":
     resolution: {
@@ -7214,6 +7224,10 @@ snapshots:
       - encoding
       - supports-color
       - typescript
+
+  "@capacitor/browser@7.0.2(@capacitor/core@7.4.2)":
+    dependencies:
+      "@capacitor/core": 7.4.2
 
   "@capacitor/camera@7.0.1(@capacitor/core@7.4.2)":
     dependencies:
